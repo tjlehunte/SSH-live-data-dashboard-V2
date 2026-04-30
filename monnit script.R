@@ -12,10 +12,6 @@ library(plumber)
 
 #MONNIT DIRECT ----
 
-#these are set by render instead
-#monnit_api_secret_key <- "hCsLUvCeh5Ms8gLKP5sadyjXWexaBts9"
-#monnit_api_key_id <- "BSSXYQPSnPE5"
-
 #we could get all possible gateways at EH2, JH etc but we only want SSH which is NetworkID = 6
 ##All sensors ----
 
