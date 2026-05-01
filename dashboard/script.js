@@ -4,11 +4,25 @@ async function loadData() {
   const response = await fetch("https://monnit-plumber-api.onrender.com/data");
   const data = await response.json();
 
+  console.log("API response:", data);
+
+  if (!Array.isArray(data) || data.length === 0) {
+    console.error("API did not return an array");
+    return;
+  }
+
   // Extract column names
   const columns = Object.keys(data[0]).filter(c => c !== "MessageDate");
+  console.log("Columns found:", columns);
+
+  const select = document.getElementById("columnSelect");
+
+  if (!select) {
+    console.error("Dropdown element not found");
+    return;
+  }
 
   // Populate dropdown
-  const select = document.getElementById("columnSelect");
   columns.forEach(col => {
     const option = document.createElement("option");
     option.value = col;
@@ -49,10 +63,6 @@ function drawChart(data, column) {
       responsive: true,
       plugins: {
         tooltip: { enabled: true }
-      },
-      scales: {
-        x: { display: true },
-        y: { display: true }
       }
     }
   });
