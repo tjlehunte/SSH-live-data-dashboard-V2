@@ -34,7 +34,7 @@ function drawTemperatureChart(data, tempCols) {
     label: shortenLabel(col),
     data: data.map(d => d[col]),
     borderColor: randomColor(),
-    borderWidth: 2,
+    borderWidth: 1,
     fill: false,
     tension: 0.2
   }));
@@ -65,7 +65,7 @@ function drawHumidityChart(data, humCols) {
     label: shortenLabel(col),
     data: data.map(d => d[col]),
     borderColor: randomColor(),
-    borderWidth: 2,
+    borderWidth: 0.5,
     fill: false,
     tension: 0.2
   }));
