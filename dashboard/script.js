@@ -98,7 +98,6 @@ mainChart = new Chart(ctx, {
         ticks: {
           autoSkip: false,
           callback: function(value, index) {
-            // Tick label every 2 hours (12 × 10‑min samples)
             if (index % 12 === 0) {
               return this.getLabelForValue(value);
             }
@@ -111,15 +110,14 @@ mainChart = new Chart(ctx, {
           color: function(context) {
             const index = context.index;
 
-            // Grid line every 30 minutes (3 × 10‑min samples)
             if (index % 3 === 0) {
-              return "#ccc";  // visible grid line
+              return "#ccc";
             }
 
-            return "transparent"; // hide minor lines
+            return "transparent";
           }
         }
-      },   // ✅ COMMA FIXED HERE
+      },
       y: {
         title: {
           display: true,
@@ -129,7 +127,9 @@ mainChart = new Chart(ctx, {
       }
     }
   }
-});
+});   // ✅ closes new Chart
+}     // ✅ closes drawMainChart
+
 
 function randomColor() {
   return `hsl(${Math.random() * 360}, 70%, 50%)`;
