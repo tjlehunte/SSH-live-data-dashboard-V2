@@ -57,12 +57,6 @@ canvas {
   flex: 1;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
-  padding: 20px;
-}
-
 .chart-row {
   display: flex;
   justify-content: space-between;
