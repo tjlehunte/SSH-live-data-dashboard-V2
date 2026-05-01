@@ -44,7 +44,7 @@ function getRoomColor(room) {
   return roomColorMap[room];
 }
 
-function drawMainChart(data, cols, title) {
+function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
@@ -125,7 +125,7 @@ function drawMainChart(data, cols, title) {
           grid: { color: gridColor },
           title: {
             display: true,
-            text: "Temperature (°C)",
+            text: unit,
             align: "center",
             color: textColor
           }
@@ -134,8 +134,6 @@ function drawMainChart(data, cols, title) {
     }
   });
 }
-
-
 
 function randomColor() {
   return `hsl(${Math.random() * 360}, 70%, 50%)`;
@@ -164,9 +162,9 @@ document.querySelectorAll(".tab").forEach(tab => {
     const type = tab.dataset.type;
 
     if (type === "temperature") {
-      drawMainChart(allData, tempCols, "Temperature Sensors");
+      drawMainChart(allData, tempCols, "Temperature Sensors", "Temperature (°C)");
     } else {
-      drawMainChart(allData, humCols, "Humidity Sensors");
+      drawMainChart(allData, humCols, "Humidity Sensors", "Humidity (%)");
     }
   });
 });
