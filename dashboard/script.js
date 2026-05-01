@@ -90,7 +90,8 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
         tooltip: { enabled: true },
         title: {
           display: true,
-          text: title
+          text: title,
+          title.color: textColor
         }
       },
 
