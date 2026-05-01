@@ -123,7 +123,7 @@ mainChart = new Chart(ctx, {
       },
       y: {
         beginAtZero: true,
-        max = roundedMax,
+        max: roundedMax,
         title: {
           display: true,
           text: "Temperature (°C)",
