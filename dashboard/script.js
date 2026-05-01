@@ -46,6 +46,7 @@ function getRoomColor(room) {
 
 function drawMainChart(data, cols, title) {
   const labels = data.map(d => d.MessageDate);
+
   const datasets = cols.map(col => {
     const room = col.split(" - ")[0];
     const color = getRoomColor(room);
@@ -62,77 +63,78 @@ function drawMainChart(data, cols, title) {
       fill: false
     };
   });
-  const maxValue = Math.max(
-    ...datasets.flatMap(ds => ds.data)
-  );
+
+  // Compute Y-axis max
+  const maxValue = Math.max(...datasets.flatMap(ds => ds.data));
   const roundedMax = Math.ceil(maxValue / 5) * 5;
-  
+
+  // Dark mode detection
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const gridColor = isDark ? "#444" : "#ccc";
+  const textColor = isDark ? "#ddd" : "#000";
+
   const ctx = document.getElementById("mainChart").getContext("2d");
-  
+
   if (mainChart) mainChart.destroy();
 
-mainChart = new Chart(ctx, {
-  type: "line",
-  data: { labels, datasets },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: { mode: "index", intersect: false },
-    plugins: {
-      legend: { position: "right" },
-      tooltip: { enabled: true },
-      title: {
-        display: true,
-        text: title
-      }
-    },
-    layout: {
-      padding: {
-        bottom: 20
-      }
-    },
-    scales: {
-      x: {
+  mainChart = new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+
+      plugins: {
+        legend: { position: "right" },
+        tooltip: { enabled: true },
         title: {
           display: true,
-          text: "Time",
-          align: "center"
-        },
-        ticks: {
-          autoSkip: false,
-          callback: function(value, index) {
-            if (index % 12 === 0) {
-              return this.getLabelForValue(value);
-            }
-            return "";
-          }
-        },
-        grid: {
-          drawOnChartArea: true,
-          drawTicks: true,
-          color: function(context) {
-            const index = context.index;
-
-            if (index % 3 === 0) {
-              return "#ccc";
-            }
-
-            return "transparent";
-          }
+          text: title
         }
       },
-      y: {
-        beginAtZero: true,
-        max: roundedMax,
-        title: {
-          display: true,
-          text: "Temperature (°C)",
-          align: "center"}
+
+      layout: {
+        padding: { bottom: 20 }
+      },
+
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Time",
+            align: "center",
+            color: textColor
+          },
+          ticks: {
+            color: textColor,
+            autoSkip: false,
+            callback: function(value, index) {
+              if (index % 12 === 0) {
+                return this.getLabelForValue(value);
+              }
+              return "";
+            }
+          },
+          grid: { color: gridColor }
+        },
+        y: {
+          beginAtZero: true,
+          max: roundedMax,
+          ticks: { color: textColor },
+          grid: { color: gridColor },
+          title: {
+            display: true,
+            text: "Temperature (°C)",
+            align: "center",
+            color: textColor
+          }
+        }
       }
     }
-  }
-});   // ✅ closes new Chart
-}     // ✅ closes drawMainChart
+  });
+}
+
 
 
 function randomColor() {
@@ -168,3 +170,9 @@ document.querySelectorAll(".tab").forEach(tab => {
     }
   });
 });
+
+// Auto-update chart when system theme changes
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+  loadData(); // redraw chart with new theme
+});
+
