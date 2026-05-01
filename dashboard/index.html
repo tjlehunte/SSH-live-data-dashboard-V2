@@ -7,14 +7,23 @@
 </head>
 
 <body>
-  <h1>Monnit Sensor Dashboard</h1>
+<h1>Monnit Sensor Dashboard</h1>
 
-  <h2>Temperature Sensors</h2>
-  <canvas id="tempChart" width="800" height="400"></canvas>
+<div id="loading" class="spinner"></div>
 
-  <h2>Humidity Sensors</h2>
-  <canvas id="humChart" width="800" height="400"></canvas>
+<div class="chart-row">
+  <div class="chart-container">
+    <h2 class="chart-title">Temperature Sensors</h2>
+    <canvas id="tempChart"></canvas>
+  </div>
 
-  <script src="script.js"></script>
+  <div class="chart-container">
+    <h2 class="chart-title">Humidity Sensors</h2>
+    <canvas id="humChart"></canvas>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
