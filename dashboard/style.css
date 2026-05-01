@@ -85,13 +85,13 @@ canvas {
   display: none;
 }
 
-tab-row {
+.tab-row {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
 }
 
-tab {
+.tab {
   padding: 10px 20px;
   background: #eee;
   border-radius: 6px;
@@ -101,11 +101,11 @@ tab {
   transition: 0.2s;
 }
 
-tab:hover {
+.tab:hover {
   background: #ddd;
 }
 
-tab.active {
+.tab.active {
   background: #3498db;
   color: white;
 }
