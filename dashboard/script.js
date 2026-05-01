@@ -42,11 +42,15 @@ function drawTemperatureChart(data, tempCols) {
     type: "line",
     data: { labels, datasets },
     options: {
-      responsive: true,
-      interaction: { mode: "index", intersect: false },
-      plugins: { tooltip: { enabled: true } }
-    }
-  });
+  responsive: true,
+  interaction: { mode: "index", intersect: false },
+  plugins: {
+    legend: {
+      position: "right"   // <-- THIS is the fix
+    },
+    tooltip: { enabled: true }
+  }
+});
 }
 
 function drawHumidityChart(data, humCols) {
@@ -69,11 +73,15 @@ function drawHumidityChart(data, humCols) {
     type: "line",
     data: { labels, datasets },
     options: {
-      responsive: true,
-      interaction: { mode: "index", intersect: false },
-      plugins: { tooltip: { enabled: true } }
-    }
-  });
+  responsive: true,
+  interaction: { mode: "index", intersect: false },
+  plugins: {
+    legend: {
+      position: "right"   // <-- THIS is the fix
+    },
+    tooltip: { enabled: true }
+  }
+});
 }
 
 function randomColor() {
