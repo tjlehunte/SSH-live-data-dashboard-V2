@@ -38,19 +38,21 @@ function drawTemperatureChart(data, tempCols) {
 
   if (tempChart) tempChart.destroy();
 
-  tempChart = new Chart(ctx, {
-    type: "line",
-    data: { labels, datasets },
-    options: {
-  responsive: true,
-  interaction: { mode: "index", intersect: false },
-  plugins: {
-    legend: {
-      position: "right"   // <-- THIS is the fix
-    },
-    tooltip: { enabled: true }
+tempChart = new Chart(ctx, {
+  type: "line",
+  data: { labels, datasets },
+  options: {
+    responsive: true,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: {
+        position: "right"
+      },
+      tooltip: { enabled: true }
+    }
   }
 });
+
 }
 
 function drawHumidityChart(data, humCols) {
@@ -69,19 +71,21 @@ function drawHumidityChart(data, humCols) {
 
   if (humChart) humChart.destroy();
 
-  humChart = new Chart(ctx, {
-    type: "line",
-    data: { labels, datasets },
-    options: {
-  responsive: true,
-  interaction: { mode: "index", intersect: false },
-  plugins: {
-    legend: {
-      position: "right"   // <-- THIS is the fix
-    },
-    tooltip: { enabled: true }
+humChart = new Chart(ctx, {
+  type: "line",
+  data: { labels, datasets },
+  options: {
+    responsive: true,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: {
+        position: "right"
+      },
+      tooltip: { enabled: true }
+    }
   }
 });
+
 }
 
 function randomColor() {
