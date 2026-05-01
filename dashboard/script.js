@@ -53,7 +53,7 @@ function drawTemperatureChart(data, tempCols) {
       responsive: true,
       interaction: { mode: "index", intersect: false },
       plugins: {
-        legend: { position: "right" },
+        legend: { position: "bottom" },
         tooltip: { enabled: true }
       }
     }
