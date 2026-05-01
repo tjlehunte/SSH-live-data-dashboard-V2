@@ -26,11 +26,20 @@ function shortenLabel(col) {
   return col.split(" - ")[0];
 }
 
+function colorFromString(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const hue = Math.abs(hash) % 360;
+  return `hsl(${hue}, 70%, 50%)`;
+}
+
 function drawMainChart(data, cols, title) {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
-    const color = randomColor();
+    const color = colorFromString(col);
     return {
       label: shortenLabel(col),
       data: data.map(d => d[col]),
