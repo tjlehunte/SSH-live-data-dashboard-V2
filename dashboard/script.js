@@ -30,36 +30,34 @@ function shortenLabel(col) {
 function drawTemperatureChart(data, tempCols) {
   const labels = data.map(d => d.MessageDate);
 
-const datasets = tempCols.map(col => ({
-  label: shortenLabel(col),
-  data: data.map(d => d[col]),
-  borderColor: randomColor(),
-  borderWidth: 1,
-  pointRadius: 1,        // smaller visible points
-  pointHoverRadius: 4,   // bigger on hover so tooltips still work
-  pointBorderWidth: 0.5, // thin outline
-  fill: false,
-  tension: 0.2
-}));
-
+  const datasets = tempCols.map(col => ({
+    label: shortenLabel(col),
+    data: data.map(d => d[col]),
+    borderColor: randomColor(),
+    borderWidth: 1,
+    pointRadius: 1,
+    pointHoverRadius: 4,
+    pointBorderWidth: 0.5,
+    fill: false,
+    tension: 0.2
+  }));
 
   const ctx = document.getElementById("tempChart").getContext("2d");
 
   if (tempChart) tempChart.destroy();
 
-tempChart = new Chart(ctx, {
-  type: "line",
-  data: { labels, datasets },
-  options: {
-    responsive: true,
-    interaction: { mode: "index", intersect: false },
-    plugins: {
-      legend: { position: "bottom" },
-      tooltip: { enabled: true }
+  tempChart = new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "right" },
+        tooltip: { enabled: true }
+      }
     }
-  }
-});
-
+  });
 }
 
 function drawHumidityChart(data, humCols) {
