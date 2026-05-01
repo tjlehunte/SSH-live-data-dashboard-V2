@@ -45,9 +45,7 @@ tempChart = new Chart(ctx, {
     responsive: true,
     interaction: { mode: "index", intersect: false },
     plugins: {
-      legend: {
-        position: "right"
-      },
+      legend: { position: "right" },
       tooltip: { enabled: true }
     }
   }
@@ -78,9 +76,7 @@ humChart = new Chart(ctx, {
     responsive: true,
     interaction: { mode: "index", intersect: false },
     plugins: {
-      legend: {
-        position: "right"
-      },
+      legend: { position: "right" },
       tooltip: { enabled: true }
     }
   }
