@@ -68,62 +68,68 @@ function drawMainChart(data, cols, title) {
 
   if (mainChart) mainChart.destroy();
 
-  mainChart = new Chart(ctx, {
-    type: "line",
-    data: { labels, datasets },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: { mode: "index", intersect: false },
-      plugins: {
-        legend: { position: "right" },
-        tooltip: { enabled: true },
+mainChart = new Chart(ctx, {
+  type: "line",
+  data: { labels, datasets },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: "index", intersect: false },
+    plugins: {
+      legend: { position: "right" },
+      tooltip: { enabled: true },
+      title: {
+        display: true,
+        text: title
+      }
+    },
+    layout: {
+      padding: {
+        bottom: 20
+      }
+    },
+    scales: {
+      x: {
         title: {
           display: true,
-          text: title
-        }
-      }, // ✅ FIXED COMMA
-      layout: {
-        padding: {
-          bottom: 20
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: "Time",
-            align: "center"
-          },
-          ticks: {
-            autoSkip: false,
-            callback: function(value, index) {
-              // Show a tick every 2 hours (assuming 5‑minute samples)
-              if (index % 12 === 0) {
-                return this.getLabelForValue(value);
-              }
-              return "";
+          text: "Time",
+          align: "center"
+        },
+        ticks: {
+          autoSkip: false,
+          callback: function(value, index) {
+            // Tick label every 2 hours (12 × 10‑min samples)
+            if (index % 12 === 0) {
+              return this.getLabelForValue(value);
             }
-          },
-          grid: {
-            drawOnChartArea: true,
-            drawTicks: true,
-            color: function(context) {
-              return (context.tick && contect.tick.label !== "") ? "#ccc" : "transparent";
-            }
+            return "";
           }
         },
-        y: {
-          title: {
-            display: true,
-            text: "Temperature (°C)",
-            align: "center"
+        grid: {
+          drawOnChartArea: true,
+          drawTicks: true,
+          color: function(context) {
+            const index = context.index;
+
+            // Grid line every 30 minutes (3 × 10‑min samples)
+            if (index % 3 === 0) {
+              return "#ccc";  // visible grid line
+            }
+
+            return "transparent"; // hide minor lines
           }
+        }
+      },   // ✅ COMMA FIXED HERE
+      y: {
+        title: {
+          display: true,
+          text: "Temperature (°C)",
+          align: "center"
         }
       }
     }
-  });
-} // ✅ FIXED: closing brace for drawMainChart()
+  }
+});
 
 function randomColor() {
   return `hsl(${Math.random() * 360}, 70%, 50%)`;
