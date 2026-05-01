@@ -87,7 +87,8 @@ function drawMainChart(data, cols, title) {
         x: {
           title: {
             display: true,
-            text: "Time"
+            text: "Time",
+            align: "centre"
           },
           ticks: {
             autoSkip: false,
@@ -103,7 +104,8 @@ function drawMainChart(data, cols, title) {
         y: {
           title: {
             display: true,
-            text: "Temperature (°C)"
+            text: "Temperature (°C)",
+            align: "centre"
           }
         }
       }
