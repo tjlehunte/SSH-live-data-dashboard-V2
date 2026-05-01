@@ -69,3 +69,5 @@ function drawChart(data, column) {
 }
 
 loadData();
+
+setInterval(loadData, 10 * 60 * 1000); //10 miutes
