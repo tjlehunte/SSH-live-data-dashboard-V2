@@ -30,14 +30,18 @@ function shortenLabel(col) {
 function drawTemperatureChart(data, tempCols) {
   const labels = data.map(d => d.MessageDate);
 
-  const datasets = tempCols.map(col => ({
-    label: shortenLabel(col),
-    data: data.map(d => d[col]),
-    borderColor: randomColor(),
-    borderWidth: 1,
-    fill: false,
-    tension: 0.2
-  }));
+const datasets = humCols.map(col => ({
+  label: shortenLabel(col),
+  data: data.map(d => d[col]),
+  borderColor: randomColor(),
+  borderWidth: 1,
+  pointRadius: 1,        // smaller visible points
+  pointHoverRadius: 4,   // bigger on hover so tooltips still work
+  pointBorderWidth: 0.5, // thin outline
+  fill: false,
+  tension: 0.2
+}));
+
 
   const ctx = document.getElementById("tempChart").getContext("2d");
 
@@ -61,14 +65,18 @@ tempChart = new Chart(ctx, {
 function drawHumidityChart(data, humCols) {
   const labels = data.map(d => d.MessageDate);
 
-  const datasets = humCols.map(col => ({
-    label: shortenLabel(col),
-    data: data.map(d => d[col]),
-    borderColor: randomColor(),
-    borderWidth: 0.5,
-    fill: false,
-    tension: 0.2
-  }));
+const datasets = humCols.map(col => ({
+  label: shortenLabel(col),
+  data: data.map(d => d[col]),
+  borderColor: randomColor(),
+  borderWidth: 1,
+  pointRadius: 1,        // smaller visible points
+  pointHoverRadius: 4,   // bigger on hover so tooltips still work
+  pointBorderWidth: 0.5, // thin outline
+  fill: false,
+  tension: 0.2
+}));
+
 
   const ctx = document.getElementById("humChart").getContext("2d");
 
