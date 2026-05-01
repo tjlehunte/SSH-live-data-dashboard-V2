@@ -26,35 +26,43 @@ function shortenLabel(col) {
   return col.split(" - ")[0];
 }
 
-function colorFromString(str) {
-  let hash = 2166136261; // FNV-1a 32-bit offset basis
-  for (let i = 0; i < str.length; i++) {
-    hash ^= str.charCodeAt(i);
-    hash = (hash * 16777619) >>> 0; // FNV prime
+const ROOM_COLORS = [
+  "#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231",
+  "#911eb4", "#46f0f0", "#f032e6", "#bcf60c", "#fabebe",
+  "#008080", "#e6beff", "#9a6324", "#fffac8", "#800000",
+  "#aaffc3", "#808000", "#ffd8b1", "#000075", "#808080"
+];
+
+const roomColorMap = {};
+let roomColorIndex = 0;
+
+function getRoomColor(room) {
+  if (!roomColorMap[room]) {
+    roomColorMap[room] = ROOM_COLORS[roomColorIndex % ROOM_COLORS.length];
+    roomColorIndex++;
   }
-  const hue = hash % 360;
-  return `hsl(${hue}, 70%, 50%)`;
+  return roomColorMap[room];
 }
 
 function drawMainChart(data, cols, title) {
   const labels = data.map(d => d.MessageDate);
+const datasets = cols.map(col => {
+  const room = col.split(" - ")[0];
+  const color = getRoomColor(room);
+  return {
+    label: room,
+    data: data.map(d => d[col]),
+    borderColor: color,
+    backgroundColor: color,
+    pointStyle: "rect",
+    borderWidth: 1,
+    pointRadius: 1,
+    pointHoverRadius: 4,
+    tension: 0.2,
+    fill: false
+  };
+});
 
-  const datasets = cols.map(col => {
-    const room = col.split(" - ")[0];
-    const color = colorFromString(room);
-    return {
-      label: shortenLabel(col),
-      data: data.map(d => d[col]),
-      borderColor: color,
-      backgroundColor: color,
-      pointStyle: "rect",
-      borderWidth: 1,
-      pointRadius: 1,
-      pointHoverRadius: 4,
-      tension: 0.2,
-      fill: false
-    };
-  });
 
   const ctx = document.getElementById("mainChart").getContext("2d");
 
