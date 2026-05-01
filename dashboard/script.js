@@ -39,7 +39,8 @@ function drawMainChart(data, cols, title) {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
-    const color = colorFromString(col);
+    const room = col.split(" - ")[0];
+    const color = colorFromString(room);
     return {
       label: shortenLabel(col),
       data: data.map(d => d[col]),
