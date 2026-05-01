@@ -89,3 +89,4 @@ function randomColor() {
 }
 
 loadData();
+setInterval(loadData, 10 * 60 * 1000);   // refresh every 10 minutes
