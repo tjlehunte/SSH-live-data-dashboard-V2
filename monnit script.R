@@ -12,6 +12,9 @@ library(plumber)
 
 #MONNIT DIRECT ----
 
+  monnit_api_key_id <- Sys.getenv("monnit_api_key_id")
+  monnit_api_secret_key <- Sys.getenv("monnit_api_secret_key")
+  
 #we could get all possible gateways at EH2, JH etc but we only want SSH which is NetworkID = 6
 ##All sensors ----
 
