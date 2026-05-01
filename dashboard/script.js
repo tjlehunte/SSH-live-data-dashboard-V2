@@ -46,70 +46,70 @@ function getRoomColor(room) {
 
 function drawMainChart(data, cols, title) {
   const labels = data.map(d => d.MessageDate);
-const datasets = cols.map(col => {
-  const room = col.split(" - ")[0];
-  const color = getRoomColor(room);
-  return {
-    label: room,
-    data: data.map(d => d[col]),
-    borderColor: color,
-    backgroundColor: color,
-    pointStyle: "rect",
-    borderWidth: 1,
-    pointRadius: 1,
-    pointHoverRadius: 4,
-    tension: 0.2,
-    fill: false
-  };
-});
 
+  const datasets = cols.map(col => {
+    const room = col.split(" - ")[0];
+    const color = getRoomColor(room);
+    return {
+      label: room,
+      data: data.map(d => d[col]),
+      borderColor: color,
+      backgroundColor: color,
+      pointStyle: "rect",
+      borderWidth: 1,
+      pointRadius: 1,
+      pointHoverRadius: 4,
+      tension: 0.2,
+      fill: false
+    };
+  });
 
   const ctx = document.getElementById("mainChart").getContext("2d");
 
   if (mainChart) mainChart.destroy();
 
-mainChart = new Chart(ctx, {
-  type: "line",
-  data: { labels, datasets },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: { mode: "index", intersect: false },
-    plugins: {
-      legend: { position: "bottom" },
-      tooltip: { enabled: true },
-      title: {
-        display: true,
-        text: title
-      }
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: "Time"
-        },
-        ticks: {
-          autoSkip: false,
-          callback: function(value, index) {
-            // Show a tick every 2 hours (assuming 5‑minute samples)
-            if (index % 24 === 0) {
-              return this.getLabelForValue(value);
-            }
-            return "";
-          }
-        }
-      },
-      y: {
+  mainChart = new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { position: "bottom" },
+        tooltip: { enabled: true },
         title: {
           display: true,
           text: title
         }
+      }, // ✅ FIXED COMMA
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Time"
+          },
+          ticks: {
+            autoSkip: false,
+            callback: function(value, index) {
+              // Show a tick every 2 hours (assuming 5‑minute samples)
+              if (index % 24 === 0) {
+                return this.getLabelForValue(value);
+              }
+              return "";
+            }
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: title
+          }
+        }
       }
     }
-  }
-});
-
+  });
+} // ✅ FIXED: closing brace for drawMainChart()
 
 function randomColor() {
   return `hsl(${Math.random() * 360}, 70%, 50%)`;
