@@ -1,8 +1,16 @@
 .chart-container {
-  background-color: #333 !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    background: #333 !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.tab:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
+tab:hover {
+    background-color: #444;
+}
+
+/* Original CSS rules here */
