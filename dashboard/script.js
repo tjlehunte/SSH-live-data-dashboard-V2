@@ -30,7 +30,7 @@ function shortenLabel(col) {
 function drawTemperatureChart(data, tempCols) {
   const labels = data.map(d => d.MessageDate);
 
-const datasets = humCols.map(col => ({
+const datasets = tempCols.map(col => ({
   label: shortenLabel(col),
   data: data.map(d => d[col]),
   borderColor: randomColor(),
