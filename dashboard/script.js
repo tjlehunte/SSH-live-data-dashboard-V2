@@ -91,7 +91,7 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
         title: {
           display: true,
           text: title,
-          title.color: textColor
+          color: textColor
         }
       },
 
