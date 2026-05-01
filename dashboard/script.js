@@ -76,7 +76,7 @@ function drawMainChart(data, cols, title) {
       maintainAspectRatio: false,
       interaction: { mode: "index", intersect: false },
       plugins: {
-        legend: { position: "bottom" },
+        legend: { position: "right" },
         tooltip: { enabled: true },
         title: {
           display: true,
