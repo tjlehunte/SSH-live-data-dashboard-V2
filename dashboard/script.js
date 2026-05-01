@@ -46,7 +46,10 @@ function getRoomColor(room) {
 
 function drawMainChart(data, cols, title) {
   const labels = data.map(d => d.MessageDate);
-
+  const maxValue = Math.max(
+    ...datasets.flatMap(ds => ds.data)
+    );
+  const roundedMax = Math.ceil(maxValue / 5) * 5;
   const datasets = cols.map(col => {
     const room = col.split(" - ")[0];
     const color = getRoomColor(room);
@@ -122,7 +125,9 @@ mainChart = new Chart(ctx, {
         title: {
           display: true,
           text: "Temperature (°C)",
-          align: "center"
+          align: "center",
+          beginAtZero: true,
+          max = roundedMax
         }
       }
     }
