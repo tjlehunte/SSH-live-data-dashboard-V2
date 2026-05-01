@@ -83,6 +83,11 @@ function drawMainChart(data, cols, title) {
           text: title
         }
       }, // ✅ FIXED COMMA
+      layout: {
+        padding: {
+          bottom: 20
+        }
+      },
       scales: {
         x: {
           title: {
