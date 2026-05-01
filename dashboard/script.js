@@ -1,66 +1,49 @@
-let chart;
+let tempChart, humChart;
 
 async function loadData() {
   const response = await fetch("https://monnit-plumber-api.onrender.com/data");
   const data = await response.json();
 
-  console.log("API response:", data);
+  const columns = Object.keys(data[0]);
 
-  if (!Array.isArray(data) || data.length === 0) {
-    console.error("API did not return an array");
-    return;
-  }
+  // Identify temperature and humidity columns
+  const tempCols = columns.filter(c =>
+    c.toLowerCase().includes("temp") || c.toLowerCase().includes("temperature")
+  );
 
-  // Extract column names
-  const columns = Object.keys(data[0]).filter(c => c !== "MessageDate");
-  console.log("Columns found:", columns);
+  const humCols = columns.filter(c =>
+    c.toLowerCase().includes("humid")
+  );
 
-  const select = document.getElementById("columnSelect");
-
-  if (!select) {
-    console.error("Dropdown element not found");
-    return;
-  }
-
-  // Populate dropdown
-  columns.forEach(col => {
-    const option = document.createElement("option");
-    option.value = col;
-    option.textContent = col;
-    select.appendChild(option);
-  });
-
-  // Draw initial chart
-  drawChart(data, columns[0]);
-
-  // Update chart when dropdown changes
-  select.addEventListener("change", () => {
-    drawChart(data, select.value);
-  });
+  drawTemperatureChart(data, tempCols);
+  drawHumidityChart(data, humCols);
 }
 
-function drawChart(data, column) {
+function drawTemperatureChart(data, tempCols) {
   const labels = data.map(d => d.MessageDate);
-  const values = data.map(d => d[column]);
 
-  const ctx = document.getElementById("chart").getContext("2d");
+  const datasets = tempCols.map(col => ({
+    label: col,
+    data: data.map(d => d[col]),
+    borderWidth: 2,
+    borderColor: randomColor(),
+    fill: false,
+    tension: 0.2
+  }));
 
-  if (chart) chart.destroy();
+  const ctx = document.getElementById("tempChart").getContext("2d");
 
-  chart = new Chart(ctx, {
+  if (tempChart) tempChart.destroy();
+
+  tempChart = new Chart(ctx, {
     type: "line",
-    data: {
-      labels: labels,
-      datasets: [{
-        label: column,
-        data: values,
-        borderColor: "blue",
-        fill: false,
-        tension: 0.2
-      }]
-    },
+    data: { labels, datasets },
     options: {
       responsive: true,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
       plugins: {
         tooltip: { enabled: true }
       }
@@ -68,6 +51,41 @@ function drawChart(data, column) {
   });
 }
 
-loadData();
+function drawHumidityChart(data, humCols) {
+  const labels = data.map(d => d.MessageDate);
 
-setInterval(loadData, 10 * 60 * 1000); //10 miutes
+  const datasets = humCols.map(col => ({
+    label: col,
+    data: data.map(d => d[col]),
+    borderWidth: 2,
+    borderColor: randomColor(),
+    fill: false,
+    tension: 0.2
+  }));
+
+  const ctx = document.getElementById("humChart").getContext("2d");
+
+  if (humChart) humChart.destroy();
+
+  humChart = new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      interaction: {
+        mode: "index",
+        intersect: false
+      },
+      plugins: {
+        tooltip: { enabled: true }
+      }
+    }
+  });
+}
+
+// Random colour generator for multiple lines
+function randomColor() {
+  return `hsl(${Math.random() * 360}, 70%, 50%)`;
+}
+
+loadData();
