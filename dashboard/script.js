@@ -27,11 +27,12 @@ function shortenLabel(col) {
 }
 
 function colorFromString(str) {
-  let hash = 0;
+  let hash = 2166136261; // FNV-1a 32-bit offset basis
   for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    hash ^= str.charCodeAt(i);
+    hash = (hash * 16777619) >>> 0; // FNV prime
   }
-  const hue = Math.abs(hash) % 360;
+  const hue = hash % 360;
   return `hsl(${hue}, 70%, 50%)`;
 }
 
