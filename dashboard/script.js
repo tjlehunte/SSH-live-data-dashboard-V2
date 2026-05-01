@@ -93,7 +93,7 @@ function drawMainChart(data, cols, title) {
             autoSkip: false,
             callback: function(value, index) {
               // Show a tick every 2 hours (assuming 5‑minute samples)
-              if (index % 24 === 0) {
+              if (index % 12 === 0) {
                 return this.getLabelForValue(value);
               }
               return "";
@@ -103,7 +103,7 @@ function drawMainChart(data, cols, title) {
         y: {
           title: {
             display: true,
-            text: title
+            text: "Temperature (°C)"
           }
         }
       }
