@@ -122,13 +122,12 @@ mainChart = new Chart(ctx, {
         }
       },
       y: {
+        beginAtZero: true,
+        max = roundedMax,
         title: {
           display: true,
           text: "Temperature (°C)",
-          align: "center",
-          beginAtZero: true,
-          max = roundedMax
-        }
+          align: "center"}
       }
     }
   }
