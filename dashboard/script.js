@@ -34,6 +34,7 @@ function drawTemperatureChart(data, tempCols) {
     label: shortenLabel(col),
     data: data.map(d => d[col]),
     borderColor: randomColor(),
+    backgroundColor: color + "33",
     borderWidth: 1,
     pointRadius: 1,
     pointHoverRadius: 4,
@@ -67,6 +68,7 @@ const datasets = humCols.map(col => ({
   label: shortenLabel(col),
   data: data.map(d => d[col]),
   borderColor: randomColor(),
+  backgroundColor: color + "33",
   borderWidth: 1,
   pointRadius: 1,        // smaller visible points
   pointHoverRadius: 4,   // bigger on hover so tooltips still work
