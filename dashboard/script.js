@@ -104,6 +104,13 @@ function drawMainChart(data, cols, title) {
               }
               return "";
             }
+          },
+          grid: {
+            drawOnChartArea: true,
+            drawTicks: true,
+            color: function(context) {
+              return (context.tick && contect.tick.label !== "") ? "#ccc" : "transparent";
+            }
           }
         },
         y: {
