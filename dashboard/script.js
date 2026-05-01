@@ -22,11 +22,16 @@ async function loadData() {
   hideSpinner();
 }
 
+function shortenLabel(col) {
+  // Split on " - " and return only the room name
+  return col.split(" - ")[0];
+}
+
 function drawTemperatureChart(data, tempCols) {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = tempCols.map(col => ({
-    label: col,
+    label: shortenLabel(col),
     data: data.map(d => d[col]),
     borderColor: randomColor(),
     borderWidth: 2,
@@ -57,7 +62,7 @@ function drawHumidityChart(data, humCols) {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = humCols.map(col => ({
-    label: col,
+    label: shortenLabel(col),
     data: data.map(d => d[col]),
     borderColor: randomColor(),
     borderWidth: 2,
