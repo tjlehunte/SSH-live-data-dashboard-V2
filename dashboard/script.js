@@ -29,7 +29,8 @@ function shortenLabel(col) {
 const ROOM_COLORS = [
   "#800000", "#9A6324", "#469990", "#000075", "#000000",
   "#e6194B", "#f58231", "#ffe119", "#3cb44b", "#42d4f4",
-  "#f032e6", "#dcbeff"
+  "#f032e6", "#dcbeff", "#aaffc3", "#911eb4", "#a9a9a9",
+  '#ffd8b1"
 ];
 
 const roomColorMap = {};
