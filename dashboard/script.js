@@ -91,4 +91,4 @@ function hideSpinner() {
 loadData();
 
 // Auto-refresh every minute
-setInterval(loadData, 60 * 1000);
+setInterval(loadData, 10 * 60 * 1000);
