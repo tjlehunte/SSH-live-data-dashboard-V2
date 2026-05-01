@@ -22,6 +22,10 @@ body {
     background: #444;
     color: #fff;
   }
+  .spinner {
+    border-color: #444;
+    border-top-color: #3498db;
+  }
 }
 
 h1 {
