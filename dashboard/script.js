@@ -46,10 +46,6 @@ function getRoomColor(room) {
 
 function drawMainChart(data, cols, title) {
   const labels = data.map(d => d.MessageDate);
-  const maxValue = Math.max(
-    ...datasets.flatMap(ds => ds.data)
-    );
-  const roundedMax = Math.ceil(maxValue / 5) * 5;
   const datasets = cols.map(col => {
     const room = col.split(" - ")[0];
     const color = getRoomColor(room);
@@ -66,9 +62,13 @@ function drawMainChart(data, cols, title) {
       fill: false
     };
   });
-
+  const maxValue = Math.max(
+    ...datasets.flatMap(ds => ds.data)
+  );
+  const roundedMax = Math.ceil(maxValue / 5) * 5;
+  
   const ctx = document.getElementById("mainChart").getContext("2d");
-
+  
   if (mainChart) mainChart.destroy();
 
 mainChart = new Chart(ctx, {
