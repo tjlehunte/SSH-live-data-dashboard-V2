@@ -1,6 +1,19 @@
 library(plumber)
 source("monnit script.R")   # your main script with get_monnit_data()
 
+#* @filter cors
+function(req, res) {
+  res$setHeader("Access-Control-Allow-Origin", "*")
+  res$setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+  res$setHeader("Access-Control-Allow-Headers", "Content-Type")
+  
+  if (req$REQUEST_METHOD == "OPTIONS") {
+    return(list())
+  }
+  
+  forward()
+}
+
 #* @get /data
 #* @serializer json
 
