@@ -22,7 +22,7 @@ async function loadData() {
   dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
   gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
   heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
-  wetbulbCols = columns.filter(c => c.toLowerCase().includes("wetbulb"));
+  wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
 
   console.log(columns);
 
