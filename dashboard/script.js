@@ -254,9 +254,9 @@ const roundedMin = Math.floor(minValue / 5) * 5;
 
 // Load data once
 async function loadData() {
-  const canvas = document.getElementById("mainChart");
+  const envcanvas = document.getElementById("mainChart");
   canvas.classList.add("loading");
-  const canvas = document.getElementById("currentChart");
+  const currentcanvas = document.getElementById("currentChart");
   canvas.classList.add("loading");
   showEnvSpinner();
   showCurrentSpinner();
@@ -283,15 +283,12 @@ async function loadData() {
 
   // Default chart = Temperature
   drawMainChart(allData, tempCols, "Temperature Sensors");
-  // after chart is drawn
   hideEnvSpinner();
   canvas.classList.remove("loading");
   // Default current chart = min max avg
   drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
-  // after chart is drawn
   hideCurrentSpinner();
   canvas.classList.remove("loading");
-
 }
 
 function randomColor() {
