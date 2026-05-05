@@ -1,4 +1,5 @@
 let mainChart = null;
+let currentChart = null;
 let tempCols = [];
 let humCols = [];
 let dewCols = [];
@@ -34,6 +35,9 @@ async function loadData() {
 
   // Default chart = Temperature
   drawMainChart(allData, tempCols, "Temperature Sensors");
+
+  // Default current chart = min max avg
+  drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
 
   hideSpinner();
 }
@@ -79,6 +83,43 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
       fill: false
     };
   });
+
+function drawCurrentChart(data, cols, title, unit = "Current (A)") {
+  const labels = data.map(d => d.MessageDate);
+
+  const datasets = cols.map(col => {
+    const room = col.split(" - ")[0];
+    const color = getRoomColor(room);
+    return {
+      label: room,
+      data: data.map(d => d[col]),
+      borderColor: color,
+      backgroundColor: color,
+      borderWidth: 1,
+      pointRadius: 1,
+      tension: 0.2
+    };
+  });
+    const ctx = document.getElementById("currentChart").getContext("2d");
+
+  if (currentChart) currentChart.destroy();
+
+  currentChart = new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "right" },
+        title: { display: true, text: title }
+      },
+      scales: {
+        y: { title: { display: true, text: unit } }
+      }
+    }
+  });
+}
 
   // Collect all numeric values from all datasets
 const allValues = datasets
@@ -182,11 +223,11 @@ loadData();
 setInterval(loadData, 10 * 60 * 1000);
 
 // TAB CLICK HANDLER
-document.querySelectorAll(".tab").forEach(tab => {
+document.querySelectorAll("#envTabs .tab").forEach(tab => {
   tab.addEventListener("click", () => {
 
     // Remove active class from all tabs
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll("#envTabs .tab").forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
 
     const type = tab.dataset.type;
@@ -209,12 +250,28 @@ document.querySelectorAll(".tab").forEach(tab => {
     if (type === "wetbulb") {
       drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
     }
+  });
+});
+
+document.querySelectorAll("#currentTabs .tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+
+    document.querySelectorAll("#currentTabs .tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    const type = tab.dataset.type;
+
     if (type === "current3") {
-     drawMainChart(allData, current3Cols, "Current Sensors", "Current (A)");
-    } 
+      drawCurrentChart(
+        allData,
+        current3Cols,
+        "Current (Min / Max / Avg)",
+        "Current (A)"
+      );
+    }
     if (type === "currentcum") {
-     drawMainChart(allData, currentcumCols, "Cumulative Current Sensor", "Current (A)");
-    } 
+      drawCurrentChart(allData,currentcumCols,"Cumulative Current (Ah)", "Amp-Hours (Ah)");
+    }
   });
 });
 
