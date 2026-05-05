@@ -222,6 +222,7 @@ loadData();
 // Auto-refresh every 10 minutes
 setInterval(loadData, 10 * 60 * 1000);
 
+document.addEventListener("DOMContentLoaded", () => {
 // TAB CLICK HANDLER
 document.querySelectorAll("#envTabs .tab").forEach(tab => {
   tab.addEventListener("click", () => {
@@ -251,6 +252,7 @@ document.querySelectorAll("#envTabs .tab").forEach(tab => {
       drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
     }
   });
+});
 });
 
 document.querySelectorAll("#currentTabs .tab").forEach(tab => {
