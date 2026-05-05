@@ -110,6 +110,7 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
             color: textColor,
             usePointStyle: true,
             pointStyle: "rect",
+            pointStyleWidth: 16,
             generateLabels: function(chart) {
               return chart.data.datasets.map((ds, i) => ({
                 text: ds.label,
@@ -227,6 +228,7 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
             color: textColor,
             usePointStyle: true,
             pointStyle: "rect",
+            pointStyleWidth: 16,
             generateLabels: function(chart) {
               return chart.data.datasets.map((ds, i) => ({
                 text: ds.label,
