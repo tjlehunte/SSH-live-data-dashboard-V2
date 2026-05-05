@@ -52,7 +52,7 @@ function getRoomColor(room) {
   return roomColorMap[room];
 }
 
-function drawMainChart(data, cols, title, unit) {
+function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
@@ -72,16 +72,34 @@ function drawMainChart(data, cols, title, unit) {
     };
   });
 
+  // Dark mode detection
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const gridColor = isDark ? "#444" : "#ccc";
+  const textColor = isDark ? "#ddd" : "#000";
+
+  // Update chart data
   mainChart.data.labels = labels;
   mainChart.data.datasets = datasets;
 
+  // Update chart title + axis labels
   mainChart.options.plugins.title.text = title;
   mainChart.options.scales.y.title.text = unit;
 
-  mainChart.update();   // ← THIS is what animates
+  // Restore text colours
+  mainChart.options.plugins.legend.labels.color = textColor;
+  mainChart.options.scales.x.ticks.color = textColor;
+  mainChart.options.scales.y.ticks.color = textColor;
+  mainChart.options.scales.x.title.color = textColor;
+  mainChart.options.scales.y.title.color = textColor;
+
+  // Restore grid colours
+  mainChart.options.scales.x.grid.color = gridColor;
+  mainChart.options.scales.y.grid.color = gridColor;
+
+  mainChart.update();
 }
 
-function drawCurrentChart(data, cols, title, unit) {
+function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
@@ -101,13 +119,31 @@ function drawCurrentChart(data, cols, title, unit) {
     };
   });
 
+  // Dark mode detection
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const gridColor = isDark ? "#444" : "#ccc";
+  const textColor = isDark ? "#ddd" : "#000";
+
+  // Update chart data
   currentChart.data.labels = labels;
   currentChart.data.datasets = datasets;
 
+  // Update chart title + axis labels
   currentChart.options.plugins.title.text = title;
   currentChart.options.scales.y.title.text = unit;
 
-  currentChart.update();   // ← smooth animation returns
+  // Restore text colours
+  currentChart.options.plugins.legend.labels.color = textColor;
+  currentChart.options.scales.x.ticks.color = textColor;
+  currentChart.options.scales.y.ticks.color = textColor;
+  currentChart.options.scales.x.title.color = textColor;
+  currentChart.options.scales.y.title.color = textColor;
+
+  // Restore grid colours
+  currentChart.options.scales.x.grid.color = gridColor;
+  currentChart.options.scales.y.grid.color = gridColor;
+
+  currentChart.update();
 }
 
 function initTabs() {
