@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", () => {
+
 let mainChart = null;
 let currentChart = null;
 let tempCols = [];
@@ -344,4 +346,6 @@ document.addEventListener("DOMContentLoaded", () => {
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
   loadData(); // redraw chart with new theme
 });
+
+}); // end DOMContentLoaded
 
