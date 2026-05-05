@@ -255,9 +255,9 @@ const roundedMin = Math.floor(minValue / 5) * 5;
 // Load data once
 async function loadData() {
   const envcanvas = document.getElementById("mainChart");
-  canvas.classList.add("loading");
+  envcanvas.classList.add("loading");
   const currentcanvas = document.getElementById("currentChart");
-  canvas.classList.add("loading");
+  currentcanvas.classList.add("loading");
   showEnvSpinner();
   showCurrentSpinner();
   
