@@ -20,6 +20,12 @@ const ROOM_COLORS = [
   "#ffd8b1"
 ];
 
+const CURRENT_METRIC_COLORS = {
+  "Minimum Current": "#3498db",  // blue
+  "Maximum Current": "#e74c3c",  // red
+  "Average Current": "#2ecc71"   // green
+};
+
 const roomColorMap = {};
 let roomColorIndex = 0;
 
@@ -137,16 +143,19 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
-    const room = col.split(" - ")[0];
+    const metric = col.split(" - ")[1];
     const color = getRoomColor(room);
     return {
-      label: room,
+      label: metric,
       data: data.map(d => d[col]),
       borderColor: color,
       backgroundColor: color,
+      pointStyle: "rect",
       borderWidth: 1,
       pointRadius: 1,
-      tension: 0.2
+      pointHoverRadius: 4,
+      tension: 0.2,
+      fill: false
     };
   });
   
