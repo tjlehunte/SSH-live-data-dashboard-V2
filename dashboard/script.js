@@ -1,6 +1,10 @@
 let mainChart = null;
 let tempCols = [];
 let humCols = [];
+let dewCols = [];
+let gpkgCols = [];
+let heatindexCols = [];
+let wetbulbCols = [];
 let allData = [];
 
 // Load data once
@@ -15,6 +19,10 @@ async function loadData() {
 
   tempCols = columns.filter(c => c.toLowerCase().includes("temp"));
   humCols  = columns.filter(c => c.toLowerCase().includes("humid"));
+  dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
+  gpkgCols = columns.filter(c => c.toLowerCase().includes("gramsper"));
+  heatindexCols = columns.filter(c => c.toLowerCase().includes("heatindex"));
+  wetbulbCols = columns.filter(c => c.toLowerCase().includes("wetbulb"));
 
   // Default chart = Temperature
   drawMainChart(allData, tempCols, "Temperature Sensors");
@@ -164,8 +172,16 @@ document.querySelectorAll(".tab").forEach(tab => {
 
     if (type === "temperature") {
       drawMainChart(allData, tempCols, "Temperature Sensors", "Temperature (°C)");
-    } else {
+    } if {
       drawMainChart(allData, humCols, "Humidity Sensors", "Humidity (%)");
+    } if {
+      drawMainChart(allData, dewCols, "Dew Point Sensors", "Dew Point (°C)");
+    } if {
+      drawMainChart(allData, gpkgCols, "Grams per Kilogram sensors", "Grams per Kilogram (g/kg)");
+    } if {
+      drawMainChart(allData, heatindexCols, "Heat Index Sensors", "Heat Index (°C)");
+    } if {
+      drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
     }
   });
 });
