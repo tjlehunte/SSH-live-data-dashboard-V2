@@ -95,6 +95,9 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        duration: 400,
+        easing: "easeInOutQuart"},
       interaction: { mode: "index", intersect: false },
       elements: {
         point: {
@@ -215,6 +218,9 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      animation: {
+        duration: 400,
+        easing: "easeInOutQuart"},
       interaction: { mode: "index", intersect: false },
       elements: {
         point: {
