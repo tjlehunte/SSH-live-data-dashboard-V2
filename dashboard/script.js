@@ -144,7 +144,7 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
 
   const datasets = cols.map(col => {
     const metric = col.split(" - ")[1];
-    const color = getRoomColor(room);
+    const color = CURRENT_METRIC_COLORS[metric];
     return {
       label: metric,
       data: data.map(d => d[col]),
