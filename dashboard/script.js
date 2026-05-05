@@ -87,6 +87,9 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   const textColor = isDark ? "#ddd" : "#000";
 
   const ctx = document.getElementById("mainChart").getContext("2d");
+  
+  await new Promise(requestAnimationFrame);   // ← THIS FIXES THE ANIMATION
+  
   if (mainChart) mainChart.destroy();
 
   mainChart = new Chart(ctx, {
@@ -210,6 +213,9 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   const textColor = isDark ? "#ddd" : "#000";
 
   const ctx = document.getElementById("currentChart").getContext("2d");
+
+  await new Promise(requestAnimationFrame);   // ← THIS FIXES THE ANIMATION
+  
   if (currentChart) currentChart.destroy();
 
   currentChart = new Chart(ctx, {
