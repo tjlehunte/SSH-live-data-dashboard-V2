@@ -284,11 +284,11 @@ async function loadData() {
   // Default chart = Temperature
   drawMainChart(allData, tempCols, "Temperature Sensors");
   hideEnvSpinner();
-  canvas.classList.remove("loading");
+  envcanvas.classList.remove("loading");
   // Default current chart = min max avg
   drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
   hideCurrentSpinner();
-  canvas.classList.remove("loading");
+  currentcanvas.classList.remove("loading");
 }
 
 function randomColor() {
