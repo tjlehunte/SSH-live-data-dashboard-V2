@@ -101,52 +101,50 @@ const roundedMin = Math.floor(minValue / 5) * 5;
       interaction: { mode: "index", intersect: false },
       elements: {
         point: {
-        pointStyle: "rect",
-        radius: 6,          // controls legend block size
-        hoverRadius: 6}},
-      plugins: {
-        legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect",
-                                             generateLabels: function(chart) {
-                                               return chart.data.datasets.map((ds, i) => ({
-                                                 text: ds.label,
-                                                 fillStyle: ds.backgroundColor,
-                                                 strokeStyle: ds.backgroundColor,
-                                                 lineWidth: 0,           // no border on the swatch
-                                                 pointStyle: "rect",
-                                                 fontColor: textColor,
-                                                 hidden: !chart.isDatasetVisible(i),
-                                                 datasetIndex: i
-                                               }));
-                                             }
-                                             }
-                }
+          pointStyle: "rect",
+          radius: 6,
+          hoverRadius: 6
+        }
       },
-        tooltip: { enabled: true },
-        title: {
+      plugins: {
+        legend: {
+          position: "right",
+          labels: {
+            color: textColor,
+            usePointStyle: true,
+            pointStyle: "rect",
+            generateLabels: function(chart) {
+              return chart.data.datasets.map((ds, i) => ({
+                text: ds.label,
+                fillStyle: ds.backgroundColor,
+                strokeStyle: ds.backgroundColor,
+                lineWidth: 0,
+                pointStyle: "rect",
+                fontColor: textColor,
+                hidden: !chart.isDatasetVisible(i),
+                datasetIndex: i
+              }));
+            }
+          }
+        },
+        tooltip: { enabled: true },   // ← inside plugins
+        title: {                       // ← inside plugins
           display: true,
           text: title,
           color: textColor
         }
-      },
+      },                               // ← closes plugins
       layout: {
         padding: { bottom: 20 }
       },
-
       scales: {
         x: {
-          title: {
-            display: true,
-            text: "Time",
-            align: "center",
-            color: textColor
-          },
+          title: { display: true, text: "Time", align: "center", color: textColor },
           ticks: {
             color: textColor,
             autoSkip: false,
             callback: function(value, index) {
-              if (index % 12 === 0) {
-                return this.getLabelForValue(value);
-              }
+              if (index % 12 === 0) return this.getLabelForValue(value);
               return "";
             }
           },
@@ -157,14 +155,10 @@ const roundedMin = Math.floor(minValue / 5) * 5;
           max: roundedMax,
           ticks: { color: textColor },
           grid: { color: gridColor },
-          title: {
-            display: true,
-            text: unit,
-            align: "center",
-            color: textColor
-          }
+          title: { display: true, text: unit, align: "center", color: textColor }
         }
       }
+    }  // ← closes options
     });
 }
 
@@ -219,53 +213,50 @@ const roundedMin = Math.floor(minValue / 5) * 5;
       interaction: { mode: "index", intersect: false },
       elements: {
         point: {
-        pointStyle: "rect",
-        radius: 6,          // controls legend block size
-        hoverRadius: 6}},
-      plugins: {
-        legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect",
-                                             generateLabels: function(chart) {
-                                               return chart.data.datasets.map((ds, i) => ({
-                                                 text: ds.label,
-                                                 fillStyle: ds.backgroundColor,
-                                                 strokeStyle: ds.backgroundColor,
-                                                 lineWidth: 0,           // no border on the swatch
-                                                 pointStyle: "rect",
-                                                 fontColor: textColor,
-                                                 hidden: !chart.isDatasetVisible(i),
-                                                 datasetIndex: i
-                                               }));
-                                             }
-                                             }
-                }
+          pointStyle: "rect",
+          radius: 6,
+          hoverRadius: 6
+        }
       },
-        tooltip: { enabled: true },
-        title: {
+      plugins: {
+        legend: {
+          position: "right",
+          labels: {
+            color: textColor,
+            usePointStyle: true,
+            pointStyle: "rect",
+            generateLabels: function(chart) {
+              return chart.data.datasets.map((ds, i) => ({
+                text: ds.label,
+                fillStyle: ds.backgroundColor,
+                strokeStyle: ds.backgroundColor,
+                lineWidth: 0,
+                pointStyle: "rect",
+                fontColor: textColor,
+                hidden: !chart.isDatasetVisible(i),
+                datasetIndex: i
+              }));
+            }
+          }
+        },
+        tooltip: { enabled: true },   // ← inside plugins
+        title: {                       // ← inside plugins
           display: true,
           text: title,
           color: textColor
         }
-      },
-
+      },                               // ← closes plugins
       layout: {
         padding: { bottom: 20 }
       },
-
       scales: {
         x: {
-          title: {
-            display: true,
-            text: "Time",
-            align: "center",
-            color: textColor
-          },
+          title: { display: true, text: "Time", align: "center", color: textColor },
           ticks: {
             color: textColor,
             autoSkip: false,
             callback: function(value, index) {
-              if (index % 12 === 0) {
-                return this.getLabelForValue(value);
-              }
+              if (index % 12 === 0) return this.getLabelForValue(value);
               return "";
             }
           },
@@ -276,14 +267,10 @@ const roundedMin = Math.floor(minValue / 5) * 5;
           max: roundedMax,
           ticks: { color: textColor },
           grid: { color: gridColor },
-          title: {
-            display: true,
-            text: unit,
-            align: "center",
-            color: textColor
-          }
+          title: { display: true, text: unit, align: "center", color: textColor }
         }
       }
+    }  // ← closes options
     });
 }
 
