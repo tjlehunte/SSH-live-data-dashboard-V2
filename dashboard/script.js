@@ -128,6 +128,7 @@ const roundedMin = Math.floor(minValue / 5) * 5;
             color: textColor
           }
         }
+        }
       }
     }
   });
