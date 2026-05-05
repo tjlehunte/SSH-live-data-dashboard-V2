@@ -36,9 +36,9 @@ const ROOM_COLORS = [
 ];
 
 const CURRENT_METRIC_COLORS = {
-  "Minimum Current": "#00c8f0",
-  "Maximum Current": "#ff1a1a",
-  "Average Current": "#00cc44"
+  "Minimum current": "#00c8f0",
+  "Maximum current": "#ff1a1a",
+  "Average current": "#00cc44"
 };
 
 const roomColorMap = {};
