@@ -164,8 +164,7 @@ const roundedMin = Math.floor(minValue / 5) * 5;
           }
         }
       }
-    }
-  });
+    });
 }
 
 function drawCurrentChart(data, cols, title, unit = "Current (A)") {
@@ -283,8 +282,7 @@ const roundedMin = Math.floor(minValue / 5) * 5;
           }
         }
       }
-    }
-  });
+    });
 }
 
 // Load data once
