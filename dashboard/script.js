@@ -52,7 +52,7 @@ function getRoomColor(room) {
   return roomColorMap[room];
 }
 
-function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
+function drawMainChart(data, cols, title, unit) {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
@@ -72,113 +72,16 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
     };
   });
 
-  const allValues = datasets
-    .flatMap(ds => ds.data)
-    .map(v => Number(v))
-    .filter(v => Number.isFinite(v));
+  mainChart.data.labels = labels;
+  mainChart.data.datasets = datasets;
 
-  const maxValue = Math.max(...allValues);
-  const minValue = Math.min(...allValues);
-  const roundedMax = Math.ceil(maxValue / 5) * 5;
-  const roundedMin = Math.floor(minValue / 5) * 5;
+  mainChart.options.plugins.title.text = title;
+  mainChart.options.scales.y.title.text = unit;
 
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const gridColor = isDark ? "#444" : "#ccc";
-  const textColor = isDark ? "#ddd" : "#000";
-
-  const ctx = document.getElementById("mainChart").getContext("2d");
-  
-  await new Promise(requestAnimationFrame);   // ← THIS FIXES THE ANIMATION
-  
-  if (mainChart) mainChart.destroy();
-
-  mainChart = new Chart(ctx, {
-    type: "line",
-    data: { labels, datasets },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: {
-        duration: 400,
-        easing: "easeInOutQuart"},
-      interaction: { mode: "index", intersect: false },
-      elements: {
-        point: {
-          pointStyle: "rect",
-          radius: 6,
-          hoverRadius: 6
-        }
-      },
-      plugins: {
-        legend: {
-          position: "right",
-          labels: {
-            color: textColor,
-            usePointStyle: true,
-            pointStyle: "rect",
-            pointStyleWidth: 16,
-            generateLabels: function(chart) {
-              return chart.data.datasets.map((ds, i) => {
-                return ({
-                  text: ds.label,
-                  fillStyle: ds.backgroundColor,
-                  strokeStyle: ds.backgroundColor,
-                  lineWidth: 0,
-                  pointStyle: "rect",
-                  fontColor: textColor,
-                  hidden: !chart.isDatasetVisible(i),
-                  datasetIndex: i
-                });
-              });
-            }
-          }
-        },
-        tooltip: { enabled: true },
-        title: {
-          display: true,
-          text: title,
-          color: textColor
-        }
-      },
-      layout: {
-        padding: { bottom: 20 }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: "Time",
-            align: "center",
-            color: textColor
-          },
-          ticks: {
-            color: textColor,
-            autoSkip: false,
-            callback: function(value, index) {
-              if (index % 12 === 0) return this.getLabelForValue(value);
-              return "";
-            }
-          },
-          grid: { color: gridColor }
-        },
-        y: {
-          min: roundedMin,
-          max: roundedMax,
-          ticks: { color: textColor },
-          grid: { color: gridColor },
-          title: {
-            display: true,
-            text: unit,
-            align: "center",
-            color: textColor
-          }
-        }
-      }
-    }
-  });
+  mainChart.update();   // ← THIS is what animates
 }
 
-function drawCurrentChart(data, cols, title, unit = "Current (A)") {
+function drawCurrentChart(data, cols, title, unit) {
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
@@ -198,110 +101,13 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
     };
   });
 
-  const allValues = datasets
-    .flatMap(ds => ds.data)
-    .map(v => Number(v))
-    .filter(v => Number.isFinite(v));
+  currentChart.data.labels = labels;
+  currentChart.data.datasets = datasets;
 
-  const maxValue = Math.max(...allValues);
-  const minValue = Math.min(...allValues);
-  const roundedMax = Math.ceil(maxValue / 5) * 5;
-  const roundedMin = Math.floor(minValue / 5) * 5;
+  currentChart.options.plugins.title.text = title;
+  currentChart.options.scales.y.title.text = unit;
 
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const gridColor = isDark ? "#444" : "#ccc";
-  const textColor = isDark ? "#ddd" : "#000";
-
-  const ctx = document.getElementById("currentChart").getContext("2d");
-
-  await new Promise(requestAnimationFrame);   // ← THIS FIXES THE ANIMATION
-  
-  if (currentChart) currentChart.destroy();
-
-  currentChart = new Chart(ctx, {
-    type: "line",
-    data: { labels, datasets },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: {
-        duration: 400,
-        easing: "easeInOutQuart"},
-      interaction: { mode: "index", intersect: false },
-      elements: {
-        point: {
-          pointStyle: "rect",
-          radius: 6,
-          hoverRadius: 6
-        }
-      },
-      plugins: {
-        legend: {
-          position: "right",
-          labels: {
-            color: textColor,
-            usePointStyle: true,
-            pointStyle: "rect",
-            pointStyleWidth: 16,
-            generateLabels: function(chart) {
-              return chart.data.datasets.map((ds, i) => {
-                return ({
-                  text: ds.label,
-                  fillStyle: ds.backgroundColor,
-                  strokeStyle: ds.backgroundColor,
-                  lineWidth: 0,
-                  pointStyle: "rect",
-                  fontColor: textColor,
-                  hidden: !chart.isDatasetVisible(i),
-                  datasetIndex: i
-                });
-              });
-            }
-          }
-        },
-        tooltip: { enabled: true },
-        title: {
-          display: true,
-          text: title,
-          color: textColor
-        }
-      },
-      layout: {
-        padding: { bottom: 20 }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: "Time",
-            align: "center",
-            color: textColor
-          },
-          ticks: {
-            color: textColor,
-            autoSkip: false,
-            callback: function(value, index) {
-              if (index % 12 === 0) return this.getLabelForValue(value);
-              return "";
-            }
-          },
-          grid: { color: gridColor }
-        },
-        y: {
-          min: roundedMin,
-          max: roundedMax,
-          ticks: { color: textColor },
-          grid: { color: gridColor },
-          title: {
-            display: true,
-            text: unit,
-            align: "center",
-            color: textColor
-          }
-        }
-      }
-    }
-  });
+  currentChart.update();   // ← smooth animation returns
 }
 
 function initTabs() {
@@ -357,8 +163,181 @@ async function loadData() {
     c.toLowerCase().includes("minimum current"));
   currentcumCols  = columns.filter(c => c.toLowerCase().includes("amp hours"));
 
-  console.log(columns);
+  if (!mainChart) {
+    const ctx = document.getElementById("mainChart").getContext("2d");
+    mainChart = new Chart(ctx, {
+      type: "line",
+      data: { labels: [], datasets: [] },
+      options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 400,
+        easing: "easeInOutQuart"},
+      interaction: { mode: "index", intersect: false },
+      elements: {
+        point: {
+          pointStyle: "rect",
+          radius: 6,
+          hoverRadius: 6
+        }
+      },
+      plugins: {
+        legend: {
+          position: "right",
+          labels: {
+            color: textColor,
+            usePointStyle: true,
+            pointStyle: "rect",
+            pointStyleWidth: 16,
+            generateLabels: function(chart) {
+              return chart.data.datasets.map((ds, i) => {
+                return ({
+                  text: ds.label,
+                  fillStyle: ds.backgroundColor,
+                  strokeStyle: ds.backgroundColor,
+                  lineWidth: 0,
+                  pointStyle: "rect",
+                  fontColor: textColor,
+                  hidden: !chart.isDatasetVisible(i),
+                  datasetIndex: i
+                });
+              });
+            }
+          }
+        },
+        tooltip: { enabled: true },
+        title: {
+          display: true,
+          text: title,
+          color: textColor
+        }
+      },
+      layout: {
+        padding: { bottom: 20 }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Time",
+            align: "center",
+            color: textColor
+          },
+          ticks: {
+            color: textColor,
+            autoSkip: false,
+            callback: function(value, index) {
+              if (index % 12 === 0) return this.getLabelForValue(value);
+              return "";
+            }
+          },
+          grid: { color: gridColor }
+        },
+        y: {
+          min: roundedMin,
+          max: roundedMax,
+          ticks: { color: textColor },
+          grid: { color: gridColor },
+          title: {
+            display: true,
+            text: unit,
+            align: "center",
+            color: textColor
+          }
+        }
+      }
+    }
+    });
+  }
 
+  if (!currentChart) {
+  const ctx2 = document.getElementById("currentChart").getContext("2d");
+  currentChart = new Chart(ctx2, {
+    type: "line",
+    data: { labels: [], datasets: [] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 400,
+        easing: "easeInOutQuart"},
+      interaction: { mode: "index", intersect: false },
+      elements: {
+        point: {
+          pointStyle: "rect",
+          radius: 6,
+          hoverRadius: 6
+        }
+      },
+      plugins: {
+        legend: {
+          position: "right",
+          labels: {
+            color: textColor,
+            usePointStyle: true,
+            pointStyle: "rect",
+            pointStyleWidth: 16,
+            generateLabels: function(chart) {
+              return chart.data.datasets.map((ds, i) => {
+                return ({
+                  text: ds.label,
+                  fillStyle: ds.backgroundColor,
+                  strokeStyle: ds.backgroundColor,
+                  lineWidth: 0,
+                  pointStyle: "rect",
+                  fontColor: textColor,
+                  hidden: !chart.isDatasetVisible(i),
+                  datasetIndex: i
+                });
+              });
+            }
+          }
+        },
+        tooltip: { enabled: true },
+        title: {
+          display: true,
+          text: title,
+          color: textColor
+        }
+      },
+      layout: {
+        padding: { bottom: 20 }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Time",
+            align: "center",
+            color: textColor
+          },
+          ticks: {
+            color: textColor,
+            autoSkip: false,
+            callback: function(value, index) {
+              if (index % 12 === 0) return this.getLabelForValue(value);
+              return "";
+            }
+          },
+          grid: { color: gridColor }
+        },
+        y: {
+          min: roundedMin,
+          max: roundedMax,
+          ticks: { color: textColor },
+          grid: { color: gridColor },
+          title: {
+            display: true,
+            text: unit,
+            align: "center",
+            color: textColor
+          }
+        }
+      }
+    }
+    });
+  }
   drawMainChart(allData, tempCols, "Temperature Sensors");
   hideEnvSpinner();
   envcanvas.classList.remove("loading");
