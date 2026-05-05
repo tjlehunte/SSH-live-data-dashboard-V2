@@ -80,14 +80,22 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
     };
   });
 
-  // Compute Y-axis max
-  const maxValue = Math.max(...datasets.flatMap(ds => ds.data));
-  const roundedMax = Math.ceil(maxValue / 5) * 5;
+  // Collect all numeric values from all datasets
+const allValues = datasets
+  .flatMap(ds => ds.data)
+  .map(v => Number(v))
+  .filter(v => Number.isFinite(v));
 
-  // Compute Y-axis min
-  const minValue = Math.min(...datasets.flatMap(ds => ds.data));
-  const roundedMin = Math.floor(minValue / 5) * 5;
+// Compute Y-axis max
+const maxValue = Math.max(...allValues);
+// Compute Y-axis min
+const minValue = Math.min(...allValues);
 
+const roundedMax = Math.ceil(maxValue / 5) * 5;
+const roundedMin = Math.floor(minValue / 5) * 5;
+
+console.log({ minValue, maxValue, roundedMin, roundedMax });
+  
   // Dark mode detection
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const gridColor = isDark ? "#444" : "#ccc";
