@@ -24,7 +24,11 @@ async function loadData() {
   gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
   heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
   wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
-  currentCols = columns.filter(c => c.toLowerCase().includes("current"));
+  current3Cols = columns.filter(c =>
+    c.toLowerCase().includes("average current") ||
+    c.toLowerCase().includes("maximum current") ||
+    c.toLowerCase().includes("minimum current"));
+  currentcumCols = columns.filter(c => c.toLowerCase().includes("amp hours"));
 
   console.log(columns);
 
@@ -193,8 +197,11 @@ document.querySelectorAll(".tab").forEach(tab => {
     if (type === "wetbulb") {
       drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
     }
-    if (type === "current") {
-     drawMainChart(allData, currentCols, "Current Sensors", "Current (A)");
+    if (type === "current3") {
+     drawMainChart(allData, current3Cols, "Current Sensors", "Current (A)");
+    } 
+    if (type === "currentcum") {
+     drawMainChart(allData, currentcumCols, "Cumulative Current Sensor", "Current (A)");
     } 
   });
 });
