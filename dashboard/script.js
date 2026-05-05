@@ -113,7 +113,6 @@ const roundedMin = Math.floor(minValue / 5) * 5;
           color: textColor
         }
       },
-
       layout: {
         padding: { bottom: 20 }
       },
