@@ -136,6 +136,18 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
     };
   });
 
+  // ⭐ RECOMPUTE Y‑AXIS RANGE
+  const allValues = datasets
+  .flatMap(ds => ds.data)
+  .map(v => Number(v))
+  .filter(v => Number.isFinite(v));
+
+  const maxValue = Math.max(...allValues);
+  const minValue = Math.min(...allValues);
+
+  const roundedMax = Math.ceil(maxValue / 5) * 5;
+  const roundedMin = Math.floor(minValue / 5) * 5;
+  
   // Dark mode detection
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const gridColor = isDark ? "#444" : "#ccc";
