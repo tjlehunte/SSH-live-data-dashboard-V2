@@ -72,6 +72,18 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
     };
   });
 
+  // ⭐ RECOMPUTE Y‑AXIS RANGE
+  const allValues = datasets
+    .flatMap(ds => ds.data)
+    .map(v => Number(v))
+    .filter(v => Number.isFinite(v));
+
+  const maxValue = Math.max(...allValues);
+  const minValue = Math.min(...allValues);
+
+  const roundedMax = Math.ceil(maxValue / 5) * 5;
+  const roundedMin = Math.floor(minValue / 5) * 5;
+
   // Dark mode detection
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const gridColor = isDark ? "#444" : "#ccc";
@@ -81,23 +93,28 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   mainChart.data.labels = labels;
   mainChart.data.datasets = datasets;
 
-  // Update chart title + axis labels
+  // Update titles
   mainChart.options.plugins.title.text = title;
   mainChart.options.scales.y.title.text = unit;
 
-  // Restore text colours
+  // ⭐ APPLY NEW Y‑AXIS RANGE
+  mainChart.options.scales.y.min = roundedMin;
+  mainChart.options.scales.y.max = roundedMax;
+
+  // Restore theme
   mainChart.options.plugins.legend.labels.color = textColor;
   mainChart.options.scales.x.ticks.color = textColor;
   mainChart.options.scales.y.ticks.color = textColor;
   mainChart.options.scales.x.title.color = textColor;
   mainChart.options.scales.y.title.color = textColor;
 
-  // Restore grid colours
+  // Restore grid colors
   mainChart.options.scales.x.grid.color = gridColor;
   mainChart.options.scales.y.grid.color = gridColor;
 
   mainChart.update();
 }
+
 
 function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   const labels = data.map(d => d.MessageDate);
@@ -131,6 +148,10 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   // Update chart title + axis labels
   currentChart.options.plugins.title.text = title;
   currentChart.options.scales.y.title.text = unit;
+
+  // ⭐ APPLY NEW Y‑AXIS RANGE
+  currentChart.options.scales.y.min = roundedMin;
+  currentChart.options.scales.y.max = roundedMax;
 
   // Restore text colours
   currentChart.options.plugins.legend.labels.color = textColor;
