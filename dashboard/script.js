@@ -38,6 +38,7 @@ function getRoomColor(room) {
 }
 
 function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
+  showEnvSpinner()
   const labels = data.map(d => d.MessageDate);
 
   const datasets = cols.map(col => {
@@ -137,6 +138,7 @@ const roundedMin = Math.floor(minValue / 5) * 5;
       }
     }
   });
+  hideEnvSpinner();
 }
 
 function drawCurrentChart(data, cols, title, unit = "Current (A)") {
@@ -277,13 +279,15 @@ function randomColor() {
   return `hsl(${Math.random() * 360}, 70%, 50%)`;
 }
 
-function showSpinner() {
-  document.getElementById("loading").style.display = "block";
-}
+function showEnvSpinner() {
+  document.getElementById("envSpinner").style.display = "block";}
+function hideEnvSpinner() {
+  document.getElementById("envSpinner").style.display = "none";}
 
-function hideSpinner() {
-  document.getElementById("loading").style.display = "none";
-}
+function showEnvSpinner() {
+  document.getElementById("currentSpinner").style.display = "block";}
+function hideEnvSpinner() {
+  document.getElementById("currentSpinner").style.display = "none";}
 
 loadData();
 
