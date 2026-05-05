@@ -222,53 +222,52 @@ loadData();
 // Auto-refresh every 10 minutes
 setInterval(loadData, 10 * 60 * 1000);
 
-document.addEventListener("DOMContentLoaded", () => {
 // TAB CLICK HANDLER
-document.querySelectorAll("#envTabs .tab").forEach(tab => {
-  tab.addEventListener("click", () => {
+document.addEventListener("DOMContentLoaded", () => {
+  // ENVIRONMENTAL TABS
+  document.querySelectorAll("#envTabs .tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll("#envTabs .tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
 
-    // Remove active class from all tabs
-    document.querySelectorAll("#envTabs .tab").forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
+      const type = tab.dataset.type;
 
-    const type = tab.dataset.type;
-
-    if (type === "temperature") {
-      drawMainChart(allData, tempCols, "Temperature Sensors", "Temperature (°C)");
-    }
-    if (type === "humidity") {
-      drawMainChart(allData, humCols, "Humidity Sensors", "Humidity (%)");
-    }
-    if (type === "dewpoint") {
-      drawMainChart(allData, dewCols, "Dew Point Sensors", "Dew Point (°C)");
-    }
-    if (type === "gpkg") {
-      drawMainChart(allData, gpkgCols, "Grams per Kilogram Sensors", "Grams per Kilogram (g/kg)");
-    }
-    if (type === "heatindex") {
-      drawMainChart(allData, heatindexCols, "Heat Index Sensors", "Heat Index (°C)");
-    }
-    if (type === "wetbulb") {
-      drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
-    }
+      if (type === "temperature") {
+        drawMainChart(allData, tempCols, "Temperature Sensors", "Temperature (°C)");
+      }
+      if (type === "humidity") {
+        drawMainChart(allData, humCols, "Humidity Sensors", "Humidity (%)");
+      }
+      if (type === "dewpoint") {
+        drawMainChart(allData, dewCols, "Dew Point Sensors", "Dew Point (°C)");
+      }
+      if (type === "gpkg") {
+        drawMainChart(allData, gpkgCols, "Grams per Kilogram Sensors", "Grams per Kilogram (g/kg)");
+      }
+      if (type === "heatindex") {
+        drawMainChart(allData, heatindexCols, "Heat Index Sensors", "Heat Index (°C)");
+      }
+      if (type === "wetbulb") {
+        drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
+      }
+    });
   });
-});
-});
 
-document.querySelectorAll("#currentTabs .tab").forEach(tab => {
-  tab.addEventListener("click", () => {
+  // CURRENT TABS
+  document.querySelectorAll("#currentTabs .tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll("#currentTabs .tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
 
-    document.querySelectorAll("#currentTabs .tab").forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
+      const type = tab.dataset.type;
 
-    const type = tab.dataset.type;
-
-    if (type === "current-summary") {
-      drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
-    }
-    if (type === "current-cumulative") {
-      drawCurrentChart(allData,currentcumCols,"Cumulative Current (Ah)", "Amp-Hours (Ah)");
-    }
+      if (type === "current-summary") {
+        drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
+      }
+      if (type === "current-cumulative") {
+        drawCurrentChart(allData, currentcumCols, "Cumulative Current (Ah)", "Amp-Hours (Ah)");
+      }
+    });
   });
 });
 
