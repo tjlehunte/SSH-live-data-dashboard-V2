@@ -64,9 +64,7 @@ const minValue = Math.min(...allValues);
 
 const roundedMax = Math.ceil(maxValue / 5) * 5;
 const roundedMin = Math.floor(minValue / 5) * 5;
-
-console.log({ minValue, maxValue, roundedMin, roundedMax });
-  
+ 
   // Dark mode detection
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const gridColor = isDark ? "#444" : "#ccc";
@@ -85,7 +83,7 @@ console.log({ minValue, maxValue, roundedMin, roundedMax });
       interaction: { mode: "index", intersect: false },
 
       plugins: {
-        legend: { position: "right" },
+        legend: { position: "right", labels: { color: textColor },
         tooltip: { enabled: true },
         title: {
           display: true,
@@ -183,7 +181,7 @@ const roundedMin = Math.floor(minValue / 5) * 5;
       interaction: { mode: "index", intersect: false },
 
       plugins: {
-        legend: { position: "right" },
+        legend: { position: "right", labels: { color: textColor },
         tooltip: { enabled: true },
         title: {
           display: true,
