@@ -12,21 +12,33 @@
 
 <div id="loading" class="spinner"></div>
 
-<!-- TAB ROW -->
-<div class="tab-row">
-  <div class="tab active" data-type="temperature">Temperature</div>
-  <div class="tab" data-type="humidity">Humidity</div>
-  <div class="tab" data-type="dewpoint">Dew Point</div>
-  <div class="tab" data-type="gpkg">Grams per kg</div>
-  <div class="tab" data-type="heatindex">Heat Index</div>
-  <div class="tab" data-type="wetbulb">Wet Bulb</div>
-  <div class="tab" data-type="current3">Current (Min / Max / Avg)</div>
-  <div class="tab" data-type="currentcum">Current (Cumulative)</div>
+<!-- Temperature, humidity etc graph section -->
+<div class="envchart-section">
+  <div class="tab-row">
+    <div class="tab active" data-type="temperature">Temperature</div>
+    <div class="tab" data-type="humidity">Humidity</div>
+    <div class="tab" data-type="dewpoint">Dew Point</div>
+    <div class="tab" data-type="gpkg">Grams per kg</div>
+    <div class="tab" data-type="heatindex">Heat Index</div>
+    <div class="tab" data-type="wetbulb">Wet Bulb</div>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="mainChart"></canvas>
+  </div>
 </div>
 
-<!-- SINGLE CHART AREA -->
-<div class="chart-container">
-  <canvas id="mainChart"></canvas>
+  
+<!-- Cumulative current, current stats graph section -->
+<div class="currentchart-section">
+  <div class="tab-row">
+    <div class="tab" data-type="current3">Current (Min / Max / Avg)</div>
+    <div class="tab" data-type="currentcum">Current (Cumulative)</div>
+  </div>
+  
+  <div class="chart-container">
+    <canvas id="currentChart"></canvas>
+  </div>
 </div>
 
 <script src="script.js"></script>
