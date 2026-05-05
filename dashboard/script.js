@@ -5,6 +5,7 @@ let dewCols = [];
 let gpkgCols = [];
 let heatindexCols = [];
 let wetbulbCols = [];
+let currentCols = [];
 let allData = [];
 
 // Load data once
@@ -23,6 +24,7 @@ async function loadData() {
   gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
   heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
   wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
+  currentCols = columns.filter(c => c.toLowerCase().includes("current"));
 
   console.log(columns);
 
@@ -191,9 +193,11 @@ document.querySelectorAll(".tab").forEach(tab => {
     if (type === "wetbulb") {
       drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
     }
+    if (type === "current") {
+     drawMainChart(allData, currentCols, "Current Sensors", "Current (A)");
+    } 
   });
 });
-
 
 // Auto-update chart when system theme changes
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
