@@ -108,13 +108,14 @@ const roundedMin = Math.floor(minValue / 5) * 5;
         legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect",
                                              generateLabels: function(chart) {
                                                return chart.data.datasets.map((ds, i) => ({
-                                                       text: ds.label,
-                                                       fillStyle: ds.backgroundColor,
-                                                       strokeStyle: ds.backgroundColor,
-                                                       lineWidth: 0,           // no border on the swatch
-                                                       pointStyle: "rect",
-                                                       hidden: !chart.isDatasetVisible(i),
-                                                       datasetIndex: i
+                                                 text: ds.label,
+                                                 fillStyle: ds.backgroundColor,
+                                                 strokeStyle: ds.backgroundColor,
+                                                 lineWidth: 0,           // no border on the swatch
+                                                 pointStyle: "rect",
+                                                 fontColor: textColor,
+                                                 hidden: !chart.isDatasetVisible(i),
+                                                 datasetIndex: i
                                                }));
                                              }
                                              }
@@ -225,13 +226,14 @@ const roundedMin = Math.floor(minValue / 5) * 5;
         legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect",
                                              generateLabels: function(chart) {
                                                return chart.data.datasets.map((ds, i) => ({
-                                                       text: ds.label,
-                                                       fillStyle: ds.backgroundColor,
-                                                       strokeStyle: ds.backgroundColor,
-                                                       lineWidth: 0,           // no border on the swatch
-                                                       pointStyle: "rect",
-                                                       hidden: !chart.isDatasetVisible(i),
-                                                       datasetIndex: i
+                                                 text: ds.label,
+                                                 fillStyle: ds.backgroundColor,
+                                                 strokeStyle: ds.backgroundColor,
+                                                 lineWidth: 0,           // no border on the swatch
+                                                 pointStyle: "rect",
+                                                 fontColor: textColor,
+                                                 hidden: !chart.isDatasetVisible(i),
+                                                 datasetIndex: i
                                                }));
                                              }
                                              }
