@@ -13,6 +13,16 @@ function shortenLabel(col) {
   return col.split(" - ")[0];
 }
 
+function showEnvSpinner() {
+  document.getElementById("envSpinner").style.display = "block";}
+function hideEnvSpinner() {
+  document.getElementById("envSpinner").style.display = "none";}
+
+function showEnvSpinner() {
+  document.getElementById("currentSpinner").style.display = "block";}
+function hideEnvSpinner() {
+  document.getElementById("currentSpinner").style.display = "none";}
+
 const ROOM_COLORS = [
   "#800000", "#9A6324", "#469990", "#000075", "#000000",
   "#e6194B", "#f58231", "#ffe119", "#3cb44b", "#42d4f4",
@@ -278,16 +288,6 @@ async function loadData() {
 function randomColor() {
   return `hsl(${Math.random() * 360}, 70%, 50%)`;
 }
-
-function showEnvSpinner() {
-  document.getElementById("envSpinner").style.display = "block";}
-function hideEnvSpinner() {
-  document.getElementById("envSpinner").style.display = "none";}
-
-function showEnvSpinner() {
-  document.getElementById("currentSpinner").style.display = "block";}
-function hideEnvSpinner() {
-  document.getElementById("currentSpinner").style.display = "none";}
 
 loadData();
 
