@@ -161,13 +161,13 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
       label: metric,
       data: data.map(d => d[col]),
       borderColor: color,
-      backgroundColor: color,
-      pointStyle: "rect",
+      backgroundColor: color,   // solid fill
+      pointStyle: "rect",       // makes legend block a rectangle
       borderWidth: 1,
       pointRadius: 1,
       pointHoverRadius: 4,
       tension: 0.2,
-      fill: false
+      fill: false  
     };
   });
   
