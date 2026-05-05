@@ -250,7 +250,7 @@ async function loadData() {
         tooltip: { enabled: true },
         title: {
           display: true,
-          text: title,
+          text: "",
           color: textColor
         }
       },
@@ -338,7 +338,7 @@ async function loadData() {
         tooltip: { enabled: true },
         title: {
           display: true,
-          text: title,
+          text: "",
           color: textColor
         }
       },
