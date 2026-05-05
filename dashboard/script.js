@@ -1,6 +1,10 @@
 let mainChart = null;
 let tempCols = [];
 let humCols = [];
+let dewCols = [];
+let gpkgCols = [];
+let heatindexCols = [];
+let wetbulbCols = [];
 let allData = [];
 
 // Load data once
@@ -15,6 +19,12 @@ async function loadData() {
 
   tempCols = columns.filter(c => c.toLowerCase().includes("temp"));
   humCols  = columns.filter(c => c.toLowerCase().includes("humid"));
+  dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
+  gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
+  heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
+  wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
+
+  console.log(columns);
 
   // Default chart = Temperature
   drawMainChart(allData, tempCols, "Temperature Sensors");
@@ -44,8 +54,9 @@ function getRoomColor(room) {
   return roomColorMap[room];
 }
 
-function drawMainChart(data, cols, title) {
+function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   const labels = data.map(d => d.MessageDate);
+
   const datasets = cols.map(col => {
     const room = col.split(" - ")[0];
     const color = getRoomColor(room);
@@ -62,78 +73,78 @@ function drawMainChart(data, cols, title) {
       fill: false
     };
   });
-  const maxValue = Math.max(
-    ...datasets.flatMap(ds => ds.data)
-  );
+
+  // Compute Y-axis max
+  const maxValue = Math.max(...datasets.flatMap(ds => ds.data));
   const roundedMax = Math.ceil(maxValue / 5) * 5;
-  
+
+  // Dark mode detection
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const gridColor = isDark ? "#444" : "#ccc";
+  const textColor = isDark ? "#ddd" : "#000";
+
   const ctx = document.getElementById("mainChart").getContext("2d");
-  
+
   if (mainChart) mainChart.destroy();
 
-mainChart = new Chart(ctx, {
-  type: "line",
-  data: { labels, datasets },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: { mode: "index", intersect: false },
-    plugins: {
-      legend: { position: "right" },
-      tooltip: { enabled: true },
-      title: {
-        display: true,
-        text: title
-      }
-    },
-    layout: {
-      padding: {
-        bottom: 20
-      }
-    },
-    scales: {
-      x: {
+  mainChart = new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+
+      plugins: {
+        legend: { position: "right" },
+        tooltip: { enabled: true },
         title: {
           display: true,
-          text: "Time",
-          align: "center"
-        },
-        ticks: {
-          autoSkip: false,
-          callback: function(value, index) {
-            if (index % 12 === 0) {
-              return this.getLabelForValue(value);
-            }
-            return "";
-          }
-        },
-        grid: {
-          drawOnChartArea: true,
-          drawTicks: true,
-          color: function(context) {
-            const index = context.index;
-
-            if (index % 3 === 0) {
-              return "#ccc";
-            }
-
-            return "transparent";
-          }
+          text: title,
+          color: textColor
         }
       },
-      y: {
-        beginAtZero: true,
-        max: roundedMax,
-        title: {
-          display: true,
-          text: "Temperature (°C)",
-          align: "center"}
+
+      layout: {
+        padding: { bottom: 20 }
+      },
+
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Time",
+            align: "center",
+            color: textColor
+          },
+          ticks: {
+            color: textColor,
+            autoSkip: false,
+            callback: function(value, index) {
+              if (index % 12 === 0) {
+                return this.getLabelForValue(value);
+              }
+              return "";
+            }
+          },
+          grid: { color: gridColor }
+        },
+        y: {
+          beginAtZero: true,
+          max: roundedMax,
+          ticks: { color: textColor },
+          grid: { color: gridColor },
+          title: {
+            display: true,
+            text: unit,
+            align: "center",
+            color: textColor
+          }
+        }
       }
     }
-  }
-});   // ✅ closes new Chart
-}     // ✅ closes drawMainChart
-
+  });
+}
 
 function randomColor() {
   return `hsl(${Math.random() * 360}, 70%, 50%)`;
@@ -156,15 +167,36 @@ setInterval(loadData, 10 * 60 * 1000);
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
 
+    // Remove active class from all tabs
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
 
     const type = tab.dataset.type;
 
     if (type === "temperature") {
-      drawMainChart(allData, tempCols, "Temperature Sensors");
-    } else {
-      drawMainChart(allData, humCols, "Humidity Sensors");
+      drawMainChart(allData, tempCols, "Temperature Sensors", "Temperature (°C)");
+    }
+    if (type === "humidity") {
+      drawMainChart(allData, humCols, "Humidity Sensors", "Humidity (%)");
+    }
+    if (type === "dewpoint") {
+      drawMainChart(allData, dewCols, "Dew Point Sensors", "Dew Point (°C)");
+    }
+    if (type === "gpkg") {
+      drawMainChart(allData, gpkgCols, "Grams per Kilogram Sensors", "Grams per Kilogram (g/kg)");
+    }
+    if (type === "heatindex") {
+      drawMainChart(allData, heatindexCols, "Heat Index Sensors", "Heat Index (°C)");
+    }
+    if (type === "wetbulb") {
+      drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
     }
   });
 });
+
+
+// Auto-update chart when system theme changes
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+  loadData(); // redraw chart with new theme
+});
+

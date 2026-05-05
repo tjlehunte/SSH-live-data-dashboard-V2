@@ -34,12 +34,6 @@ canvas {
   flex: 1;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
-  padding: 20px;
-}
-
 .chart-row {
   display: flex;
   justify-content: space-between;
@@ -61,7 +55,7 @@ body {
   height: 60px;
   animation: spin 1s linear infinite;
   margin: 40px auto;
-  display: none; /* hidden by default */
+  display: none;
 }
 
 .tab-row {
@@ -78,6 +72,7 @@ body {
   user-select: none;
   font-weight: bold;
   transition: 0.2s;
+  color: #333;
 }
 
 .tab:hover {
@@ -92,4 +87,39 @@ body {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* ---------------------------------------------------------
+   DARK MODE OVERRIDES — MUST BE LAST
+   --------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #121212;
+    color: #e0e0e0;
+  }
+
+  .chart-container {
+    background: #1e1e1e !important;
+    border-color: #333;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  .tab {
+    background: #222 !important;
+    color: #ddd !important;
+  }
+
+  .tab:hover {
+    background: #333 !important;
+  }
+
+  .tab.active {
+    background: #444 !important;
+    color: #fff !important;
+  }
+
+  .spinner {
+    border-color: #444;
+    border-top-color: #3498db;
+  }
 }
