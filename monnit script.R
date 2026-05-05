@@ -12,9 +12,9 @@ library(plumber)
 
 #MONNIT DIRECT ----
 
-  monnit_api_key_id <- Sys.getenv("monnit_api_key_id")
-  monnit_api_secret_key <- Sys.getenv("monnit_api_secret_key")
-  
+monnit_api_secret_key <- "hCsLUvCeh5Ms8gLKP5sadyjXWexaBts9"
+monnit_api_key_id <- "BSSXYQPSnPE5"
+
 #we could get all possible gateways at EH2, JH etc but we only want SSH which is NetworkID = 6
 ##All sensors ----
 
@@ -218,7 +218,7 @@ monnit_current_df <- monnit_current_df[,-6]
 names(monnit_current_df) <- sub("\\.", " ", names(monnit_current_df))
 
 #one df
-df_list <- list(monnit_current_df, monnit_dewpoint_df, monnit_gpkg_df, monnit_heatindex_df, monnit_humidity_df, monnit_temperature_df)
+df_list <- list(monnit_current_df, monnit_dewpoint_df, monnit_gpkg_df, monnit_heatindex_df, monnit_humidity_df, monnit_temperature_df, monnit_wetbulb_df)
 
 joined_monnit_df <- df_list %>% reduce(full_join)
 
