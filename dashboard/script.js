@@ -105,7 +105,21 @@ const roundedMin = Math.floor(minValue / 5) * 5;
         radius: 6,          // controls legend block size
         hoverRadius: 6}},
       plugins: {
-        legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect" } },
+        legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect",
+                                             generateLabels: function(chart) {
+                                               return chart.data.datasets.map((ds, i) => ({
+                                                       text: ds.label,
+                                                       fillStyle: ds.backgroundColor,
+                                                       strokeStyle: ds.backgroundColor,
+                                                       lineWidth: 0,           // no border on the swatch
+                                                       pointStyle: "rect",
+                                                       hidden: !chart.isDatasetVisible(i),
+                                                       datasetIndex: i
+                                               }));
+                                             }
+                                             }
+                }
+      },
         tooltip: { enabled: true },
         title: {
           display: true,
@@ -209,7 +223,21 @@ const roundedMin = Math.floor(minValue / 5) * 5;
         radius: 6,          // controls legend block size
         hoverRadius: 6}},
       plugins: {
-        legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect" } },
+        legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect",
+                                             generateLabels: function(chart) {
+                                               return chart.data.datasets.map((ds, i) => ({
+                                                       text: ds.label,
+                                                       fillStyle: ds.backgroundColor,
+                                                       strokeStyle: ds.backgroundColor,
+                                                       lineWidth: 0,           // no border on the swatch
+                                                       pointStyle: "rect",
+                                                       hidden: !chart.isDatasetVisible(i),
+                                                       datasetIndex: i
+                                               }));
+                                             }
+                                             }
+                }
+      },
         tooltip: { enabled: true },
         title: {
           display: true,
