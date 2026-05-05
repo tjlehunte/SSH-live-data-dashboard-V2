@@ -177,16 +177,16 @@ document.querySelectorAll(".tab").forEach(tab => {
     if (type === "humidity") {
       drawMainChart(allData, humCols, "Humidity Sensors", "Humidity (%)");
     }
-    if (type === "dew") {
+    if (type === "dewpoint") {
       drawMainChart(allData, dewCols, "Dew Point Sensors", "Dew Point (°C)");
     }
-    if (type === "gpk") {
+    if (type === "gpkg") {
       drawMainChart(allData, gpkgCols, "Grams per Kilogram Sensors", "Grams per Kilogram (g/kg)");
     }
-    if (type === "heat") {
+    if (type === "heatindex") {
       drawMainChart(allData, heatindexCols, "Heat Index Sensors", "Heat Index (°C)");
     }
-    if (type === "wet") {
+    if (type === "wetbulb") {
       drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
     }
   });
