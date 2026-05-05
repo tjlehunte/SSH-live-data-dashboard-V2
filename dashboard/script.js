@@ -313,10 +313,6 @@ async function loadData() {
   currentcanvas.classList.remove("loading");
 }
 
-function randomColor() {
-  return `hsl(${Math.random() * 360}, 70%, 50%)`;
-}
-
 loadData();
 
 // Auto-refresh every 10 minutes
