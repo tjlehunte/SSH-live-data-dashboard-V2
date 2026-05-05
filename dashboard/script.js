@@ -233,16 +233,19 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
             pointStyle: "rect",
             pointStyleWidth: 16,
             generateLabels: function(chart) {
-              return chart.data.datasets.map((ds, i) => ({
-                text: ds.label,
-                fillStyle: ds.backgroundColor,
-                strokeStyle: ds.backgroundColor,
-                lineWidth: 0,
-                pointStyle: "rect",
-                fontColor: textColor,
-                hidden: !chart.isDatasetVisible(i),
-                datasetIndex: i
-              }));
+              return chart.data.datasets.map((ds, i) => {
+                console.log(ds.label, ds.backgroundColor);  // ← add this
+                return ({
+                  text: ds.label,
+                  fillStyle: ds.backgroundColor,
+                  strokeStyle: ds.backgroundColor,
+                  lineWidth: 0,
+                  pointStyle: "rect",
+                  fontColor: textColor,
+                  hidden: !chart.isDatasetVisible(i),
+                  datasetIndex: i
+                });
+              });
             }
           }
         },
