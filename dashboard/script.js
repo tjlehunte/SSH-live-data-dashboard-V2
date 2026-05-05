@@ -99,7 +99,11 @@ const roundedMin = Math.floor(minValue / 5) * 5;
       responsive: true,
       maintainAspectRatio: false,
       interaction: { mode: "index", intersect: false },
-
+      elements: {
+        point: {
+        pointStyle: "rect",
+        radius: 6,          // controls legend block size
+        hoverRadius: 6}}
       plugins: {
         legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect" } },
         tooltip: { enabled: true },
@@ -200,7 +204,11 @@ const roundedMin = Math.floor(minValue / 5) * 5;
       responsive: true,
       maintainAspectRatio: false,
       interaction: { mode: "index", intersect: false },
-
+      elements: {
+        point: {
+        pointStyle: "rect",
+        radius: 6,          // controls legend block size
+        hoverRadius: 6}}
       plugins: {
         legend: { position: "right", labels: { color: textColor, usePointStyle: true, pointStyle: "rect" } },
         tooltip: { enabled: true },
