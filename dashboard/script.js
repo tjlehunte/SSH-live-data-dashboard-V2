@@ -84,6 +84,10 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   const maxValue = Math.max(...datasets.flatMap(ds => ds.data));
   const roundedMax = Math.ceil(maxValue / 5) * 5;
 
+  // Compute X-axis min
+  const minValue = Math.min(...datasets.flatMap(ds => ds.data));
+  const roundedMin = Math.floor(minValue / 5) * 5;
+
   // Dark mode detection
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const gridColor = isDark ? "#444" : "#ccc";
@@ -136,7 +140,7 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
           grid: { color: gridColor }
         },
         y: {
-          beginAtZero: true,
+          min: roundedMin,
           max: roundedMax,
           ticks: { color: textColor },
           grid: { color: gridColor },
