@@ -20,8 +20,8 @@ async function loadData() {
   tempCols = columns.filter(c => c.toLowerCase().includes("temp"));
   humCols  = columns.filter(c => c.toLowerCase().includes("humid"));
   dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
-  gpkgCols = columns.filter(c => c.toLowerCase().includes("gramsper"));
-  heatindexCols = columns.filter(c => c.toLowerCase().includes("heatindex"));
+  gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
+  heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
   wetbulbCols = columns.filter(c => c.toLowerCase().includes("wetbulb"));
 
   console.log(columns);
