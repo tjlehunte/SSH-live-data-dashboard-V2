@@ -24,6 +24,8 @@ async function loadData() {
   heatindexCols = columns.filter(c => c.toLowerCase().includes("heatindex"));
   wetbulbCols = columns.filter(c => c.toLowerCase().includes("wetbulb"));
 
+  console.log(columns);
+
   // Default chart = Temperature
   drawMainChart(allData, tempCols, "Temperature Sensors");
 
