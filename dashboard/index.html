@@ -10,8 +10,6 @@
 <body>
 <h1>Salford Smart Home - Monnit Sensor Dashboard</h1>
 
-<div id="loading" class="spinner"></div>
-
 <!-- Temperature, humidity etc graph section -->
 <div class="envchart-section">
   <div id="envTabs" class="tab-row">
@@ -24,6 +22,7 @@
   </div>
 
   <div class="chart-container">
+    <div class="chart-spinner" id="envSpinner"></div>
     <canvas id="mainChart"></canvas>
   </div>
 </div>
@@ -37,6 +36,7 @@
   </div>
   
   <div class="chart-container">
+    <div class="chart-spinner" id="envSpinner"></div>
     <canvas id="currentChart"></canvas>
   </div>
 </div>
