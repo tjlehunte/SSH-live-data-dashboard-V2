@@ -84,43 +84,6 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
     };
   });
 
-function drawCurrentChart(data, cols, title, unit = "Current (A)") {
-  const labels = data.map(d => d.MessageDate);
-
-  const datasets = cols.map(col => {
-    const room = col.split(" - ")[0];
-    const color = getRoomColor(room);
-    return {
-      label: room,
-      data: data.map(d => d[col]),
-      borderColor: color,
-      backgroundColor: color,
-      borderWidth: 1,
-      pointRadius: 1,
-      tension: 0.2
-    };
-  });
-    const ctx = document.getElementById("currentChart").getContext("2d");
-
-  if (currentChart) currentChart.destroy();
-
-  currentChart = new Chart(ctx, {
-    type: "line",
-    data: { labels, datasets },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { position: "right" },
-        title: { display: true, text: title }
-      },
-      scales: {
-        y: { title: { display: true, text: unit } }
-      }
-    }
-  });
-}
-
   // Collect all numeric values from all datasets
 const allValues = datasets
   .flatMap(ds => ds.data)
@@ -200,6 +163,43 @@ console.log({ minValue, maxValue, roundedMin, roundedMax });
             color: textColor
           }
         }
+      }
+    }
+  });
+}
+
+function drawCurrentChart(data, cols, title, unit = "Current (A)") {
+  const labels = data.map(d => d.MessageDate);
+
+  const datasets = cols.map(col => {
+    const room = col.split(" - ")[0];
+    const color = getRoomColor(room);
+    return {
+      label: room,
+      data: data.map(d => d[col]),
+      borderColor: color,
+      backgroundColor: color,
+      borderWidth: 1,
+      pointRadius: 1,
+      tension: 0.2
+    };
+  });
+    const ctx = document.getElementById("currentChart").getContext("2d");
+
+  if (currentChart) currentChart.destroy();
+
+  currentChart = new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "right" },
+        title: { display: true, text: title }
+      },
+      scales: {
+        y: { title: { display: true, text: unit } }
       }
     }
   });
