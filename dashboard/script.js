@@ -254,7 +254,6 @@ const roundedMin = Math.floor(minValue / 5) * 5;
 
 // Load data once
 async function loadData() {
-  showSpinner();
 
   const response = await fetch("https://monnit-plumber-api.onrender.com/data");
   const data = await response.json();
@@ -281,8 +280,6 @@ async function loadData() {
 
   // Default current chart = min max avg
   drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
-
-  hideSpinner();
 }
 
 function randomColor() {
