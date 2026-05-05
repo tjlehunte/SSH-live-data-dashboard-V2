@@ -83,7 +83,7 @@ const roundedMin = Math.floor(minValue / 5) * 5;
       interaction: { mode: "index", intersect: false },
 
       plugins: {
-        legend: { position: "right", labels: { color: textColor },
+        legend: { position: "right", labels: { color: textColor } },
         tooltip: { enabled: true },
         title: {
           display: true,
@@ -127,7 +127,6 @@ const roundedMin = Math.floor(minValue / 5) * 5;
             align: "center",
             color: textColor
           }
-        }
         }
       }
     }
@@ -182,7 +181,7 @@ const roundedMin = Math.floor(minValue / 5) * 5;
       interaction: { mode: "index", intersect: false },
 
       plugins: {
-        legend: { position: "right", labels: { color: textColor },
+        legend: { position: "right", labels: { color: textColor } },
         tooltip: { enabled: true },
         title: {
           display: true,
