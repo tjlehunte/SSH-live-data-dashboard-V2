@@ -261,10 +261,10 @@ document.querySelectorAll("#currentTabs .tab").forEach(tab => {
 
     const type = tab.dataset.type;
 
-    if (type === "current3") {
+    if (type === "current-summary") {
       drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
     }
-    if (type === "currentcum") {
+    if (type === "current-cumulative") {
       drawCurrentChart(allData,currentcumCols,"Cumulative Current (Ah)", "Amp-Hours (Ah)");
     }
   });
