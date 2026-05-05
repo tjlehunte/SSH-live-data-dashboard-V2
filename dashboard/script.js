@@ -84,7 +84,7 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   const maxValue = Math.max(...datasets.flatMap(ds => ds.data));
   const roundedMax = Math.ceil(maxValue / 5) * 5;
 
-  // Compute X-axis min
+  // Compute Y-axis min
   const minValue = Math.min(...datasets.flatMap(ds => ds.data));
   const roundedMin = Math.floor(minValue / 5) * 5;
 
