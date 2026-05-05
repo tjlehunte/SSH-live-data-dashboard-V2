@@ -292,6 +292,33 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   });
 }
 
+function initTabs() {
+  document.querySelectorAll("#envTabs .tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#envTabs .tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    const type = tab.dataset.type;
+    if (type === "temperature") drawMainChart(allData, tempCols,      "Temperature Sensors",            "Temperature (°C)");
+    if (type === "humidity")    drawMainChart(allData, humCols,       "Humidity Sensors",               "Humidity (%)");
+    if (type === "dewpoint")    drawMainChart(allData, dewCols,       "Dew Point Sensors",              "Dew Point (°C)");
+    if (type === "gpkg")        drawMainChart(allData, gpkgCols,      "Grams per Kilogram Sensors",     "Grams per Kilogram (g/kg)");
+    if (type === "heatindex")   drawMainChart(allData, heatindexCols, "Heat Index Sensors",             "Heat Index (°C)");
+    if (type === "wetbulb")     drawMainChart(allData, wetbulbCols,   "Wet-Bulb Temperature Sensors",   "Wet Bulb (°C)");
+  });
+});
+  document.querySelectorAll("#currentTabs .tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#currentTabs .tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+
+    const type = tab.dataset.type;
+    if (type === "current-summary")    drawCurrentChart(allData, current3Cols,   "Current (Min / Max / Avg)",    "Current (A)");
+    if (type === "current-cumulative") drawCurrentChart(allData, currentcumCols, "Cumulative Current (Ah)",      "Amp-Hours (Ah)");
+  });
+});
+}
+
 async function loadData() {
   const envcanvas = document.getElementById("mainChart");
   envcanvas.classList.add("loading");
@@ -327,37 +354,16 @@ async function loadData() {
   drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
   hideCurrentSpinner();
   currentcanvas.classList.remove("loading");
+
+  if (!window.tabsInitialised) {
+    window.tabsInitialised = true;
+    initTabs();
+  }
 }
 
 loadData();
 
 setInterval(loadData, 10 * 60 * 1000);
-
-document.querySelectorAll("#envTabs .tab").forEach(tab => {
-  tab.addEventListener("click", () => {
-    document.querySelectorAll("#envTabs .tab").forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-
-    const type = tab.dataset.type;
-    if (type === "temperature") drawMainChart(allData, tempCols,      "Temperature Sensors",            "Temperature (°C)");
-    if (type === "humidity")    drawMainChart(allData, humCols,       "Humidity Sensors",               "Humidity (%)");
-    if (type === "dewpoint")    drawMainChart(allData, dewCols,       "Dew Point Sensors",              "Dew Point (°C)");
-    if (type === "gpkg")        drawMainChart(allData, gpkgCols,      "Grams per Kilogram Sensors",     "Grams per Kilogram (g/kg)");
-    if (type === "heatindex")   drawMainChart(allData, heatindexCols, "Heat Index Sensors",             "Heat Index (°C)");
-    if (type === "wetbulb")     drawMainChart(allData, wetbulbCols,   "Wet-Bulb Temperature Sensors",   "Wet Bulb (°C)");
-  });
-});
-
-document.querySelectorAll("#currentTabs .tab").forEach(tab => {
-  tab.addEventListener("click", () => {
-    document.querySelectorAll("#currentTabs .tab").forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-
-    const type = tab.dataset.type;
-    if (type === "current-summary")    drawCurrentChart(allData, current3Cols,   "Current (Min / Max / Avg)",    "Current (A)");
-    if (type === "current-cumulative") drawCurrentChart(allData, currentcumCols, "Cumulative Current (Ah)",      "Amp-Hours (Ah)");
-});
-});
 
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
   loadData();
