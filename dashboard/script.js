@@ -165,6 +165,7 @@ setInterval(loadData, 10 * 60 * 1000);
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
 
+    // Remove active class from all tabs
     document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
 
@@ -172,19 +173,25 @@ document.querySelectorAll(".tab").forEach(tab => {
 
     if (type === "temperature") {
       drawMainChart(allData, tempCols, "Temperature Sensors", "Temperature (°C)");
-    } if {
+    }
+    if (type === "humidity") {
       drawMainChart(allData, humCols, "Humidity Sensors", "Humidity (%)");
-    } if {
+    }
+    if (type === "dew") {
       drawMainChart(allData, dewCols, "Dew Point Sensors", "Dew Point (°C)");
-    } if {
-      drawMainChart(allData, gpkgCols, "Grams per Kilogram sensors", "Grams per Kilogram (g/kg)");
-    } if {
+    }
+    if (type === "gpk") {
+      drawMainChart(allData, gpkgCols, "Grams per Kilogram Sensors", "Grams per Kilogram (g/kg)");
+    }
+    if (type === "heat") {
       drawMainChart(allData, heatindexCols, "Heat Index Sensors", "Heat Index (°C)");
-    } if {
+    }
+    if (type === "wet") {
       drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
     }
   });
 });
+
 
 // Auto-update chart when system theme changes
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
