@@ -276,13 +276,13 @@ async function loadData() {
           grid: { color: gridColor }
         },
         y: {
-          min: roundedMin,
-          max: roundedMax,
+          min: 0,
+          max: 1,
           ticks: { color: textColor },
           grid: { color: gridColor },
           title: {
             display: true,
-            text: unit,
+            text: "",
             align: "center",
             color: textColor
           }
