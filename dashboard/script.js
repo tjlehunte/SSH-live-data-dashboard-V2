@@ -9,39 +9,6 @@ let wetbulbCols = [];
 let currentCols = [];
 let allData = [];
 
-// Load data once
-async function loadData() {
-  showSpinner();
-
-  const response = await fetch("https://monnit-plumber-api.onrender.com/data");
-  const data = await response.json();
-  allData = data;
-
-  const columns = Object.keys(data[0]);
-
-  tempCols = columns.filter(c => c.toLowerCase().includes("temp"));
-  humCols  = columns.filter(c => c.toLowerCase().includes("humid"));
-  dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
-  gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
-  heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
-  wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
-  current3Cols = columns.filter(c =>
-    c.toLowerCase().includes("average current") ||
-    c.toLowerCase().includes("maximum current") ||
-    c.toLowerCase().includes("minimum current"));
-  currentcumCols = columns.filter(c => c.toLowerCase().includes("amp hours"));
-
-  console.log(columns);
-
-  // Default chart = Temperature
-  drawMainChart(allData, tempCols, "Temperature Sensors");
-
-  // Default current chart = min max avg
-  drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
-
-  hideSpinner();
-}
-
 function shortenLabel(col) {
   return col.split(" - ")[0];
 }
@@ -205,6 +172,39 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   });
 }
 
+// Load data once
+async function loadData() {
+  showSpinner();
+
+  const response = await fetch("https://monnit-plumber-api.onrender.com/data");
+  const data = await response.json();
+  allData = data;
+
+  const columns = Object.keys(data[0]);
+
+  tempCols = columns.filter(c => c.toLowerCase().includes("temp"));
+  humCols  = columns.filter(c => c.toLowerCase().includes("humid"));
+  dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
+  gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
+  heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
+  wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
+  current3Cols = columns.filter(c =>
+    c.toLowerCase().includes("average current") ||
+    c.toLowerCase().includes("maximum current") ||
+    c.toLowerCase().includes("minimum current"));
+  currentcumCols = columns.filter(c => c.toLowerCase().includes("amp hours"));
+
+  console.log(columns);
+
+  // Default chart = Temperature
+  drawMainChart(allData, tempCols, "Temperature Sensors");
+
+  // Default current chart = min max avg
+  drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
+
+  hideSpinner();
+}
+
 function randomColor() {
   return `hsl(${Math.random() * 360}, 70%, 50%)`;
 }
@@ -262,12 +262,7 @@ document.querySelectorAll("#currentTabs .tab").forEach(tab => {
     const type = tab.dataset.type;
 
     if (type === "current3") {
-      drawCurrentChart(
-        allData,
-        current3Cols,
-        "Current (Min / Max / Avg)",
-        "Current (A)"
-      );
+      drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
     }
     if (type === "currentcum") {
       drawCurrentChart(allData,currentcumCols,"Cumulative Current (Ah)", "Amp-Hours (Ah)");
