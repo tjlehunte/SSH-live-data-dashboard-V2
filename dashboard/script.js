@@ -20,9 +20,9 @@ function showEnvSpinner() {
 function hideEnvSpinner() {
   document.getElementById("envSpinner").style.display = "none";}
 
-function showEnvSpinner() {
+function showCurrentSpinner() {
   document.getElementById("currentSpinner").style.display = "block";}
-function hideEnvSpinner() {
+function hideCurrentSpinner() {
   document.getElementById("currentSpinner").style.display = "none";}
 
 const ROOM_COLORS = [
@@ -256,8 +256,11 @@ const roundedMin = Math.floor(minValue / 5) * 5;
 async function loadData() {
   const canvas = document.getElementById("mainChart");
   canvas.classList.add("loading");
+  const canvas = document.getElementById("currentChart");
+  canvas.classList.add("loading");
   showEnvSpinner();
-
+  showCurrentSpinner();
+  
   const response = await fetch("https://monnit-plumber-api.onrender.com/data");
   const data = await response.json();
   allData = data;
@@ -280,13 +283,15 @@ async function loadData() {
 
   // Default chart = Temperature
   drawMainChart(allData, tempCols, "Temperature Sensors");
-
+  // after chart is drawn
+  hideEnvSpinner();
+  canvas.classList.remove("loading");
   // Default current chart = min max avg
   drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
-
   // after chart is drawn
-hideEnvSpinner();
-canvas.classList.remove("loading");
+  hideCurrentSpinner();
+  canvas.classList.remove("loading");
+
 }
 
 function randomColor() {
