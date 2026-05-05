@@ -127,7 +127,7 @@ canvas {
     color: #fff !important;
   }
 
-  .spinner {
+  .chart-spinner {
     border-color: #444;
     border-top-color: #3498db;
   }
