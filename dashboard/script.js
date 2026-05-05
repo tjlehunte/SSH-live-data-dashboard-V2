@@ -16,14 +16,17 @@ function shortenLabel(col) {
 }
 
 function showEnvSpinner() {
-  document.getElementById("envSpinner").style.display = "block";}
+  document.getElementById("envSpinner").style.display = "block";
+}
 function hideEnvSpinner() {
-  document.getElementById("envSpinner").style.display = "none";}
-
+  document.getElementById("envSpinner").style.display = "none";
+}
 function showCurrentSpinner() {
-  document.getElementById("currentSpinner").style.display = "block";}
+  document.getElementById("currentSpinner").style.display = "block";
+}
 function hideCurrentSpinner() {
-  document.getElementById("currentSpinner").style.display = "none";}
+  document.getElementById("currentSpinner").style.display = "none";
+}
 
 const ROOM_COLORS = [
   "#800000", "#9A6324", "#469990", "#000075", "#000000",
@@ -33,9 +36,9 @@ const ROOM_COLORS = [
 ];
 
 const CURRENT_METRIC_COLORS = {
-  "Minimum Current": "#42d4f4",  // blue
-  "Maximum Current": "#e6194B",  // red
-  "Average Current": "#3cb44b"   // green
+  "Minimum Current": "#42d4f4",
+  "Maximum Current": "#e6194B",
+  "Average Current": "#3cb44b"
 };
 
 const roomColorMap = {};
@@ -69,27 +72,21 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
     };
   });
 
-  // Collect all numeric values from all datasets
-const allValues = datasets
-  .flatMap(ds => ds.data)
-  .map(v => Number(v))
-  .filter(v => Number.isFinite(v));
+  const allValues = datasets
+    .flatMap(ds => ds.data)
+    .map(v => Number(v))
+    .filter(v => Number.isFinite(v));
 
-// Compute Y-axis max
-const maxValue = Math.max(...allValues);
-// Compute Y-axis min
-const minValue = Math.min(...allValues);
+  const maxValue = Math.max(...allValues);
+  const minValue = Math.min(...allValues);
+  const roundedMax = Math.ceil(maxValue / 5) * 5;
+  const roundedMin = Math.floor(minValue / 5) * 5;
 
-const roundedMax = Math.ceil(maxValue / 5) * 5;
-const roundedMin = Math.floor(minValue / 5) * 5;
- 
-  // Dark mode detection
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const gridColor = isDark ? "#444" : "#ccc";
   const textColor = isDark ? "#ddd" : "#000";
 
   const ctx = document.getElementById("mainChart").getContext("2d");
-
   if (mainChart) mainChart.destroy();
 
   mainChart = new Chart(ctx, {
@@ -127,19 +124,24 @@ const roundedMin = Math.floor(minValue / 5) * 5;
             }
           }
         },
-        tooltip: { enabled: true },   // ← inside plugins
-        title: {                       // ← inside plugins
+        tooltip: { enabled: true },
+        title: {
           display: true,
           text: title,
           color: textColor
         }
-      },                               // ← closes plugins
+      },
       layout: {
         padding: { bottom: 20 }
       },
       scales: {
         x: {
-          title: { display: true, text: "Time", align: "center", color: textColor },
+          title: {
+            display: true,
+            text: "Time",
+            align: "center",
+            color: textColor
+          },
           ticks: {
             color: textColor,
             autoSkip: false,
@@ -155,11 +157,16 @@ const roundedMin = Math.floor(minValue / 5) * 5;
           max: roundedMax,
           ticks: { color: textColor },
           grid: { color: gridColor },
-          title: { display: true, text: unit, align: "center", color: textColor }
+          title: {
+            display: true,
+            text: unit,
+            align: "center",
+            color: textColor
+          }
         }
       }
-    }  // ← closes options
-    });
+    }
+  });
 }
 
 function drawCurrentChart(data, cols, title, unit = "Current (A)") {
@@ -172,36 +179,31 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
       label: metric,
       data: data.map(d => d[col]),
       borderColor: color,
-      backgroundColor: color,   // solid fill
-      pointStyle: "rect",       // makes legend block a rectangle
+      backgroundColor: color,
+      pointStyle: "rect",
       borderWidth: 1,
       pointRadius: 1,
       pointHoverRadius: 4,
       tension: 0.2,
-      fill: false  
+      fill: false
     };
   });
-  
+
   const allValues = datasets
-  .flatMap(ds => ds.data)
-  .map(v => Number(v))
-  .filter(v => Number.isFinite(v));
+    .flatMap(ds => ds.data)
+    .map(v => Number(v))
+    .filter(v => Number.isFinite(v));
 
-// Compute Y-axis max
-const maxValue = Math.max(...allValues);
-// Compute Y-axis min
-const minValue = Math.min(...allValues);
+  const maxValue = Math.max(...allValues);
+  const minValue = Math.min(...allValues);
+  const roundedMax = Math.ceil(maxValue / 5) * 5;
+  const roundedMin = Math.floor(minValue / 5) * 5;
 
-const roundedMax = Math.ceil(maxValue / 5) * 5;
-const roundedMin = Math.floor(minValue / 5) * 5;
-  
-  // Dark mode detection
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const gridColor = isDark ? "#444" : "#ccc";
   const textColor = isDark ? "#ddd" : "#000";
 
   const ctx = document.getElementById("currentChart").getContext("2d");
-
   if (currentChart) currentChart.destroy();
 
   currentChart = new Chart(ctx, {
@@ -239,19 +241,24 @@ const roundedMin = Math.floor(minValue / 5) * 5;
             }
           }
         },
-        tooltip: { enabled: true },   // ← inside plugins
-        title: {                       // ← inside plugins
+        tooltip: { enabled: true },
+        title: {
           display: true,
           text: title,
           color: textColor
         }
-      },                               // ← closes plugins
+      },
       layout: {
         padding: { bottom: 20 }
       },
       scales: {
         x: {
-          title: { display: true, text: "Time", align: "center", color: textColor },
+          title: {
+            display: true,
+            text: "Time",
+            align: "center",
+            color: textColor
+          },
           ticks: {
             color: textColor,
             autoSkip: false,
@@ -267,14 +274,18 @@ const roundedMin = Math.floor(minValue / 5) * 5;
           max: roundedMax,
           ticks: { color: textColor },
           grid: { color: gridColor },
-          title: { display: true, text: unit, align: "center", color: textColor }
+          title: {
+            display: true,
+            text: unit,
+            align: "center",
+            color: textColor
+          }
         }
       }
-    }  // ← closes options
-    });
+    }
+  });
 }
 
-// Load data once
 async function loadData() {
   const envcanvas = document.getElementById("mainChart");
   envcanvas.classList.add("loading");
@@ -282,32 +293,31 @@ async function loadData() {
   currentcanvas.classList.add("loading");
   showEnvSpinner();
   showCurrentSpinner();
-  
+
   const response = await fetch("https://monnit-plumber-api.onrender.com/data");
   const data = await response.json();
   allData = data;
 
   const columns = Object.keys(data[0]);
 
-  tempCols = columns.filter(c => c.toLowerCase().includes("temp"));
-  humCols  = columns.filter(c => c.toLowerCase().includes("humid"));
-  dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
-  gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
-  heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
-  wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
-  current3Cols = columns.filter(c =>
+  tempCols        = columns.filter(c => c.toLowerCase().includes("temp"));
+  humCols         = columns.filter(c => c.toLowerCase().includes("humid"));
+  dewCols         = columns.filter(c => c.toLowerCase().includes("dewpoint"));
+  gpkgCols        = columns.filter(c => c.toLowerCase().includes("gpkg"));
+  heatindexCols   = columns.filter(c => c.toLowerCase().includes("heat index"));
+  wetbulbCols     = columns.filter(c => c.toLowerCase().includes("wet bulb"));
+  current3Cols    = columns.filter(c =>
     c.toLowerCase().includes("average current") ||
     c.toLowerCase().includes("maximum current") ||
     c.toLowerCase().includes("minimum current"));
-  currentcumCols = columns.filter(c => c.toLowerCase().includes("amp hours"));
+  currentcumCols  = columns.filter(c => c.toLowerCase().includes("amp hours"));
 
   console.log(columns);
 
-  // Default chart = Temperature
   drawMainChart(allData, tempCols, "Temperature Sensors");
   hideEnvSpinner();
   envcanvas.classList.remove("loading");
-  // Default current chart = min max avg
+
   drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
   hideCurrentSpinner();
   currentcanvas.classList.remove("loading");
@@ -315,62 +325,38 @@ async function loadData() {
 
 loadData();
 
-// Auto-refresh every 10 minutes
 setInterval(loadData, 10 * 60 * 1000);
 
-// TAB CLICK HANDLER
 document.addEventListener("DOMContentLoaded", () => {
-  // ENVIRONMENTAL TABS
   document.querySelectorAll("#envTabs .tab").forEach(tab => {
     tab.addEventListener("click", () => {
       document.querySelectorAll("#envTabs .tab").forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
 
       const type = tab.dataset.type;
-
-      if (type === "temperature") {
-        drawMainChart(allData, tempCols, "Temperature Sensors", "Temperature (°C)");
-      }
-      if (type === "humidity") {
-        drawMainChart(allData, humCols, "Humidity Sensors", "Humidity (%)");
-      }
-      if (type === "dewpoint") {
-        drawMainChart(allData, dewCols, "Dew Point Sensors", "Dew Point (°C)");
-      }
-      if (type === "gpkg") {
-        drawMainChart(allData, gpkgCols, "Grams per Kilogram Sensors", "Grams per Kilogram (g/kg)");
-      }
-      if (type === "heatindex") {
-        drawMainChart(allData, heatindexCols, "Heat Index Sensors", "Heat Index (°C)");
-      }
-      if (type === "wetbulb") {
-        drawMainChart(allData, wetbulbCols, "Wet-Bulb Temperature Sensors", "Wet Bulb (°C)");
-      }
+      if (type === "temperature") drawMainChart(allData, tempCols,      "Temperature Sensors",            "Temperature (°C)");
+      if (type === "humidity")    drawMainChart(allData, humCols,       "Humidity Sensors",               "Humidity (%)");
+      if (type === "dewpoint")    drawMainChart(allData, dewCols,       "Dew Point Sensors",              "Dew Point (°C)");
+      if (type === "gpkg")        drawMainChart(allData, gpkgCols,      "Grams per Kilogram Sensors",     "Grams per Kilogram (g/kg)");
+      if (type === "heatindex")   drawMainChart(allData, heatindexCols, "Heat Index Sensors",             "Heat Index (°C)");
+      if (type === "wetbulb")     drawMainChart(allData, wetbulbCols,   "Wet-Bulb Temperature Sensors",   "Wet Bulb (°C)");
     });
   });
 
-  // CURRENT TABS
   document.querySelectorAll("#currentTabs .tab").forEach(tab => {
     tab.addEventListener("click", () => {
       document.querySelectorAll("#currentTabs .tab").forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
 
       const type = tab.dataset.type;
-
-      if (type === "current-summary") {
-        drawCurrentChart(allData, current3Cols, "Current (Min / Max / Avg)", "Current (A)");
-      }
-      if (type === "current-cumulative") {
-        drawCurrentChart(allData, currentcumCols, "Cumulative Current (Ah)", "Amp-Hours (Ah)");
-      }
+      if (type === "current-summary")    drawCurrentChart(allData, current3Cols,   "Current (Min / Max / Avg)",    "Current (A)");
+      if (type === "current-cumulative") drawCurrentChart(allData, currentcumCols, "Cumulative Current (Ah)",      "Amp-Hours (Ah)");
     });
   });
 });
 
-// Auto-update chart when system theme changes
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-  loadData(); // redraw chart with new theme
+  loadData();
 });
 
 }); // end DOMContentLoaded
-
