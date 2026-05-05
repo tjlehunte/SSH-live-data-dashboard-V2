@@ -174,6 +174,7 @@ function initTabs() {
 }
 
 async function loadData() {
+  
   const envcanvas = document.getElementById("mainChart");
   envcanvas.classList.add("loading");
   const currentcanvas = document.getElementById("currentChart");
@@ -184,7 +185,11 @@ async function loadData() {
   const response = await fetch("https://monnit-plumber-api.onrender.com/data");
   const data = await response.json();
   allData = data;
-
+  
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const gridColor = isDark ? "#444" : "#ccc";
+  const textColor = isDark ? "#ddd" : "#000";
+  
   const columns = Object.keys(data[0]);
 
   tempCols        = columns.filter(c => c.toLowerCase().includes("temp"));
