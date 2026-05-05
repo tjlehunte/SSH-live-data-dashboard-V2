@@ -113,7 +113,6 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
             pointStyleWidth: 16,
             generateLabels: function(chart) {
               return chart.data.datasets.map((ds, i) => {
-                console.log(ds.label, ds.backgroundColor);  // ← add this
                 return ({
                   text: ds.label,
                   fillStyle: ds.backgroundColor,
@@ -234,7 +233,6 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
             pointStyleWidth: 16,
             generateLabels: function(chart) {
               return chart.data.datasets.map((ds, i) => {
-                console.log(ds.label, ds.backgroundColor);  // ← add this
                 return ({
                   text: ds.label,
                   fillStyle: ds.backgroundColor,
@@ -335,32 +333,30 @@ loadData();
 
 setInterval(loadData, 10 * 60 * 1000);
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("#envTabs .tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll("#envTabs .tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
+document.querySelectorAll("#envTabs .tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#envTabs .tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
 
-      const type = tab.dataset.type;
-      if (type === "temperature") drawMainChart(allData, tempCols,      "Temperature Sensors",            "Temperature (°C)");
-      if (type === "humidity")    drawMainChart(allData, humCols,       "Humidity Sensors",               "Humidity (%)");
-      if (type === "dewpoint")    drawMainChart(allData, dewCols,       "Dew Point Sensors",              "Dew Point (°C)");
-      if (type === "gpkg")        drawMainChart(allData, gpkgCols,      "Grams per Kilogram Sensors",     "Grams per Kilogram (g/kg)");
-      if (type === "heatindex")   drawMainChart(allData, heatindexCols, "Heat Index Sensors",             "Heat Index (°C)");
-      if (type === "wetbulb")     drawMainChart(allData, wetbulbCols,   "Wet-Bulb Temperature Sensors",   "Wet Bulb (°C)");
-    });
+    const type = tab.dataset.type;
+    if (type === "temperature") drawMainChart(allData, tempCols,      "Temperature Sensors",            "Temperature (°C)");
+    if (type === "humidity")    drawMainChart(allData, humCols,       "Humidity Sensors",               "Humidity (%)");
+    if (type === "dewpoint")    drawMainChart(allData, dewCols,       "Dew Point Sensors",              "Dew Point (°C)");
+    if (type === "gpkg")        drawMainChart(allData, gpkgCols,      "Grams per Kilogram Sensors",     "Grams per Kilogram (g/kg)");
+    if (type === "heatindex")   drawMainChart(allData, heatindexCols, "Heat Index Sensors",             "Heat Index (°C)");
+    if (type === "wetbulb")     drawMainChart(allData, wetbulbCols,   "Wet-Bulb Temperature Sensors",   "Wet Bulb (°C)");
   });
+});
 
-  document.querySelectorAll("#currentTabs .tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll("#currentTabs .tab").forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
+document.querySelectorAll("#currentTabs .tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("#currentTabs .tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
 
-      const type = tab.dataset.type;
-      if (type === "current-summary")    drawCurrentChart(allData, current3Cols,   "Current (Min / Max / Avg)",    "Current (A)");
-      if (type === "current-cumulative") drawCurrentChart(allData, currentcumCols, "Cumulative Current (Ah)",      "Amp-Hours (Ah)");
-    });
-  });
+    const type = tab.dataset.type;
+    if (type === "current-summary")    drawCurrentChart(allData, current3Cols,   "Current (Min / Max / Avg)",    "Current (A)");
+    if (type === "current-cumulative") drawCurrentChart(allData, currentcumCols, "Cumulative Current (Ah)",      "Amp-Hours (Ah)");
+});
 });
 
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
