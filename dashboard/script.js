@@ -151,7 +151,26 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
       tension: 0.2
     };
   });
-    const ctx = document.getElementById("currentChart").getContext("2d");
+  
+  const allValues = datasets
+  .flatMap(ds => ds.data)
+  .map(v => Number(v))
+  .filter(v => Number.isFinite(v));
+
+// Compute Y-axis max
+const maxValue = Math.max(...allValues);
+// Compute Y-axis min
+const minValue = Math.min(...allValues);
+
+const roundedMax = Math.ceil(maxValue / 5) * 5;
+const roundedMin = Math.floor(minValue / 5) * 5;
+  
+  // Dark mode detection
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const gridColor = isDark ? "#444" : "#ccc";
+  const textColor = isDark ? "#ddd" : "#000";
+
+  const ctx = document.getElementById("currentChart").getContext("2d");
 
   if (currentChart) currentChart.destroy();
 
@@ -161,12 +180,54 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+
       plugins: {
         legend: { position: "right" },
-        title: { display: true, text: title }
+        tooltip: { enabled: true },
+        title: {
+          display: true,
+          text: title,
+          color: textColor
+        }
       },
+
+      layout: {
+        padding: { bottom: 20 }
+      },
+
       scales: {
-        y: { title: { display: true, text: unit } }
+        x: {
+          title: {
+            display: true,
+            text: "Time",
+            align: "center",
+            color: textColor
+          },
+          ticks: {
+            color: textColor,
+            autoSkip: false,
+            callback: function(value, index) {
+              if (index % 12 === 0) {
+                return this.getLabelForValue(value);
+              }
+              return "";
+            }
+          },
+          grid: { color: gridColor }
+        },
+        y: {
+          min: roundedMin,
+          max: roundedMax,
+          ticks: { color: textColor },
+          grid: { color: gridColor },
+          title: {
+            display: true,
+            text: unit,
+            align: "center",
+            color: textColor
+          }
+        }
       }
     }
   });
