@@ -307,8 +307,11 @@ async function loadData() {
               return "";
             }
           },
-          grid: { color: function(context) {
-            return context.index % 3 === 0 ? gridColor : "transparent";
+          grid: {
+            color: function(context) {
+              const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+              const gc = isDark ? "#444" : "#ccc";
+              return context.index % 3 === 0 ? gc : "transparent";
             }
           }
         },
