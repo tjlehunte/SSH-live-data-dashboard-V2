@@ -16,7 +16,7 @@ function(req, res) {
 }
 
 #* @get /data
-#* @serializer 
+#* @serializer json
 function() {
   tryCatch(
     {
