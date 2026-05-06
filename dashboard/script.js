@@ -303,7 +303,7 @@ async function loadData() {
             color: textColor,
             autoSkip: false,
             callback: function(value, index) {
-              if (index % 12 === 0) return this.getLabelForValue(value);
+              if (index % 24 === 0) return this.getLabelForValue(value);
               return "";
             }
           },
@@ -391,7 +391,7 @@ async function loadData() {
             color: textColor,
             autoSkip: false,
             callback: function(value, index) {
-              if (index % 12 === 0) return this.getLabelForValue(value);
+              if (index % 24 === 0) return this.getLabelForValue(value);
               return "";
             }
           },
