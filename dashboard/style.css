@@ -18,7 +18,14 @@ h1 {
   width: 200px;
 }
 
-#logo-dark {
+#sml-logo-light, #sml-logo-dark {
+  position: absolute;
+  top: 20px;
+  right: 240px;
+  width: 200px;
+}
+
+#uos-logo-dark, #sml-logo-dark {
   display: none;
 }
 
@@ -141,8 +148,11 @@ canvas.loading {
     color: #e0e0e0;
   }
  
-  #logo-light { display: none; }
-  #logo-dark  { display: block; }
+  #uos-logo-light { display: none; }
+  #uos-logo-dark  { display: block; }
+  
+  #sml-logo-light { display: none; }
+  #sml-logo-dark  { display: block; }
   
   .chart-container {
     background: #1e1e1e !important;
