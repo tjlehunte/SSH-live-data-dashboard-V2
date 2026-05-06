@@ -204,6 +204,7 @@ async function loadData() {
           legend: {
             position: "right",
             labels: {
+              font: { size: 15 }
               color: textColor,
               usePointStyle: true,
               pointStyle: "rect",
