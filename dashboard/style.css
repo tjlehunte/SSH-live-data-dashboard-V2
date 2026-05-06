@@ -126,6 +126,31 @@ canvas.loading {
   background: #ddd;
 }
 
+.tab::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: normal;
+  white-space: normal;
+  width: 220px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 100;
+}
+
+.tab:hover::after {
+  opacity: 1;
+}
+
 .tab.active {
   background: #3498db;
   color: white;
