@@ -1,5 +1,6 @@
 library(plumber)
-source("monnit script.R")   # your main script with get_monnit_data()
+source("monnit script.R")   #monnit script
+source("givenergy flows.R") #givenergy script
 
 #* @filter cors
 function(req, res) {
@@ -15,11 +16,7 @@ function(req, res) {
 }
 
 #* @get /data
-#* @serializer json
-
-#this function in the monnit script gets all the data, 
-#splits it up, then joins it all back into one big dataframe
-#has trycatch incase it fails it gives an error message
+#* @serializer 
 
 function() {
   tryCatch(
@@ -33,12 +30,26 @@ function() {
   )
 }
 
+#* @get /givenergy
+#* @serializer json
+
+function() {
+  tryCatch(
+    {
+      df <- get_givenergy_data()
+      df
+    },
+    error = function(e) {
+      list(error = TRUE, message = e$message)
+    }
+  )
+}
 
 #* @get /
 function() {
   list(
     status = "ok",
-    message = "Monnit plumber API is running, use the endpoint /data"
+    message = "Plumber API is running, use the endpoint /data"
   )
 }
 
