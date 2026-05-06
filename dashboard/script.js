@@ -106,7 +106,7 @@ function drawChart(data, cols, title, unit, isCurrentChart = false) {
 }
 
 function drawGivenergyChart(data, flowCol, title) {
-  const labels = data.map(d => d.time); // adjust to your actual time column name
+  const labels = data.map(d => d.start);
 
   const gridColors = labels.map((_, i) => {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
