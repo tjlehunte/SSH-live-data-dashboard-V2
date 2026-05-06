@@ -58,6 +58,12 @@ canvas.loading {
   flex-wrap: wrap;
 }
 
+.sub-tab-row {
+  margin-top: -5px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+}
+
 .chart-title {
   text-align: center;
   margin-bottom: 10px;
