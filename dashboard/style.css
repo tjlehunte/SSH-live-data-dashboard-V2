@@ -163,6 +163,28 @@ canvas.loading {
   color: white;
 }
 
+.legend-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  justify-content: flex-end;
+}
+
+.legend-controls button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #eee;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.legend-controls button:hover {
+  background: #ddd;
+}
+
 .envchart-section {
   margin-bottom: 40px;
 }
@@ -214,5 +236,14 @@ canvas.loading {
   .chart-spinner {
     border-color: #444;
     border-top-color: #3498db;
+  }
+
+  .legend-controls button {
+    background: #222;
+    color: #ddd;
+  }
+
+  .legend-controls button:hover {
+    background: #333;
   }
 }
