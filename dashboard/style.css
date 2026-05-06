@@ -21,7 +21,7 @@ h1 {
 #sml-logo-light, #sml-logo-dark {
   position: absolute;
   top: 45px;
-  right: 200px;
+  left: 20px;
   width: 200px;
 }
 
