@@ -312,6 +312,9 @@ async function loadData() {
               const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
               const gc = isDark ? "#444" : "#ccc";
               return context.index % 3 === 0 ? gc : "transparent";
+            },
+            lineWidth: function(context) {
+              return context.index % 3 === 0 ? 1 : 0;
             }
           }
         },
