@@ -72,7 +72,7 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
       pointStyle: "rect",
       borderWidth: 1,
       pointRadius: 1,
-      pointHoverRadius: 4,
+      pointHoverRadius: 8,
       tension: 0.2,
       fill: false
     };
@@ -141,7 +141,7 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
       pointStyle: "rect",
       borderWidth: 1,
       pointRadius: 1,
-      pointHoverRadius: 4,
+      pointHoverRadius: 15,
       tension: 0.2,
       fill: false
     };
