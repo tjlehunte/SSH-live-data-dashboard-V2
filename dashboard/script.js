@@ -257,6 +257,11 @@ async function loadData() {
     });
   }
 
+  if (!window.tabsInitialised) {
+  window.tabsInitialised = true;
+  initTabs();
+  }
+  
   // Draw the currently active tab on refresh
   const activeMaster = document.querySelector("#masterTabs .tab.active");
   if (activeMaster && activeMaster.dataset.master === "current") {
@@ -269,11 +274,6 @@ async function loadData() {
 
   hideSpinner();
   canvas.classList.remove("loading");
-
-  if (!window.tabsInitialised) {
-    window.tabsInitialised = true;
-    initTabs();
-  }
 }
 
 loadData();
