@@ -29,11 +29,16 @@ h1 {
   display: none;
 }
 
+.canvas-wrapper {
+  height: 500px;
+  position: relative;
+}
+
 canvas {
   display: block;
   margin: 0 auto;
   width: 100% !important;
-  height: 500px;
+  : 500px;
   background: none;
   padding: 0;
   border-radius: 0;
@@ -53,7 +58,6 @@ canvas.loading {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   position: relative;
-  height: 560px;
 }
 
 .chart-container canvas {
