@@ -17,7 +17,6 @@ function(req, res) {
 
 #* @get /data
 #* @serializer 
-
 function() {
   tryCatch(
     {
@@ -32,7 +31,6 @@ function() {
 
 #* @get /givenergy
 #* @serializer json
-
 function() {
   tryCatch(
     {
