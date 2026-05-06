@@ -22,24 +22,24 @@
       
       <!-- Master tabs -->
       <div id="masterTabs" class="tab-row">
-        <div class="tab master-tab active" data-master="environment" title="Temperature, Humidity, Dew Point and more">Environment</div>
-        <div class="tab master-tab" data-master="current" title="Main incoming current metrics and cumulative">Current (A)</div>
+        <div class="tab master-tab active" data-master="environment" data-tooltip="Temperature, Humidity, Dew Point and more">Environment</div>
+        <div class="tab master-tab" data-master="current" data-tooltip="Main incoming current metrics and cumulative">Current (A)</div>
       </div>
       
       <!-- Environment sub-tabs -->
       <div id="envTabs" class="tab-row sub-tab-row">
-        <div class="tab active" data-type="temperature" title="Temperature (°C)">Temperature</div>
-        <div class="tab" data-type="humidity" title="Relative humidity (%)">Humidity</div>
-        <div class="tab" data-type="dewpoint" title="Dewpoint (°C)">Dew Point</div>
-        <div class="tab" data-type="gpkg" title="Grams of water vapor per kilogram of air (g/kg)">Grams per kg</div>
-        <div class="tab" data-type="heatindex" title="'Feels like' temperature">Heat Index</div>
-        <div class="tab" data-type="wetbulb" title="The theoretical temperature of the air is at 100% relative humidity">Wet Bulb</div>
+        <div class="tab active" data-type="temperature" data-tooltip="Ambient Temperature (°C)">Temperature</div>
+        <div class="tab" data-type="humidity" data-tooltip="Relative humidity (%) - percentage of current amount of water vapour in the air compared to the maximum the air at this temperature could hold">Humidity</div>
+        <div class="tab" data-type="dewpoint" data-tooltip="Dewpoint (°C) - the temperature to which the air must be cooled to become saturated with water vapor, resulting in condensation">Dew Point</div>
+        <div class="tab" data-type="gpkg" data-tooltip="Grams of water vapor per kilogram of air (g/kg)">Grams per kg</div>
+        <div class="tab" data-type="heatindex" data-tooltip="'Feels like' temperature">Heat Index</div>
+        <div class="tab" data-type="wetbulb" data-tooltip="The theoretical temperature of the air if it was at 100% relative humidity">Wet Bulb</div>
       </div>
       
       <!-- Current sub-tabs -->
       <div id="currentTabs" class="tab-row sub-tab-row" style="display:none;">
-        <div class="tab active" data-type="current-summary" title="Minimum, maximum and average current over the last 10 minutes">Current (Min / Max / Avg)</div>
-        <div class="tab" data-type="current-cumulative" title="Cumulative Amp Hours">Current (Cumulative)</div>
+        <div class="tab active" data-type="current-summary" data-tooltip="Minimum, maximum and average current over the last 10 minutes">Current (Min / Max / Avg)</div>
+        <div class="tab" data-type="current-cumulative" data-tooltip="Cumulative Amp Hours">Current (Cumulative)</div>
       </div>
       
       <div class="chart-container">
