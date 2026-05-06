@@ -141,7 +141,7 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
       pointStyle: "rect",
       borderWidth: 1,
       pointRadius: 1,
-      pointHoverRadius: 15,
+      pointHoverRadius: 8,
       tension: 0.2,
       fill: false
     };
