@@ -53,7 +53,29 @@
           <canvas id="mainChart"></canvas>
       </div>
     </div>
-    
-    <script src="script.js"></script>
+
+      <!-- GivEnergy section -->
+      <div class="givenergy-section">
+        <h2>GivEnergy - Energy Flows</h2>
+        
+        <div id="givenergyTabs" class="tab-row">
+          <div class="tab active" data-flow="pv-home">PV to Home</div>
+          <div class="tab" data-flow="pv-battery">PV to Battery</div>
+          <div class="tab" data-flow="pv-grid">PV to Grid</div>
+          <div class="tab" data-flow="grid-home">Grid to Home</div>
+          <div class="tab" data-flow="grid-battery">Grid to Battery</div>
+          <div class="tab" data-flow="battery-home">Battery to Home</div>
+          <div class="tab" data-flow="battery-grid">Battery to Grid</div>
+        </div>
+        
+        <div class="chart-container">
+          <div class="chart-spinner" id="givenergySpinner"></div>
+          <div class="canvas-wrapper">
+            <canvas id="givenergyChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <script src="script.js"></script>
   </body>
 </html>
