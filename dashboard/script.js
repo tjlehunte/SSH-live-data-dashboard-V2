@@ -296,7 +296,7 @@ async function loadData() {
           display: true,
           text: "",
           color: textColor,
-          font: { size: 25 }
+          font: { size: 20 }
         }
       },
       layout: {
@@ -309,7 +309,7 @@ async function loadData() {
             text: "Time",
             align: "center",
             color: textColor,
-            font: { size: 25 }
+            font: { size: 20 }
           },
           ticks: {
             color: textColor,
@@ -331,7 +331,7 @@ async function loadData() {
             text: "",
             align: "center",
             color: textColor,
-            font: { size: 25 }
+            font: { size: 20 }
           }
         }
       }
@@ -387,7 +387,7 @@ async function loadData() {
           display: true,
           text: "",
           color: textColor,
-          font: { size: 25 }
+          font: { size: 20 }
         }
       },
       layout: {
@@ -400,7 +400,7 @@ async function loadData() {
             text: "Time",
             align: "center",
             color: textColor,
-            font: { size: 25 }
+            font: { size: 20 }
           },
           ticks: {
             color: textColor,
@@ -421,7 +421,8 @@ async function loadData() {
             display: true,
             text: "",
             align: "center",
-            color: textColor
+            color: textColor,
+            font: { size: 20 }
           }
         }
       }
