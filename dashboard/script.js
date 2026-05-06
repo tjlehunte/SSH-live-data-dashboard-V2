@@ -168,7 +168,7 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   currentChart.data.labels = labels;
   currentChart.data.datasets = datasets;
 
-  // Update chart title + axis labels
+  // Update chart title + axis labels (x axis label is always time so no update)
   currentChart.options.plugins.title.text = title;
   currentChart.options.scales.y.title.text = unit;
 
@@ -295,7 +295,8 @@ async function loadData() {
         title: {
           display: true,
           text: "",
-          color: textColor
+          color: textColor,
+          font: { size: 16 }
         }
       },
       layout: {
@@ -307,7 +308,8 @@ async function loadData() {
             display: true,
             text: "Time",
             align: "center",
-            color: textColor
+            color: textColor,
+            font: { size: 16 }
           },
           ticks: {
             color: textColor,
@@ -328,7 +330,8 @@ async function loadData() {
             display: true,
             text: "",
             align: "center",
-            color: textColor
+            color: textColor,
+            font: { size: 16 }
           }
         }
       }
@@ -383,7 +386,8 @@ async function loadData() {
         title: {
           display: true,
           text: "",
-          color: textColor
+          color: textColor,
+          font: { size: 16 }
         }
       },
       layout: {
@@ -395,7 +399,8 @@ async function loadData() {
             display: true,
             text: "Time",
             align: "center",
-            color: textColor
+            color: textColor,
+            font: { size: 16 }
           },
           ticks: {
             color: textColor,
