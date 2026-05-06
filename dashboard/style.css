@@ -121,6 +121,7 @@ canvas.loading {
   font-weight: bold;
   transition: 0.2s;
   color: #333;
+  position: relative;
 }
 
 .tab:hover {
@@ -130,7 +131,7 @@ canvas.loading {
 .tab::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
   background: #333;
