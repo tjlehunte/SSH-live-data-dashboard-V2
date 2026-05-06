@@ -311,10 +311,7 @@ async function loadData() {
             color: function(context) {
               const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
               const gc = isDark ? "#444" : "#ccc";
-              return context.index % 3 === 0 ? gc : "transparent";
-            },
-            lineWidth: function(context) {
-              return context.index % 3 === 0 ? 1 : 0;
+              return context.tick.value % 3 === 0 ? gc : "transparent";
             }
           }
         },
@@ -404,7 +401,13 @@ async function loadData() {
               return "";
             }
           },
-          grid: { color: gridColor }
+          grid: {
+            color: function(context) {
+              const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+              const gc = isDark ? "#444" : "#ccc";
+              return context.tick.value % 3 === 0 ? gc : "transparent";
+            }
+          }
         },
         y: {
           min: 0,
