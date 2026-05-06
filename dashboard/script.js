@@ -8,7 +8,8 @@ let dewCols = [];
 let gpkgCols = [];
 let heatindexCols = [];
 let wetbulbCols = [];
-let currentCols = [];
+let current3Cols = [];
+let currentcumCols = [];
 let allData = [];
 
 function shortenLabel(col) {
