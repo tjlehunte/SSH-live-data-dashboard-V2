@@ -56,6 +56,11 @@ function getRoomColor(room) {
 function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   const labels = data.map(d => d.MessageDate);
 
+  const gridColors = labels.map((_, i) => {
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return i % 3 === 0 ? (isDark ? "#444" : "#ccc") : "transparent";
+});
+  
   const datasets = cols.map(col => {
     const room = col.split(" - ")[0];
     const color = getRoomColor(room);
@@ -109,10 +114,10 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
   mainChart.options.scales.x.title.color = textColor;
   mainChart.options.scales.y.title.color = textColor;
 
-  // Restore grid colors
-  mainChart.options.scales.x.grid.color = gridColor;
+  // Restore grid colors + lines
+  mainChart.options.scales.x.grid.color = gridColors;
   mainChart.options.scales.y.grid.color = gridColor;
-
+  
   mainChart.update();
 }
 
@@ -120,6 +125,11 @@ function drawMainChart(data, cols, title, unit = "Temperature (°C)") {
 function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   const labels = data.map(d => d.MessageDate);
 
+  const gridColors = labels.map((_, i) => {
+  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return i % 3 === 0 ? (isDark ? "#444" : "#ccc") : "transparent";
+});
+  
   const datasets = cols.map(col => {
     const metric = col.split(" - ")[1];
     const color = CURRENT_METRIC_COLORS[metric];
@@ -174,7 +184,7 @@ function drawCurrentChart(data, cols, title, unit = "Current (A)") {
   currentChart.options.scales.y.title.color = textColor;
 
   // Restore grid colours
-  currentChart.options.scales.x.grid.color = gridColor;
+  currentChart.options.scales.x.grid.color = gridColors;
   currentChart.options.scales.y.grid.color = gridColor;
 
   currentChart.update();
@@ -425,6 +435,7 @@ async function loadData() {
     }
     });
   }
+  
   drawMainChart(allData, tempCols, "Temperature Sensors");
   hideEnvSpinner();
   envcanvas.classList.remove("loading");
