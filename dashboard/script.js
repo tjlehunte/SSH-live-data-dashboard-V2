@@ -303,11 +303,14 @@ async function loadData() {
             color: textColor,
             autoSkip: false,
             callback: function(value, index) {
-              if (index % 24 === 0) return this.getLabelForValue(value);
+              if (index % 12 === 0) return this.getLabelForValue(value);
               return "";
             }
           },
-          grid: { color: gridColor }
+          grid: { color: function(context) {
+            return context.index % 3 === 0 ? gridColor : "transparent";
+            }
+          }
         },
         y: {
           min: 0,
@@ -391,7 +394,7 @@ async function loadData() {
             color: textColor,
             autoSkip: false,
             callback: function(value, index) {
-              if (index % 24 === 0) return this.getLabelForValue(value);
+              if (index % 12 === 0) return this.getLabelForValue(value);
               return "";
             }
           },
