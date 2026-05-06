@@ -61,7 +61,12 @@ canvas.loading {
 .sub-tab-row {
   margin-top: -5px;
   margin-bottom: 15px;
-  padding-left: 10px;
+  padding-left: 0px;
+}
+
+.master-tab {
+  padding: 12px 28px;
+  font-size: 16px;
 }
 
 .chart-title {
