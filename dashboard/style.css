@@ -10,6 +10,17 @@ h1 {
   margin-bottom: 30px;
 }
 
+#logo-light, #logo-dark {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 150px;
+}
+
+#logo-dark {
+  display: none;
+}
+
 canvas {
   display: block;
   margin: 0 auto;
@@ -111,7 +122,10 @@ canvas.loading {
     background: #121212;
     color: #e0e0e0;
   }
-
+ 
+  #logo-light { display: none; }
+  #logo-dark  { display: block; }
+  
   .chart-container {
     background: #1e1e1e !important;
     border-color: #333;
