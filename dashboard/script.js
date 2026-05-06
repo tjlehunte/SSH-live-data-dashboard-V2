@@ -317,13 +317,7 @@ async function loadData() {
               return "";
             }
           },
-          grid: {
-            color: function(context) {
-              const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-              const gc = isDark ? "#444" : "#ccc";
-              return context.tick.value % 3 === 0 ? gc : "transparent";
-            }
-          }
+          grid: {}
         },
         y: {
           min: 0,
@@ -411,13 +405,7 @@ async function loadData() {
               return "";
             }
           },
-          grid: {
-            color: function(context) {
-              const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-              const gc = isDark ? "#444" : "#ccc";
-              return context.tick.value % 3 === 0 ? gc : "transparent";
-            }
-          }
+          grid: {}
         },
         y: {
           min: 0,
