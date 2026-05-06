@@ -160,6 +160,20 @@ function initTabs() {
   });
 }
 
+  // legend buttons
+  document.getElementById("hideAllBtn").onclick = () => {
+  mainChart.data.datasets.forEach((_, i) => mainChart.setDatasetVisibility(i, false));
+  mainChart.update();
+};
+document.getElementById("showAllBtn").onclick = () => {
+  mainChart.data.datasets.forEach((_, i) => mainChart.setDatasetVisibility(i, true));
+  mainChart.update();
+};
+document.getElementById("invertBtn").onclick = () => {
+  mainChart.data.datasets.forEach((_, i) => mainChart.setDatasetVisibility(i, !mainChart.isDatasetVisible(i)));
+  mainChart.update();
+};
+  
 async function loadData() {
   const canvas = document.getElementById("mainChart");
   canvas.classList.add("loading");
