@@ -153,6 +153,11 @@ canvas.loading {
   opacity: 1;
 }
 
+.tab-row .tab:first-child::after {
+  left: 0;
+  transform: none;
+}
+
 .tab.active {
   background: #3498db;
   color: white;
