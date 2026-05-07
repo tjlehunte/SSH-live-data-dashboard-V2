@@ -89,6 +89,12 @@ canvas.loading {
   margin-bottom: 10px;
 }
 
+#chart-seperator {
+  border-bottom: 3px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
 .chart-title {
   text-align: center;
   margin-bottom: 20px;
