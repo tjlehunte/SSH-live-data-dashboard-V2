@@ -399,7 +399,7 @@ async function loadData() {
             max: 1,
             ticks: { color: textColor },
             grid: { color: gridColor },
-            title: { display: true, text: "kW", align: "center", color: textColor, font: { size: 20 } }
+            title: { display: true, text: "Energy (kW)", align: "center", color: textColor, font: { size: 20 } }
           }
         }
       }
