@@ -49,7 +49,7 @@ function drawChart(data, cols, title, unit, isCurrentChart = false) {
 
   const gridColors = labels.map((_, i) => {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (i % 3 === 0) return isDark ? "#444" : "#ccc";
+    if (i % 12 === 0) return isDark ? "#444" : "#ccc";
     return isDark ? "#2a2a2a" : "#ebebeb";
   });
 
