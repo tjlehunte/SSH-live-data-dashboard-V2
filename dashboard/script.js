@@ -233,20 +233,28 @@ document.getElementById("invertBtn").onclick = () => {
   mainChart.update();
 };
   
+  async function fetchWithRetry(url, retries = 3, delay = 3000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url);
+      if (response.ok) return await response.json();
+    } catch (e) {
+      if (i < retries - 1) await new Promise(r => setTimeout(r, delay));
+    }
+  }
+  throw new Error("Failed to fetch after retries");
+}
+  
 async function loadData() {
   const canvas = document.getElementById("mainChart");
   canvas.classList.add("loading");
   showSpinner();
 
   // Fetch Monnit data
-  const response = await fetch("https://monnit-plumber-api.onrender.com/data");
-  const data = await response.json();
-  allData = data;
-
+  allData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/data");
+ 
   // Fetch givenergy data
-  const geResponse = await fetch("https://monnit-plumber-api.onrender.com/givenergy");
-  const geData = await geResponse.json();
-  givenergyData = geData;
+  givenergyData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/givenergy");
   
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const gridColor = isDark ? "#444" : "#ccc";
