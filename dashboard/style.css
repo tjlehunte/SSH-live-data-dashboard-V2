@@ -46,6 +46,7 @@ h1 {
   font-size: 30px;
   padding-top: 40px;
   border-top: 3px solid #ccc;
+  margin-bottom: 0px
 }
 
 .canvas-wrapper {
