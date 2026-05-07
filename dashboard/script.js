@@ -107,13 +107,10 @@ function drawChart(data, cols, title, unit, isCurrentChart = false) {
 
 function drawGivenergyChart(data, flowCol, title) {
   const labels = data.map(d => d.start);
-
-  console.log("labels:", labels.length);
-  console.log("data points:", data.length);
   
   const gridColors = labels.map((_, i) => {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return i % 3 === 0 ? (isDark ? "#444" : "#ccc") : "transparent";
+    return isDark ? "#444" : "#ccc";
   });
 
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -161,8 +158,6 @@ function drawGivenergyChart(data, flowCol, title) {
   
   givenergyChart.options.scales.x.grid.color = gridColors;
   givenergyChart.options.scales.y.grid.color = gridColor;
-
-  console.log("gridColors:", gridColors);
   
   givenergyChart.update();
 }
