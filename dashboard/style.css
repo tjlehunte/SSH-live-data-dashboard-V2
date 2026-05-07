@@ -230,6 +230,36 @@ canvas.loading {
   margin-top: 20px;
 }
 
+.section-header, .givenergy-section h2 {
+  position: relative;
+  cursor: default;
+}
+
+.section-header::after, .givenergy-section h2::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: normal;
+  white-space: normal;
+  width: 300px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 100;
+}
+
+.section-header:hover::after, .givenergy-section h2:hover::after {
+  opacity: 1;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
