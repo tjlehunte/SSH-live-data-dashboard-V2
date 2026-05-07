@@ -406,8 +406,19 @@ async function loadData() {
       });
     });
   }
+  
   // Draw default tab
-  drawGivenergyChart(givenergyData, "PV to Home", "PV to Home");
+  const activeGe = document.querySelector("#givenergyTabs .tab.active");
+  if (activeGe) {
+    const flow = activeGe.dataset.flow;
+    if (flow === "pv-home")       drawGivenergyChart(givenergyData, "PV to Home",      "PV to Home");
+    if (flow === "pv-battery")    drawGivenergyChart(givenergyData, "PV to Battery",   "PV to Battery");
+    if (flow === "pv-grid")       drawGivenergyChart(givenergyData, "PV to Grid",      "PV to Grid");
+    if (flow === "grid-home")     drawGivenergyChart(givenergyData, "Grid to Home",    "Grid to Home");
+    if (flow === "grid-battery")  drawGivenergyChart(givenergyData, "Grid to Battery", "Grid to Battery");
+    if (flow === "battery-home")  drawGivenergyChart(givenergyData, "Battery to Home", "Battery to Home");
+    if (flow === "battery-grid")  drawGivenergyChart(givenergyData, "Battery to Grid", "Battery to Grid");
+  }
   
   if (!window.tabsInitialised) {
   window.tabsInitialised = true;
