@@ -446,6 +446,27 @@ loadData();
   
 setInterval(loadData, 10 * 60 * 1000);
   
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { loadData(); });
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+  // Redraw immediately with existing data
+  const activeGe = document.querySelector("#givenergyTabs .tab.active");
+  if (activeGe) {
+    const flow = activeGe.dataset.flow;
+    if (flow === "pv-home")       drawGivenergyChart(givenergyData, "PV to Home",      "PV to Home");
+    if (flow === "pv-battery")    drawGivenergyChart(givenergyData, "PV to Battery",   "PV to Battery");
+    if (flow === "pv-grid")       drawGivenergyChart(givenergyData, "PV to Grid",      "PV to Grid");
+    if (flow === "grid-home")     drawGivenergyChart(givenergyData, "Grid to Home",    "Grid to Home");
+    if (flow === "grid-battery")  drawGivenergyChart(givenergyData, "Grid to Battery", "Grid to Battery");
+    if (flow === "battery-home")  drawGivenergyChart(givenergyData, "Battery to Home", "Battery to Home");
+    if (flow === "battery-grid")  drawGivenergyChart(givenergyData, "Battery to Grid", "Battery to Grid");
+  }
+  const activeMaster = document.querySelector("#masterTabs .tab.active");
+  if (activeMaster && activeMaster.dataset.master === "current") {
+    const activeSub = document.querySelector("#currentTabs .tab.active");
+    if (activeSub) activeSub.click();
+  } else {
+    const activeSub = document.querySelector("#envTabs .tab.active");
+    if (activeSub) activeSub.click();
+  }
+});
 
 }); // end DOMContentLoaded
