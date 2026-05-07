@@ -271,7 +271,12 @@ canvas.loading {
     flex-direction: column;
     gap: 15px;
   }
-
+  
+  .tab {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
   #uos-logo-light, #uos-logo-dark { width: 100px; }
   #sml-logo-light, #sml-logo-dark { width: 120px; }
   #ehl-logo-light, #ehl-logo-dark { width: 80px; }
