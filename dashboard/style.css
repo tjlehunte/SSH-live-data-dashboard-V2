@@ -91,7 +91,7 @@ canvas.loading {
 
 .chart-title {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 /* Loading spinner */
@@ -200,8 +200,8 @@ canvas.loading {
 
 .givenergy-section h2 {
   text-align: center;
-  margin-bottom: 15px;
-  font-size: 20px;
+  margin-bottom: 40px;
+  font-size: 30px;
 }
 
 @keyframes spin {
