@@ -233,7 +233,7 @@ document.getElementById("invertBtn").onclick = () => {
   mainChart.update();
 };
   
-  async function fetchWithRetry(url, retries = 3, delay = 3000) {
+  async function fetchWithRetry(url, retries = 3, delay = 5000) {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await fetch(url);
@@ -242,7 +242,7 @@ document.getElementById("invertBtn").onclick = () => {
       if (i < retries - 1) await new Promise(r => setTimeout(r, delay));
     }
   }
-  throw new Error("Failed to fetch after retries");
+  throw new Error("Failed to fetch after 3 retries");
 }
   
 async function loadData() {
@@ -260,7 +260,7 @@ async function loadData() {
   const gridColor = isDark ? "#444" : "#ccc";
   const textColor = isDark ? "#ddd" : "#000";
 
-  const columns = Object.keys(data[0]);
+  const columns = Object.keys(allData[0]);
 
   tempCols       = columns.filter(c => c.toLowerCase().includes("temp"));
   humCols        = columns.filter(c => c.toLowerCase().includes("humid"));
