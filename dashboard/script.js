@@ -131,10 +131,13 @@ function drawGivenergyChart(data, flowCol, title) {
   };
 
   const allValues = dataset.data.map(v => Number(v)).filter(v => Number.isFinite(v));
-  const roundedMax = maxValue <= 1 
-    ? Math.ceil(maxValue * 10) / 10  // round to 1 decimal for small values
-    : Math.ceil(maxValue / 5) * 5;   // round to nearest 5 for larger values
-  const roundedMin = Math.floor(Math.min(...allValues) * 10) / 10;
+ 
+  const roundedMax = Math.ceil(Math.max(...allValues) / 5) * 5;
+  const roundedMin = Math.floor(Math.min(...allValues) / 5) * 5;
+
+  // ensure there's always a minimum range, if they're equal, add 5 to max
+  const yMax = roundedMax === roundedMin ? roundedMin + 5 : roundedMax;
+  const yMin = roundedMin;
 
   givenergyChart.data.labels = labels;
   
