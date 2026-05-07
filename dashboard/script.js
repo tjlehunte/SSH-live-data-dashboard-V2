@@ -87,11 +87,27 @@ function drawChart(data, cols, title, unit, isCurrentChart = false) {
   mainChart.data.datasets = datasets;
   
   mainChart.options.plugins.title.text = title;
+  mainChart.options.plugins.title.color = textColor;
+  
   mainChart.options.scales.y.title.text = unit;
   
   mainChart.options.scales.y.min = roundedMin;
   mainChart.options.scales.y.max = roundedMax;
   
+  mainChart.options.plugins.legend.labels.generateLabels = function(chart) {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const tc = isDark ? "#ddd" : "#000";
+    return chart.data.datasets.map((ds, i) => ({
+      text: ds.label,
+      fillStyle: ds.backgroundColor,
+      strokeStyle: ds.backgroundColor,
+      lineWidth: 0,
+      pointStyle: "rect",
+      fontColor: tc,
+      hidden: !chart.isDatasetVisible(i),
+      datasetIndex: i
+    }));
+  };
   mainChart.options.plugins.legend.labels.color = textColor;
   
   mainChart.options.scales.x.ticks.color = textColor;
@@ -147,6 +163,7 @@ function drawGivenergyChart(data, flowCol, title) {
   givenergyChart.data.datasets = [dataset];
   
   givenergyChart.options.plugins.title.text = title;
+  givenergyChart.options.plugins.title.color = textColor;
   
   givenergyChart.options.scales.y.min = yMin;
   givenergyChart.options.scales.y.max = yMax;
