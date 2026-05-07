@@ -33,6 +33,7 @@ h1 {
   text-align: center;
   font-size: 30px;
   margin-top: 20px;
+  border-top: 3px solid #ccc;
 }
 
 .canvas-wrapper {
@@ -87,6 +88,7 @@ canvas.loading {
   border-bottom: 3px solid #ccc;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 #chart-seperator {
@@ -270,6 +272,10 @@ canvas.loading {
   }
   
   .givenergy-section {
+  border-top-color: #444;
+  }
+  
+  .section-header {
   border-top-color: #444;
   }
   
