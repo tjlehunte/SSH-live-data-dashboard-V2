@@ -303,7 +303,7 @@ async function loadData() {
             }
           },
           tooltip: { enabled: true },
-          title: { display: true, text: "", color: textColor, font: { size: 20 }, padding: { bottom: 15 } }
+          title: { display: true, text: "", color: textColor, font: { size: 20 }, padding: { bottom: 30 } }
         },
         layout: { padding: { bottom: 20 } },
         scales: {
@@ -350,7 +350,7 @@ async function loadData() {
         plugins: {
           legend: { display: false },
           tooltip: { enabled: true },
-          title: { display: true, text: "", color: textColor, font: { size: 20 }, padding: { bottom: 15 } }
+          title: { display: true, text: "", color: textColor, font: { size: 20 }, padding: { bottom: 30 } }
         },
         layout: { padding: { bottom: 20 } },
         scales: {
