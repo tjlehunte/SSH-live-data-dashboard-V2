@@ -139,7 +139,7 @@ canvas.loading {
 }
 
 .tab {
-  padding: 10px 10px;
+  padding: 10px 12px;
   background: #eee;
   border-radius: 6px;
   cursor: pointer;
@@ -152,7 +152,7 @@ canvas.loading {
 }
 
 .master-tab {
-  padding: 12px 12px;
+  padding: 12px 14px;
   font-size: 25px;
 }
 
@@ -203,7 +203,7 @@ canvas.loading {
 }
 
 .legend-controls button {
-  padding: 6px 6px;
+  padding: 6px 8px;
   border: none;
   border-radius: 6px;
   background: #eee;
