@@ -29,6 +29,13 @@ h1 {
   display: none;
 }
 
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
 .canvas-wrapper {
   height: 500px;
   position: relative;
