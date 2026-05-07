@@ -372,7 +372,7 @@ async function loadData() {
                 return "";
               }
             },
-            grid: {}
+            grid: { color: isDark ? "#444" : "#ccc" }
           },
           y: {
             min: 0,
