@@ -145,8 +145,8 @@ function drawGivenergyChart(data, flowCol, title) {
   
   givenergyChart.options.plugins.title.text = title;
   
-  givenergyChart.options.scales.y.min = roundedMin;
-  givenergyChart.options.scales.y.max = roundedMax;
+  givenergyChart.options.scales.y.min = yMin;
+  givenergyChart.options.scales.y.max = yMax;
   
   givenergyChart.options.plugins.legend.labels.color = textColor;
   
