@@ -133,6 +133,7 @@ canvas.loading {
   transition: 0.2s;
   color: #333;
   position: relative;
+  font-size: 20px;
 }
 
 .tab:hover {
