@@ -203,7 +203,6 @@ canvas.loading {
 }
 
 .givenergy-section {
-  margin-top: 40px;
   border-top: 3px solid #ccc;
 }
 
@@ -212,6 +211,7 @@ canvas.loading {
   margin-bottom: 40px;
   font-size: 30px;
   padding-top: 20px;
+  margin-top: 20px;
 }
 
 @keyframes spin {
