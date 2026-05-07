@@ -208,6 +208,8 @@ canvas.loading {
   text-align: center;
   margin-bottom: 40px;
   font-size: 30px;
+  border-top: 3px solid #ccc;
+  padding-top: 20px;
 }
 
 @keyframes spin {
@@ -263,7 +265,10 @@ canvas.loading {
     background: #222;
     color: #ddd;
   }
-
+  
+  .givenergy-section {
+  border-top-color: #444;
+  }
   .legend-controls button:hover {
     background: #333;
   }
