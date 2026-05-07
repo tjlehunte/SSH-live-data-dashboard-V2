@@ -162,6 +162,8 @@ function drawGivenergyChart(data, flowCol, title) {
   givenergyChart.options.scales.x.grid.color = gridColors;
   givenergyChart.options.scales.y.grid.color = gridColor;
 
+  console.log("gridColors:", gridColors);
+  
   givenergyChart.update();
 }
   
@@ -388,8 +390,6 @@ async function loadData() {
       }
     });
   }
-  
-  console.log("gridColors:", gridColors);
   
   if (!window.givenergyTabsInitialised) {
     window.givenergyTabsInitialised = true;
