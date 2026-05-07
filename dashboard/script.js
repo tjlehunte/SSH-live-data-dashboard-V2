@@ -348,10 +348,7 @@ async function loadData() {
         interaction: { mode: "index", intersect: false },
         elements: { point: { pointStyle: "rect", radius: 6, hoverRadius: 6 } },
         plugins: {
-          legend: {
-            position: "right",
-            labels: { color: textColor, usePointStyle: true, pointStyle: "rect", pointStyleWidth: 16, font: { size: 14 } }
-          },
+          legend: { display: false },
           tooltip: { enabled: true },
           title: { display: true, text: "", color: textColor, font: { size: 20 } }
         },
