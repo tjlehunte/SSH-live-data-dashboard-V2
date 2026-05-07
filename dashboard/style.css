@@ -190,6 +190,7 @@ canvas.loading {
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+  font-size: 
 }
 
 .legend-controls button:hover {
