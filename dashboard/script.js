@@ -12,11 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentcumCols = [];
   let allData = [];
   let givenergyData = [];
-
-  function showGivenergySpinner() {
-  console.log("showing givenergy spinner");
-  document.getElementById("givenergySpinner").style.display = "block";
-}
   
 function showSpinner() {
   document.getElementById("spinner").style.display = "block";
