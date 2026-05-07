@@ -107,6 +107,7 @@ function drawChart(data, cols, title, unit, isCurrentChart = false) {
 }
 
 function drawGivenergyChart(data, flowCol, title) {
+    console.log("drawGivenergyChart called, textColor will be:", window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   const labels = data.map(d => d.start);
   
   const gridColors = labels.map((_, i) => {
@@ -412,6 +413,7 @@ async function loadData() {
   console.log("activeGe:", activeGe);
   if (activeGe) {
     const flow = activeGe.dataset.flow;
+      console.log("drawing givenergy flow:", flow);
     if (flow === "pv-home")       drawGivenergyChart(givenergyData, "PV to Home",      "PV to Home");
     if (flow === "pv-battery")    drawGivenergyChart(givenergyData, "PV to Battery",   "PV to Battery");
     if (flow === "pv-grid")       drawGivenergyChart(givenergyData, "PV to Grid",      "PV to Grid");
