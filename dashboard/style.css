@@ -5,35 +5,39 @@ body {
   color: #333;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 50px;
-  margin-top: 50px;
+.logo-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 #uos-logo-light, #uos-logo-dark {
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  width: 152.65px;
+  width: 152px;
 }
 
 #sml-logo-light, #sml-logo-dark {
-  position: absolute;
-  top: 30px;
-  left: 30px;
   width: 200px;
 }
 
 #ehl-logo-light, #ehl-logo-dark {
-  position: absolute;
-  top: 37.5px;
-  left: 230px;
   width: 115px;
 }
 
 #uos-logo-dark, #sml-logo-dark, #ehl-logo-dark {
   display: none;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 0;
 }
 
 .section-header {
@@ -227,6 +231,17 @@ canvas.loading {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .logo-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #uos-logo-light, #uos-logo-dark { width: 100px; }
+  #sml-logo-light, #sml-logo-dark { width: 120px; }
+  #ehl-logo-light, #ehl-logo-dark { width: 80px; }
 }
 
 /* ---------------------------------------------------------
