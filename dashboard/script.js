@@ -49,7 +49,8 @@ function drawChart(data, cols, title, unit, isCurrentChart = false) {
 
   const gridColors = labels.map((_, i) => {
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return i % 3 === 0 ? (isDark ? "#444" : "#ccc") : "transparent";
+    if (i % 3 === 0) return isDark ? "#444" : "#ccc";
+    return isDark ? "#2a2a2a" : "#ebebeb";
   });
 
   const datasets = cols.map(col => {
