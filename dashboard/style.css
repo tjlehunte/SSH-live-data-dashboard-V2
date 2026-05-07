@@ -25,7 +25,14 @@ h1 {
   width: 200px;
 }
 
-#uos-logo-dark, #sml-logo-dark {
+#ehl-logo-light, #ehl-logo-dark {
+  position: absolute;
+  top: 30px;
+  left: 230px;
+  width: 200px;
+}
+
+#uos-logo-dark, #sml-logo-dark, #ehl-logo-dark {
   display: none;
 }
 
@@ -236,7 +243,10 @@ canvas.loading {
   
   #sml-logo-light { display: none; }
   #sml-logo-dark  { display: block; }
-  
+
+  #ehl-logo-light { display: none; }
+  #ehl-logo-dark  { display: block; }
+
   .chart-container {
     background: #1e1e1e !important;
     border-color: #333;
