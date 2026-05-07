@@ -273,8 +273,8 @@ canvas.loading {
   }
   
   .tab {
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
   }
   
   #uos-logo-light, #uos-logo-dark { width: 100px; }
