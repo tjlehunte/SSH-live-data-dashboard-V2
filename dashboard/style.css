@@ -33,7 +33,7 @@ h1 {
   text-align: center;
   font-size: 30px;
   margin-top: 20px;
-  padding-top: 10px;
+  padding-top: 20px;
   border-top: 3px solid #ccc;
 }
 
@@ -80,7 +80,6 @@ canvas.loading {
 }
 
 .sub-tab-row {
-  margin-top: 10px;
   margin-bottom: 15px;
   padding-left: 0px;
 }
