@@ -409,6 +409,7 @@ async function loadData() {
   
   // Draw default tab
   const activeGe = document.querySelector("#givenergyTabs .tab.active");
+  console.log("activeGe:", activeGe);
   if (activeGe) {
     const flow = activeGe.dataset.flow;
     if (flow === "pv-home")       drawGivenergyChart(givenergyData, "PV to Home",      "PV to Home");
