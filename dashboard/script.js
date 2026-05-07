@@ -388,6 +388,9 @@ async function loadData() {
       }
     });
   }
+  
+  console.log("gridColors:", gridColors);
+  
   if (!window.givenergyTabsInitialised) {
     window.givenergyTabsInitialised = true;
     document.querySelectorAll("#givenergyTabs .tab").forEach(tab => {
