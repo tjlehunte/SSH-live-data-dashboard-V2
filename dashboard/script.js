@@ -20,6 +20,13 @@ function hideSpinner() {
   document.getElementById("spinner").style.display = "none";
 }
 
+function showGivenergySpinner() {
+  document.getElementById("givenergySpinner").style.display = "block";
+}
+function hideGivenergySpinner() {
+  document.getElementById("givenergySpinner").style.display = "none";
+}
+
 const ROOM_COLORS = [
   "#800000", "#9A6324", "#469990", "#000075", "#000000",
   "#e6194B", "#f58231", "#ffe119", "#3cb44b", "#42d4f4",
@@ -267,8 +274,11 @@ document.getElementById("invertBtn").onclick = () => {
   
 async function loadData() {
   const canvas = document.getElementById("mainChart");
+  const givenergyCanvas = document.getElementById("givenergyChart");
   canvas.classList.add("loading");
+  givenergyCanvas.classList.add("loading");
   showSpinner();
+  showGivenergySpinner();
 
   // Fetch Monnit data
   allData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/data");
@@ -456,7 +466,10 @@ async function loadData() {
   }
 
   hideSpinner();
+  hideGivenergySpinner();
+  
   canvas.classList.remove("loading");
+  givenergyCanvas.classList.remove("loading");
 }
 
 loadData();
