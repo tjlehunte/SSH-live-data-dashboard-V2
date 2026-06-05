@@ -423,12 +423,12 @@ canvas.loading {
 
   /* Section headers used for major content divisions */
   .section-header {
-     text-align: center;   /* Center the section header text */
-     font-size: 30px;      /* Large font size for sections */
-     margin-top: 0;        /* Clears default browser margin to bring line closer to H1 */
-     padding-top: 15px;    /* Tightens gap between grey line and H2 text */
-     border-top: 3px solid #ccc;  /* Add a gray line above section */
-     margin-bottom: 0px;   /* No space below header */
+     text-align: center;   
+     font-size: 30px;      
+     margin-top: 0;        
+     padding-top: 15px;    
+     border-top: 3px solid #ccc;  
+     margin-bottom: 0px;   
   }
 
   h2 {
@@ -438,18 +438,16 @@ canvas.loading {
    
   /* Keep logo bar in one row instead of stacking vertically */
   .logo-bar {
-    flex-direction: row;      /* Keeps left and right blocks on the same line */
+    flex-direction: row;      
     justify-content: space-between; 
     align-items: center;      
-    gap: 10px;                /* Tighten space between elements */
+    gap: 10px;                
   }
 
-  /* Bring the two left logos closer together to fit better on mobile */
   .logo-bar-left {
     gap: 10px;                
   }
    
-  /* Reduce logo sizes for mobile screens */
   #uos-logo-light, #uos-logo-dark { width: 85px; }  
   #sml-logo-light, #sml-logo-dark { width: 105px; } 
   #ehl-logo-light, #ehl-logo-dark { width: 70px; }  
@@ -474,7 +472,7 @@ canvas.loading {
 
   /* Make tab rows horizontally scrollable on mobile */
   .tab-row {
-    display: flex !important;
+    display: flex;                      /* FIX: Removed !important so JS toggle states work */
     flex-wrap: nowrap !important;       /* Force tabs onto a single horizontal line */
     overflow-x: auto !important;        /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch;  /* Smooth inertial scrolling on iOS devices */
