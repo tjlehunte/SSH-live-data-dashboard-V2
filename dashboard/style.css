@@ -410,6 +410,11 @@ canvas.loading {
     margin: 15px; 
   }
 
+  h1 {
+     font-size: 24px !important;
+     margin-bottom: 30px;
+  }
+
 /* Keep logo bar in one row instead of stacking vertically */
   .logo-bar {
     flex-direction: row;      /* Keeps left and right blocks on the same line */
