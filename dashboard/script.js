@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Arrays to store column names for different sensor types
   let tempCols = [];              // Temperature sensor columns
-  let humCols = [];               // Humidity sensor columns
+  let humCols = [];              // Humidity sensor columns
   let dewCols = [];               // Dew point sensor columns
   let gpkgCols = [];              // Grams per kilogram sensor columns
   let heatindexCols = [];         // Heat index sensor columns
@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentcumCols = [];        // Cumulative current (amp-hours) columns
   
   // Data storage arrays
-  let allData = [];               // All fetched Monnit sensor data
-  let givenergyData = [];         // All fetched GiveEnergy data
+  let allData = []; // All fetched Monnit sensor data
+  let givenergyData = []; // All fetched GiveEnergy data
   
   // ==================== SPINNER DISPLAY FUNCTIONS ====================
   function showSpinner() {
@@ -43,13 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
     "#f032e6", "#dcbeff", "#aaffc3", "#911eb4", "#a9a9a9",
     "#ffd8b1"
   ];
-
   const CURRENT_METRIC_COLORS = {
     "Minimum current": "#00c8f0",
     "Maximum current": "#ff1a1a",
     "Average current": "#00cc44"
   };
-
   const roomColorMap = {};
   let roomColorIndex = 0;
 
@@ -69,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (i % 12 === 0) return isDark ? "#444" : "#ccc";
       return isDark ? "#2a2a2a" : "#ebebeb";
     });
-
     const datasets = cols.map(col => {
       const parts = col.split(" - ");
       const label = isCurrentChart ? parts[1] : parts[0];
@@ -88,7 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
         fill: false
       };
     });
-
     const allValues = datasets.flatMap(ds => ds.data).map(v => Number(v)).filter(v => Number.isFinite(v));
     const roundedMax = Math.ceil(Math.max(...allValues) / 5) * 5;
     const roundedMin = Math.floor(Math.min(...allValues) / 5) * 5;
@@ -104,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mainChart.options.scales.y.title.text = unit;
     mainChart.options.scales.y.min = roundedMin;
     mainChart.options.scales.y.max = roundedMax;
-
     // Dynamically change legend position based on 768px breakpoint
     mainChart.options.plugins.legend.position = (window.innerWidth <= 768) ? "bottom" : "right";
 
@@ -142,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (i % 4 === 0) return isDark ? "#444" : "#ccc";
       return isDark ? "#2a2a2a" : "#ebebeb";
     });
-
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const gridColor = isDark ? "#444" : "#ccc";
     const textColor = isDark ? "#ddd" : "#000";
@@ -159,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tension: 0.2,
       fill: false
     };
-
     const allValues = dataset.data.map(v => Number(v)).filter(v => Number.isFinite(v));
     const roundedMax = Math.ceil(Math.max(...allValues) / 5) * 5;
     const roundedMin = Math.floor(Math.min(...allValues) / 5) * 5;
@@ -187,6 +180,16 @@ document.addEventListener("DOMContentLoaded", () => {
     givenergyChart.update();
   }
 
+  // ==================== HELPER FUNCTION TO RESTORE GIVENERGY TO ORIGINAL SECTION ====================
+  function restoreGivEnergyToSection() {
+    const givWrapper = document.getElementById("givenergy-chart-wrapper");
+    const givSection = document.querySelector(".givenergy-section");
+    if (givWrapper && givWrapper.parentElement !== givSection) {
+      givSection.appendChild(givWrapper);
+      givWrapper.style.display = window.innerWidth <= 768 ? "none" : "block";
+    }
+  }
+
   // ==================== TAB INITIALIZATION FUNCTION ====================
   function initTabs() {
 
@@ -200,13 +203,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- Environment Selection ---
         if (master === "environment") {
+          restoreGivEnergyToSection();
           document.getElementById("envTabs").style.display = "flex";
           document.getElementById("currentTabs").style.display = "none";
+          document.getElementById("givenergyTabs").style.display = "none";
           document.querySelector(".chart-section .chart-container").style.display = "block";
           
           // Re-evaluate GivEnergy structural element states based on layout context
           document.getElementById("givenergyTabs").style.display = (window.innerWidth <= 768) ? "none" : "flex";
-          document.querySelector(".givenergy-section .chart-container").style.display = (window.innerWidth <= 768) ? "none" : "block";
+          const givWrapper = document.getElementById("givenergy-chart-wrapper");
+          if (givWrapper) {
+            givWrapper.style.display = (window.innerWidth <= 768) ? "none" : "block";
+          }
 
           const activeEnv = document.querySelector("#envTabs .tab.active");
           if (activeEnv) activeEnv.click();
@@ -214,13 +222,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // --- Current Selection ---
         if (master === "current") {
+          restoreGivEnergyToSection();
           document.getElementById("envTabs").style.display = "none";
           document.getElementById("currentTabs").style.display = "flex";
+          document.getElementById("givenergyTabs").style.display = "none";
           document.querySelector(".chart-section .chart-container").style.display = "block";
           
           // Re-evaluate GivEnergy structural element states based on layout context
           document.getElementById("givenergyTabs").style.display = (window.innerWidth <= 768) ? "none" : "flex";
-          document.querySelector(".givenergy-section .chart-container").style.display = (window.innerWidth <= 768) ? "none" : "block";
+          const givWrapper = document.getElementById("givenergy-chart-wrapper");
+          if (givWrapper) {
+            givWrapper.style.display = (window.innerWidth <= 768) ? "none" : "block";
+          }
 
           const activeCurrent = document.querySelector("#currentTabs .tab.active");
           if (activeCurrent) activeCurrent.click();
@@ -233,7 +246,15 @@ document.addEventListener("DOMContentLoaded", () => {
           document.querySelector(".chart-section .chart-container").style.display = "none"; // Hide Monnit chart card
           
           document.getElementById("givenergyTabs").style.display = "flex";
-          document.querySelector(".givenergy-section .chart-container").style.display = "block"; // Show GivEnergy chart card right here
+          
+          // Move givenergy chart container up into the chart section dynamically
+          const givWrapper = document.getElementById("givenergy-chart-wrapper");
+          const chartSection = document.querySelector(".chart-section");
+          if (givWrapper) {
+            givWrapper.style.display = "block";
+            chartSection.appendChild(givWrapper);
+            if (givenergyChart) givenergyChart.resize(); // force redraw in new layout position
+          }
 
           // Automatically trigger click on the first energy sub-tab flow: PV to Home
           const firstGeTab = document.querySelector("#givenergyTabs .tab:first-child");
@@ -250,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const type = tab.dataset.type;
         if (type === "temperature") drawChart(allData, tempCols,      "Temperature Sensors",          "Temperature (°C)");
-        if (type === "humidity")    drawChart(allData, humCols,       "Humidity Sensors",             "Humidity (%)");
+        if (type === "humidity")    drawChart(allData, humCols,        "Humidity Sensors",             "Humidity (%)");
         if (type === "dewpoint")    drawChart(allData, dewCols,       "Dew Point Sensors",            "Dew Point (°C)");
         if (type === "gpkg")        drawChart(allData, gpkgCols,      "Grams per Kilogram Sensors",   "Grams per Kilogram (g/kg)");
         if (type === "heatindex")   drawChart(allData, heatindexCols, "Heat Index Sensors",           "Heat Index (°C)");
@@ -281,7 +302,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mainChart.data.datasets.forEach((_, i) => mainChart.setDatasetVisibility(i, true));
     mainChart.update();
   };
-  
   document.getElementById("invertBtn").onclick = () => {
     mainChart.data.datasets.forEach((_, i) => mainChart.setDatasetVisibility(i, !mainChart.isDatasetVisible(i)));
     mainChart.update();
@@ -312,7 +332,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     allData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/data");
     givenergyData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/givenergy");
-    
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const gridColor = isDark ? "#444" : "#ccc";
     const textColor = isDark ? "#ddd" : "#000";
@@ -447,7 +466,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Set initial layout visibility states on mobile screens
     if (window.innerWidth <= 768) {
       document.getElementById("givenergyTabs").style.display = "none";
-      document.querySelector(".givenergy-section .chart-container").style.display = "none";
+      const givWrapper = document.getElementById("givenergy-chart-wrapper");
+      if (givWrapper) givWrapper.style.display = "none";
     }
 
     hideSpinner();
@@ -480,10 +500,19 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("currentTabs").style.display = "none";
         document.querySelector(".chart-section .chart-container").style.display = "none";
         document.getElementById("givenergyTabs").style.display = "flex";
-        document.querySelector(".givenergy-section .chart-container").style.display = "block";
+        
+        const givWrapper = document.getElementById("givenergy-chart-wrapper");
+        const chartSection = document.querySelector(".chart-section");
+        if (givWrapper) {
+          givWrapper.style.display = "block";
+          if (givWrapper.parentElement !== chartSection) {
+            chartSection.appendChild(givWrapper);
+            if (givenergyChart) givenergyChart.resize();
+          }
+        }
       } else {
         document.getElementById("givenergyTabs").style.display = "none";
-        document.querySelector(".givenergy-section .chart-container").style.display = "none";
+        restoreGivEnergyToSection();
         document.querySelector(".chart-section .chart-container").style.display = "block";
         if (activeMaster === "environment") {
           document.getElementById("envTabs").style.display = "flex";
@@ -495,8 +524,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } else {
       // Revert cleanly to original desktop constraints if widened
+      restoreGivEnergyToSection();
       document.getElementById("givenergyTabs").style.display = "flex";
-      document.querySelector(".givenergy-section .chart-container").style.display = "block";
       document.querySelector(".chart-section .chart-container").style.display = "block";
       if (activeMaster === "givenergy") {
         document.querySelector("#masterTabs .tab[data-master='environment']").click();
