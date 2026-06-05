@@ -112,13 +112,16 @@
       </div>
     </div>
 
+<!-- ... Rest of your HTML above remains identical ... -->
+
     <div class="givenergy-section">
       <h2>
         <span class="header-tooltip" data-tooltip="Energy flows from the Givenergy inverter and solar panel system, it updates every 30 minutes">
           GivEnergy - Energy Flows </span>
       </h2>
       
-      <div class="chart-container">
+      <!-- FIX: Added id="givenergy-chart-wrapper" here so script.js can find and manipulate it -->
+      <div class="chart-container" id="givenergy-chart-wrapper">
         <div class="chart-spinner" id="givenergySpinner"></div>
         
         <div class="canvas-wrapper">
