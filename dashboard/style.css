@@ -429,3 +429,46 @@ canvas.loading {
     background: #333;  /* Slightly lighter on hover */
   }
 }
+
+/* Hide mobile-specific master tab on desktop layout */
+.mobile-givenergy-tab {
+  display: none !important;
+}
+
+/* =============================================================================
+   MOBILE VIEWPORT ADAPTATIONS (768px Breakpoint)
+   ============================================================================= */
+@media (max-width: 768px) {
+  body {
+    margin: 15px; /* Reduce global padding to save horizontal room */
+  }
+
+  /* Make the third master tab visible on mobile screens */
+  .mobile-givenergy-tab {
+    display: inline-flex !important;
+  }
+
+  /* Hide the separate GivEnergy layout header on mobile since it is integrated */
+  .givenergy-section h2 {
+    display: none !important;
+  }
+
+  /* Prevent chart card containers from spilling out horizontally on mobile devices */
+  .chart-container {
+    min-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 12px;
+  }
+
+  /* Compact tabs to make multi-row presentation cleaner on mobile screens */
+  .tab {
+    font-size: 14px !important;
+    padding: 8px 10px !important;
+  }
+
+  .master-tab {
+    font-size: 18px !important;
+    padding: 10px 12px !important;
+  }
+}
