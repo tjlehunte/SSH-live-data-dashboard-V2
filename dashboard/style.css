@@ -213,6 +213,7 @@ canvas.loading {
 /* Special case: first tab's tooltip aligns to the left instead of center */
 .tab-row .tab:first-child::after {
   left: 0;  /* Align to left edge */
+  right: 0;
   transform: none;  /* No centering transform */
 }
 
