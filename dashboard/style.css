@@ -405,6 +405,12 @@ canvas.loading {
    RESPONSIVE DESIGN - SINGLE CONSOLIDATED MOBILE BLOCK (max 768px width)
    ============================================================================= */
 @media (max-width: 768px) {
+  /* Put a hard stop on global horizontal spilling and zooming into empty space */
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   /* Reduce global body layout margin to maximize room */
   body {
     margin: 15px; 
@@ -430,7 +436,7 @@ canvas.loading {
      margin-bottom: 20px;
   }
    
-/* Keep logo bar in one row instead of stacking vertically */
+  /* Keep logo bar in one row instead of stacking vertically */
   .logo-bar {
     flex-direction: row;      /* Keeps left and right blocks on the same line */
     justify-content: space-between; 
@@ -438,7 +444,7 @@ canvas.loading {
     gap: 10px;                /* Tighten space between elements */
   }
 
-   /* Bring the two left logos closer together to fit better on mobile */
+  /* Bring the two left logos closer together to fit better on mobile */
   .logo-bar-left {
     gap: 10px;                /* Reduced from 20px */
   }
@@ -466,14 +472,39 @@ canvas.loading {
     padding: 12px;
   }
 
-  /* Compact tabs to make multi-row presentation cleaner on mobile screens */
+  /* Make tab rows horizontally scrollable on mobile */
+  .tab-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;       /* Force tabs onto a single horizontal line */
+    overflow-x: auto !important;        /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch;  /* Smooth inertial scrolling on iOS devices */
+    padding-bottom: 8px;                /* Space beneath text so scroll tracks look clean */
+    gap: 8px;                           
+  }
+
+  /* Hide the scrollbar tracks visually while maintaining full touch swipe functionality */
+  .tab-row::-webkit-scrollbar {
+    display: none; 
+  }
+  .tab-row {
+    scrollbar-width: none; /* For Firefox */
+  }
+
+  /* Compact tabs to make presentation cleaner and prevent shrinking inside the scroll view */
   .tab {
     font-size: 14px !important;
     padding: 8px 10px !important; /* Clean layout spacing */
+    flex-shrink: 0 !important;    /* CRITICAL: Prevents tabs from squishing or crushing together */
   }
 
   .master-tab {
     font-size: 18px !important;
     padding: 10px 12px !important;
+    flex-shrink: 0 !important;    /* Prevents master tabs from collapsing if squeezed */
+  }
+
+  /* Hide hover tooltips on mobile to prevent clipping bugs inside scroll views */
+  .tab::after, .header-tooltip::after {
+    display: none !important;
   }
 }
