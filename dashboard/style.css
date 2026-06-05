@@ -412,13 +412,24 @@ canvas.loading {
 
   h1 {
      font-size: 24px !important;
-     margin-bottom: 30px;
+     margin-bottom: 10px;
+  }
+
+  /* Section headers used for major content divisions */
+  .section-header {
+     text-align: center;   /* Center the section header text */
+     font-size: 30px;      /* Large font size for sections */
+     margin-top: 0;        /* NEW: Clears default browser margin to bring line closer to H1 */
+     padding-top: 15px;    /* REDUCED: Was 40px - tightens gap between grey line and H2 text */
+     border-top: 3px solid #ccc;  /* Add a gray line above section */
+     margin-bottom: 0px;   /* No space below header */
   }
 
   h2 {
      font-size: 20px !important;
-     margin-bottom: 30px;
+     margin-bottom: 20px;
   }
+   
 /* Keep logo bar in one row instead of stacking vertically */
   .logo-bar {
     flex-direction: row;      /* Keeps left and right blocks on the same line */
