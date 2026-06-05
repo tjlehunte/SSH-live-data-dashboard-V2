@@ -425,8 +425,8 @@ canvas.loading {
   .section-header {
      text-align: center;   /* Center the section header text */
      font-size: 30px;      /* Large font size for sections */
-     margin-top: 0;        /* NEW: Clears default browser margin to bring line closer to H1 */
-     padding-top: 15px;    /* REDUCED: Was 40px - tightens gap between grey line and H2 text */
+     margin-top: 0;        /* Clears default browser margin to bring line closer to H1 */
+     padding-top: 15px;    /* Tightens gap between grey line and H2 text */
      border-top: 3px solid #ccc;  /* Add a gray line above section */
      margin-bottom: 0px;   /* No space below header */
   }
@@ -446,21 +446,21 @@ canvas.loading {
 
   /* Bring the two left logos closer together to fit better on mobile */
   .logo-bar-left {
-    gap: 10px;                /* Reduced from 20px */
+    gap: 10px;                
   }
    
   /* Reduce logo sizes for mobile screens */
-  #uos-logo-light, #uos-logo-dark { width: 85px; }  /* Reduced from 100px */
-  #sml-logo-light, #sml-logo-dark { width: 105px; } /* Reduced from 120px */
-  #ehl-logo-light, #ehl-logo-dark { width: 70px; }  /* Reduced from 80px */
+  #uos-logo-light, #uos-logo-dark { width: 85px; }  
+  #sml-logo-light, #sml-logo-dark { width: 105px; } 
+  #ehl-logo-light, #ehl-logo-dark { width: 70px; }  
 
   /* Make the third master tab visible on mobile screens */
   .mobile-givenergy-tab {
     display: inline-flex !important;
   }
 
-  /* Hide the separate GivEnergy layout header on mobile since it is integrated */
-  .givenergy-section h2 {
+  /* HIDES THE ENTIRE SECONDARY CHART SECTION AT THE BOTTOM ON MOBILE */
+  .givenergy-section {
     display: none !important;
   }
 
@@ -493,14 +493,14 @@ canvas.loading {
   /* Compact tabs to make presentation cleaner and prevent shrinking inside the scroll view */
   .tab {
     font-size: 14px !important;
-    padding: 8px 10px !important; /* Clean layout spacing */
-    flex-shrink: 0 !important;    /* CRITICAL: Prevents tabs from squishing or crushing together */
+    padding: 8px 10px !important; 
+    flex-shrink: 0 !important;    /* Prevents tabs from squishing or crushing together */
   }
 
   .master-tab {
     font-size: 18px !important;
     padding: 10px 12px !important;
-    flex-shrink: 0 !important;    /* Prevents master tabs from collapsing if squeezed */
+    flex-shrink: 0 !important;    
   }
 
   /* Hide hover tooltips on mobile to prevent clipping bugs inside scroll views */
