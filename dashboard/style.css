@@ -472,20 +472,32 @@ canvas.loading {
 
   /* Make tab rows horizontally scrollable on mobile */
   .tab-row {
-    display: flex;                      /* FIX: Removed !important so JS toggle states work */
+    display: flex;                      
     flex-wrap: nowrap !important;       /* Force tabs onto a single horizontal line */
     overflow-x: auto !important;        /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch;  /* Smooth inertial scrolling on iOS devices */
-    padding-bottom: 8px;                /* Space beneath text so scroll tracks look clean */
+    padding-bottom: 12px;               /* Slightly increased to give scrollbar breathing room */
     gap: 8px;                           
+    
+    /* For Firefox: Enable a clean, thin scrollbar */
+    scrollbar-width: thin;          
+    scrollbar-color: #bbb rgba(0, 0, 0, 0.05); 
   }
 
-  /* Hide the scrollbar tracks visually while maintaining full touch swipe functionality */
+  /* Custom visible styling for WebKit scrollbars (Safari, Chrome, iOS/Android browsers) */
   .tab-row::-webkit-scrollbar {
-    display: none; 
+    height: 5px;                        /* Sleek, thin horizontal scrollbar height */
+    display: block;                     
   }
-  .tab-row {
-    scrollbar-width: none; /* For Firefox */
+
+  .tab-row::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);   /* Translucent track background */
+    border-radius: 10px;
+  }
+
+  .tab-row::-webkit-scrollbar-thumb {
+    background: #bbb;                   /* Distinct thumb color so it's obviously scrollable */
+    border-radius: 10px;
   }
 
   /* Compact tabs to make presentation cleaner and prevent shrinking inside the scroll view */
