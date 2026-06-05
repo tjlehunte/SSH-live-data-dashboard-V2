@@ -409,16 +409,23 @@ canvas.loading {
     margin: 15px; 
   }
 
-  /* Stack logo bar vertically on mobile */
+/* Keep logo bar in one row instead of stacking vertically */
   .logo-bar {
-    flex-direction: column;  /* Stack items vertically */
-    gap: 15px;  /* Space between stacked items */
+    flex-direction: row;      /* Keeps left and right blocks on the same line */
+    justify-content: space-between; 
+    align-items: center;      
+    gap: 10px;                /* Tighten space between elements */
   }
-  
+
+   /* Bring the two left logos closer together to fit better on mobile */
+  .logo-bar-left {
+    gap: 10px;                /* Reduced from 20px */
+  }
+   
   /* Reduce logo sizes for mobile screens */
-  #uos-logo-light, #uos-logo-dark { width: 100px; }
-  #sml-logo-light, #sml-logo-dark { width: 120px; }
-  #ehl-logo-light, #ehl-logo-dark { width: 80px; }
+  #uos-logo-light, #uos-logo-dark { width: 85px; }  /* Reduced from 100px */
+  #sml-logo-light, #sml-logo-dark { width: 105px; } /* Reduced from 120px */
+  #ehl-logo-light, #ehl-logo-dark { width: 70px; }  /* Reduced from 80px */
 
   /* Make the third master tab visible on mobile screens */
   .mobile-givenergy-tab {
