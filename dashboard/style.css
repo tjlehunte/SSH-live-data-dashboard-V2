@@ -25,7 +25,7 @@ body {
   gap: 20px;  /* Add 20px space between each logo */
 }
 
-/* UOS (University of South?) logo sizing - appears in both light and dark variants */
+/* UOS logo sizing - appears in both light and dark variants */
 #uos-logo-light, #uos-logo-dark {
   width: 152px;  /* Set logo width to 152px */
 }
@@ -331,100 +331,65 @@ canvas.loading {
 }
 
 /* =============================================================================
-   RESPONSIVE DESIGN - MOBILE SCREENS (max 768px width)
-   ============================================================================= */
-@media (max-width: 768px) {
-  /* Stack logo bar vertically on mobile */
-  .logo-bar {
-    flex-direction: column;  /* Stack items vertically */
-    gap: 15px;  /* Space between stacked items */
-  }
-  
-  /* Increase tab height for easier tapping on mobile */
-  .tab {
-    padding-top: 25px !important;  /* Larger top padding */
-    padding-bottom: 25px !important;  /* Larger bottom padding */
-  }
-  
-  /* Reduce logo sizes for mobile screens */
-  #uos-logo-light, #uos-logo-dark { width: 100px; }
-  #sml-logo-light, #sml-logo-dark { width: 120px; }
-  #ehl-logo-light, #ehl-logo-dark { width: 80px; }
-}
-
-/* =============================================================================
    DARK MODE STYLES
    ============================================================================= */
-/* Dark mode is activated when user's system preference is dark */
 @media (prefers-color-scheme: dark) {
-  /* Dark mode body background and text */
   body {
     background: #121212;  /* Very dark gray/black background */
     color: #e0e0e0;  /* Light gray text for contrast */
   }
   
-  /* Show dark logos and hide light logos in dark mode */
-  #uos-logo-light { display: none; }  /* Hide light logo */
-  #uos-logo-dark  { display: block; }  /* Show dark logo */
+  #uos-logo-light { display: none; }
+  #uos-logo-dark  { display: block; }
   
-  #sml-logo-light { display: none; }  /* Hide light logo */
-  #sml-logo-dark  { display: block; }  /* Show dark logo */
+  #sml-logo-light { display: none; }
+  #sml-logo-dark  { display: block; }
 
-  #ehl-logo-light { display: none; }  /* Hide light logo */
-  #ehl-logo-dark  { display: block; }  /* Show dark logo */
+  #ehl-logo-light { display: none; }
+  #ehl-logo-dark  { display: block; }
 
-  /* Dark mode chart container styling */
   .chart-container {
     background: #1e1e1e !important;  /* Dark gray background */
     border-color: #333;  /* Dark border color */
     box-shadow: 0 2px 8px rgba(0,0,0,0.5);  /* Stronger shadow for depth in dark mode */
   }
 
-  /* Dark mode master tabs border */
   #masterTabs {
-  border-bottom-color: #444;  /* Dark gray border */
+    border-bottom-color: #444;  /* Dark gray border */
   }
   
-  /* Dark mode tab styling */
   .tab {
     background: #222 !important;  /* Dark background */
     color: #ddd !important;  /* Light gray text */
   }
 
-  /* Dark mode tab hover effect */
   .tab:hover {
     background: #333 !important;  /* Slightly lighter on hover */
   }
 
-  /* Dark mode active tab styling */
   .tab.active {
     background: #444 !important;  /* Medium dark gray background */
     color: #fff !important;  /* White text */
   }
 
-  /* Dark mode loading spinner */
   .chart-spinner {
     border-color: #444;  /* Dark border */
     border-top-color: #3498db;  /* Keep blue accent */
   }
 
-  /* Dark mode legend buttons */
   .legend-controls button {
     background: #222;  /* Dark background */
     color: #ddd;  /* Light gray text */
   }
   
-  /* Dark mode givenergy section border */
   .givenergy-section {
-  border-top-color: #444;  /* Dark border */
+    border-top-color: #444;  /* Dark border */
   }
   
-  /* Dark mode section headers */
   .section-header {
-  border-top-color: #444;  /* Dark border */
+    border-top-color: #444;  /* Dark border */
   }
   
-  /* Dark mode legend button hover */
   .legend-controls button:hover {
     background: #333;  /* Slightly lighter on hover */
   }
@@ -436,12 +401,24 @@ canvas.loading {
 }
 
 /* =============================================================================
-   MOBILE VIEWPORT ADAPTATIONS (768px Breakpoint)
+   RESPONSIVE DESIGN - SINGLE CONSOLIDATED MOBILE BLOCK (max 768px width)
    ============================================================================= */
 @media (max-width: 768px) {
+  /* Reduce global body layout margin to maximize room */
   body {
-    margin: 15px; /* Reduce global padding to save horizontal room */
+    margin: 15px; 
   }
+
+  /* Stack logo bar vertically on mobile */
+  .logo-bar {
+    flex-direction: column;  /* Stack items vertically */
+    gap: 15px;  /* Space between stacked items */
+  }
+  
+  /* Reduce logo sizes for mobile screens */
+  #uos-logo-light, #uos-logo-dark { width: 100px; }
+  #sml-logo-light, #sml-logo-dark { width: 120px; }
+  #ehl-logo-light, #ehl-logo-dark { width: 80px; }
 
   /* Make the third master tab visible on mobile screens */
   .mobile-givenergy-tab {
@@ -464,7 +441,7 @@ canvas.loading {
   /* Compact tabs to make multi-row presentation cleaner on mobile screens */
   .tab {
     font-size: 14px !important;
-    padding: 8px 10px !important;
+    padding: 8px 10px !important; /* Clean layout spacing */
   }
 
   .master-tab {
