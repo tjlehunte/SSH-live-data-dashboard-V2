@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ==================== MAIN CHART DRAWING FUNCTION ====================
   function drawChart(data, cols, title, unit, isCurrentChart = false) {
-    const labels = data.map(d => d.MessageDate);
+    const labels = data.map(d => d.MessageDate || d.start);
     const gridColors = labels.map((_, i) => {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       if (i % 12 === 0) return isDark ? "#444" : "#ccc";
@@ -257,23 +257,19 @@ function restoreGivEnergyToSection() {
         if (master === "givenergy") {
           document.getElementById("envTabs").style.display = "none";
           document.getElementById("currentTabs").style.display = "none";
-          document.querySelector(".chart-section .chart-container").style.display = "none";
-
+          
+          // Ensure the main chart area stays visible on mobile
+          document.querySelector(".chart-section .chart-container").style.display = "block";
+        
+          // Display and place the GivEnergy sub-tabs right below the master tabs
           const givTabs = document.getElementById("givenergyTabs");
-          const givWrapper = document.getElementById("givenergy-chart-wrapper");
           const chartSection = document.querySelector(".chart-section");
-
           givTabs.style.display = "flex";
-          chartSection.appendChild(givTabs);   // move tabs up too
-
-          if (givWrapper) {
-            givWrapper.style.display = "block";
-            chartSection.appendChild(givWrapper);
-            if (givenergyChart) givenergyChart.resize();
-          }
-
-          const firstGeTab = document.querySelector("#givenergyTabs .tab:first-child");
-          if (firstGeTab) firstGeTab.click();
+          chartSection.insertBefore(givTabs, document.querySelector(".chart-section .chart-container"));
+        
+          // Programmatically click the first active GivEnergy flow sub-tab
+          const activeGe = document.querySelector("#givenergyTabs .tab.active") || document.querySelector("#givenergyTabs .tab:first-child");
+          if (activeGe) activeGe.click();
         }
       });
     });
@@ -515,21 +511,29 @@ function restoreGivEnergyToSection() {
         }
       });
     }
-
     if (!window.givenergyTabsInitialised) {
       window.givenergyTabsInitialised = true;
       document.querySelectorAll("#givenergyTabs .tab").forEach(tab => {
         tab.addEventListener("click", () => {
           document.querySelectorAll("#givenergyTabs .tab").forEach(t => t.classList.remove("active"));
           tab.classList.add("active");
+          
           const flow = tab.dataset.flow;
-          if (flow === "pv-home")       drawGivenergyChart(givenergyData, "PV to Home",      "PV to Home");
-          if (flow === "pv-battery")    drawGivenergyChart(givenergyData, "PV to Battery",   "PV to Battery");
-          if (flow === "pv-grid")       drawGivenergyChart(givenergyData, "PV to Grid",      "PV to Grid");
-          if (flow === "grid-home")     drawGivenergyChart(givenergyData, "Grid to Home",    "Grid to Home");
-          if (flow === "grid-battery")  drawGivenergyChart(givenergyData, "Grid to Battery", "Grid to Battery");
-          if (flow === "battery-home")  drawGivenergyChart(givenergyData, "Battery to Home", "Battery to Home");
-          if (flow === "battery-grid")  drawGivenergyChart(givenergyData, "Battery to Grid", "Battery to Grid");
+          const isMobile = window.innerWidth <= 768;
+    
+          if (isMobile) {
+            // Redirect data pipeline straight into the main chart container on mobile devices
+            drawChart(givenergyData, [flow], flow, "Energy (kW)", false);
+          } else {
+            // Standard standalone layout configuration for desktop viewports
+            if (flow === "pv-home")       drawGivenergyChart(givenergyData, "PV to Home",      "PV to Home");
+            if (flow === "pv-battery")    drawGivenergyChart(givenergyData, "PV to Battery",   "PV to Battery");
+            if (flow === "pv-grid")       drawGivenergyChart(givenergyData, "PV to Grid",      "PV to Grid");
+            if (flow === "grid-home")     drawGivenergyChart(givenergyData, "Grid to Home",    "Grid to Home");
+            if (flow === "grid-battery")  drawGivenergyChart(givenergyData, "Grid to Battery", "Grid to Battery");
+            if (flow === "battery-home")  drawGivenergyChart(givenergyData, "Battery to Home", "Battery to Home");
+            if (flow === "battery-grid")  drawGivenergyChart(givenergyData, "Battery to Grid", "Battery to Grid");
+          }
         });
       });
     }
@@ -580,7 +584,7 @@ function restoreGivEnergyToSection() {
     givenergyCanvas.classList.remove("loading");
   }
 
-  // ==================== LIVE WINDOW RESIZE LISTENER ====================
+// ==================== LIVE WINDOW RESIZE LISTENER ====================
   window.addEventListener("resize", () => {
     const isMobile = window.innerWidth <= 768;
     const activeMasterTab = document.querySelector("#masterTabs .tab.active");
@@ -590,44 +594,20 @@ function restoreGivEnergyToSection() {
     // Redraw and shift legend positions actively during desktop/mobile resizing
     if (mainChart) {
       mainChart.options.plugins.legend.position = isMobile ? "bottom" : "right";
-      
-      // DYNAMIC MOBILE TEXT ADJUSTMENTS FOR MAIN CHART
-      mainChart.options.plugins.title.font.size = isMobile ? 14 : 20;
-      mainChart.options.plugins.title.padding.bottom = isMobile ? 10 : 30;
-      mainChart.options.scales.x.title.font.size = isMobile ? 12 : 20;
-      mainChart.options.scales.y.title.font.size = isMobile ? 12 : 20;
-      
       mainChart.update();
     }
     if (givenergyChart) {
       givenergyChart.options.plugins.legend.position = isMobile ? "bottom" : "right";
-
-      // DYNAMIC MOBILE TEXT ADJUSTMENTS FOR GIVENERGY CHART
-      givenergyChart.options.plugins.title.font.size = isMobile ? 14 : 20;
-      givenergyChart.options.plugins.title.padding.bottom = isMobile ? 10 : 30;
-      givenergyChart.options.scales.x.title.font.size = isMobile ? 12 : 20;
-      givenergyChart.options.scales.y.title.font.size = isMobile ? 12 : 20;
-      
       givenergyChart.update();
     }
 
-    // Sync structural visibility components instantly
+    // Sync structural visibility components instantly without moving chart elements around
     if (isMobile) {
       if (activeMaster === "givenergy") {
         document.getElementById("envTabs").style.display = "none";
         document.getElementById("currentTabs").style.display = "none";
-        document.querySelector(".chart-section .chart-container").style.display = "none";
         document.getElementById("givenergyTabs").style.display = "flex";
-        
-        const givWrapper = document.getElementById("givenergy-chart-wrapper");
-        const chartSection = document.querySelector(".chart-section");
-        if (givWrapper) {
-          givWrapper.style.display = "block";
-          if (givWrapper.parentElement !== chartSection) {
-            chartSection.appendChild(givWrapper);
-            if (givenergyChart) givenergyChart.resize();
-          }
-        }
+        document.querySelector(".chart-section .chart-container").style.display = "block";
       } else {
         document.getElementById("givenergyTabs").style.display = "none";
         restoreGivEnergyToSection();
@@ -641,11 +621,13 @@ function restoreGivEnergyToSection() {
         }
       }
     } else {
-      // Revert cleanly to original desktop constraints if widened
+      // Revert cleanly to original desktop layout constraints if window is widened
       restoreGivEnergyToSection();
       document.getElementById("givenergyTabs").style.display = "flex";
       document.querySelector(".chart-section .chart-container").style.display = "block";
+      
       if (activeMaster === "givenergy") {
+        // Desktop doesn't use GivEnergy in the master block, default back to environment view
         document.querySelector("#masterTabs .tab[data-master='environment']").click();
       } else if (activeMaster === "environment") {
         document.getElementById("envTabs").style.display = "flex";
