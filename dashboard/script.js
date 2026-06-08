@@ -138,13 +138,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     mainChart.update();
   }
-
-  // ==================== GIVENERGY CHART DRAWING FUNCTION ====================
+// ==================== GIVENERGY CHART DRAWING FUNCTION ====================
   function drawGivenergyChart(data, flowCol, title) {
     const labels = data.map(d => d.start);
+    const isMobile = window.innerWidth <= 768;
+    
     const gridColors = labels.map((_, i) => {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (i % 4 === 0) return isDark ? "#444" : "#ccc";
+      // Adjust alternating background lines based on viewports
+      const interval = isMobile ? 12 : 4;
+      if (i % interval === 0) return isDark ? "#444" : "#ccc";
       return isDark ? "#2a2a2a" : "#ebebeb";
     });
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -176,16 +179,30 @@ document.addEventListener("DOMContentLoaded", () => {
     givenergyChart.options.scales.y.min = yMin;
     givenergyChart.options.scales.y.max = yMax;
 
-    // Dynamically change legend position based on 768px breakpoint
-    givenergyChart.options.plugins.legend.position = (window.innerWidth <= 768) ? "bottom" : "right";
-
+    // Hide the line item legends on mobile since the large header title already states the metrics
+    givenergyChart.options.plugins.legend.display = !isMobile;
+    givenergyChart.options.plugins.legend.position = isMobile ? "bottom" : "right";
     givenergyChart.options.plugins.legend.labels.color = textColor;
+
+    // FIX: Force update the Y-axis label dynamically (otherwise it retains the old Monnit metric text)
+    givenergyChart.options.scales.y.title.text = "Energy (kWh)";
+
     givenergyChart.options.scales.x.ticks.color = textColor;
     givenergyChart.options.scales.y.ticks.color = textColor;
     givenergyChart.options.scales.x.title.color = textColor;
     givenergyChart.options.scales.y.title.color = textColor;
     givenergyChart.options.scales.x.grid.color = gridColors;
     givenergyChart.options.scales.y.grid.color = gridColor;
+
+    // FIX: Re-bind the correct mobile time interval loop directly to the current runtime target
+    givenergyChart.options.scales.x.ticks.callback = function(value, index) {
+      const interval = isMobile ? 12 : 4;
+      if (index % interval === 0) {
+        const raw = this.getLabelForValue(value);
+        return isMobile ? formatMobileTick(raw) : raw;
+      }
+      return "";
+    };
 
     givenergyChart.update();
   }
@@ -222,6 +239,11 @@ function restoreGivEnergyToSection() {
           document.getElementById("currentTabs").style.display = "none";
           document.getElementById("givenergyTabs").style.display = "none";
           document.querySelector(".chart-section .chart-container").style.display = "block";
+
+          // RESTORE BUTTONS: Show the legend control strip for Monnit datasets
+          if (document.querySelector(".legend-controls")) {
+            document.querySelector(".legend-controls").style.display = "block";
+          }
           
           // Re-evaluate GivEnergy structural element states based on layout context
           document.getElementById("givenergyTabs").style.display = (window.innerWidth <= 768) ? "none" : "flex";
@@ -241,6 +263,11 @@ function restoreGivEnergyToSection() {
           document.getElementById("currentTabs").style.display = "flex";
           document.getElementById("givenergyTabs").style.display = "none";
           document.querySelector(".chart-section .chart-container").style.display = "block";
+
+          // RESTORE BUTTONS: Show the legend control strip for Monnit datasets
+          if (document.querySelector(".legend-controls")) {
+            document.querySelector(".legend-controls").style.display = "block";
+          }
           
           // Re-evaluate GivEnergy structural element states based on layout context
           document.getElementById("givenergyTabs").style.display = (window.innerWidth <= 768) ? "none" : "flex";
@@ -253,14 +280,18 @@ function restoreGivEnergyToSection() {
           if (activeCurrent) activeCurrent.click();
         }
 
-// --- GivEnergy Selection (Mobile Context Only) ---
+        // --- GivEnergy Selection (Mobile Context Only) ---
         if (master === "givenergy") {
           document.getElementById("envTabs").style.display = "none";
           document.getElementById("currentTabs").style.display = "none";
           
-          // FIX: Keep the main chart area visible so GivEnergy can draw inside it
+          // Hide the desktop utility buttons since they don't apply to a single data line
+          if (document.querySelector(".legend-controls")) {
+            document.querySelector(".legend-controls").style.display = "none";
+          }
+        
           document.querySelector(".chart-section .chart-container").style.display = "block";
-
+          
           const givTabs = document.getElementById("givenergyTabs");
           const chartSection = document.querySelector(".chart-section");
           givTabs.style.display = "flex";
