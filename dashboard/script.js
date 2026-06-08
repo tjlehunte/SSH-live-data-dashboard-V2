@@ -246,6 +246,11 @@ function restoreGivEnergyToSection() {
           document.querySelector(".chart-section .chart-container").style.display = "block";
 
           // RESTORE BUTTONS: Show the legend control strip for Monnit datasets
+          // Ensure main chart legend turns back on when returning to Monnit data
+          if (mainChart) {
+            mainChart.options.plugins.legend.display = true;
+          }
+          
           if (document.querySelector(".legend-controls")) {
             document.querySelector(".legend-controls").style.display = "block";
           }
@@ -270,6 +275,10 @@ function restoreGivEnergyToSection() {
           document.querySelector(".chart-section .chart-container").style.display = "block";
 
           // RESTORE BUTTONS: Show the legend control strip for Monnit datasets
+          if (mainChart) {
+            mainChart.options.plugins.legend.display = true;
+          }
+          
           if (document.querySelector(".legend-controls")) {
             document.querySelector(".legend-controls").style.display = "block";
           }
