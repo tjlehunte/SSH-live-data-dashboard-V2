@@ -207,7 +207,7 @@ monnit_current <- monnit_results %>% keep(str_detect(names(monnit_results), rege
 #split the data from "42.53,22.45,9.1,51.1,21.9,14.7" into seperate columns
 #lapply (list apply) separate function on every element
 monnit_current <- lapply(monnit_current, function(df){
-  df %>% separate(Data, into = c("Amp hours","Average current","Maximum current","Minimum current"), 
+  df %>% separate(Data, into = c("Cumulative Amp hours","Average current","Maximum current","Minimum current"), 
                   sep = ",",
                   convert = TRUE)
 })
