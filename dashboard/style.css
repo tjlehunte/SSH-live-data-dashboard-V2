@@ -466,7 +466,12 @@ canvas.loading {
   #uos-logo-light, #uos-logo-dark { width: 85px; }  
   #sml-logo-light, #sml-logo-dark { width: 105px; } 
   #ehl-logo-light, #ehl-logo-dark { width: 70px; }  
-
+   
+   .chart-section + h1 + .section-header, 
+   h2.section-header:has(span[data-tooltip*="Monnit"]) {
+      display: none;
+  }
+   
   /* Make the third master tab visible on mobile screens */
   .mobile-givenergy-tab {
     display: inline-flex !important;
