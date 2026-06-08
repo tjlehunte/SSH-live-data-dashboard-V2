@@ -491,9 +491,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const givWrapper = document.getElementById("givenergy-chart-wrapper");
       if (givWrapper) givWrapper.style.display = "none";
     }
-
+    
+    const now = new Date();
+    const pad = n => String(n).padStart(2, "0");
+    const timeStr = `${now.getUTCFullYear()}-${pad(now.getUTCMonth()+1)}-${pad(now.getUTCDate())} ${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}`;
+    document.getElementById("lastUpdated").textContent = `Last updated: ${timeStr}`;
+    
     hideSpinner();
     hideGivenergySpinner();
+    
     canvas.classList.remove("loading");
     givenergyCanvas.classList.remove("loading");
   }
