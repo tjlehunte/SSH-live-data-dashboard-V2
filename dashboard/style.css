@@ -124,7 +124,7 @@ canvas.loading {
    ============================================================================= */
 /* Row containing sub-tabs */
 .sub-tab-row {
-  margin-bottom: 15px;  /* Add space below sub-tabs */
+  margin-bottom: 5px;  /* Add space below sub-tabs */
   padding-left: 0px;  /* No left padding */
 }
 
@@ -154,7 +154,7 @@ canvas.loading {
 .tab-row {
   display: flex;  /* Horizontal layout */
   gap: 10px;  /* Space between tabs */
-  margin-bottom: 15px;  /* Space below tab row */
+  margin-bottom: 10px;  /* Space below tab row */
   overflow: visible;  /* Allow content to overflow (for tooltips) */
 }
 
@@ -491,7 +491,7 @@ canvas.loading {
     flex-wrap: nowrap !important;       /* Force tabs onto a single horizontal line */
     overflow-x: auto !important;        /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch;  /* Smooth inertial scrolling on iOS devices */
-    padding-bottom: 6px;               /* Slightly increased to give scrollbar breathing room */
+    padding-bottom: 12px;               /* Slightly increased to give scrollbar breathing room */
     gap: 8px;                           
     
     /* For Firefox: Enable a clean, thin scrollbar */
