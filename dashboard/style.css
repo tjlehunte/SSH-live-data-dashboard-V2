@@ -420,148 +420,183 @@ canvas.loading {
    RESPONSIVE DESIGN - SINGLE CONSOLIDATED MOBILE BLOCK (max 768px width)
    ============================================================================= */
 @media (max-width: 768px) {
-  /* Put a hard stop on global horizontal spilling and zooming into empty space */
-  html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
+  /* Put a hard stop on global horizontal spilling and zooming into empty space */
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
-  /* Reduce global body layout margin to maximize room */
-  body {
-    margin: 15px; 
-  }
+  /* Reduce global body layout margin to maximize room */
+  body {
+    margin: 15px; 
+  }
 
-   /* Turn the chart container into a column flexbox on mobile */
-  .chart-section .chart-container {
-    display: flex;
-    flex-direction: column;
-  }
+   /* Turn the chart container into a column flexbox on mobile */
+  .chart-section .chart-container {
+    display: flex;
+    flex-direction: column;
+  }
 
-  /* Force the canvas wrapper to stay at the top */
-  .chart-section .canvas-wrapper {
-    order: 1;
-  }
+  /* Force the canvas wrapper to stay at the top */
+  .chart-section .canvas-wrapper {
+    order: 1;
+  }
 
-  /* Force the legend control buttons to move to the bottom */
-  .chart-section .legend-controls {
-    order: 2;
-    margin-top: 5px; /* Adds a clean gap below the chart legend */
-    margin-bottom: 5px;
-    justify-content: center; /* Centers the buttons on mobile screens */
-  }
-   
-  h1 {
-     font-size: 24px !important;
-     margin-bottom: 10px;
-  }
+  /* Force the legend control buttons to move to the bottom */
+  .chart-section .legend-controls {
+    order: 2;
+    margin-top: 5px; /* Adds a clean gap below the chart legend */
+    margin-bottom: 5px;
+    justify-content: center; /* Centers the buttons on mobile screens */
+  }
+   
+  h1 {
+     font-size: 24px !important;
+     margin-bottom: 10px;
+  }
 
-  /* Section headers used for major content divisions */
-  .section-header {
-     text-align: center;   
-     font-size: 30px;      
-     margin-top: 0;        
-     padding-top: 10px;    
-     border-top: 3px solid #ccc;  
-     margin-bottom: 0px;   
-  }
+  /* Section headers used for major content divisions */
+  .section-header {
+     text-align: center;   
+     font-size: 30px;      
+     margin-top: 0;        
+     padding-top: 10px;    
+     border-top: 3px solid #ccc;  
+     margin-bottom: 0px;   
+  }
 
-  h2 {
-     font-size: 20px !important;
-     margin-bottom: 20px;
-  }
-   
-  /* Keep logo bar in one row instead of stacking vertically */
-  .logo-bar {
-    flex-direction: row;      
-    justify-content: space-between; 
-    align-items: center;      
-    gap: 10px;                
-  }
+  h2 {
+     font-size: 20px !important;
+     margin-bottom: 20px;
+  }
+   
+  /* Keep logo bar in one row instead of stacking vertically */
+  .logo-bar {
+    flex-direction: row;      
+    justify-content: space-between; 
+    align-items: center;      
+    gap: 10px;                
+  }
 
-  .logo-bar-left {
-    gap: 10px;                
-  }
-   
-  #uos-logo-light, #uos-logo-dark { width: 85px; }  
-  #sml-logo-light, #sml-logo-dark { width: 105px; } 
-  #ehl-logo-light, #ehl-logo-dark { width: 70px; }  
-   
-   .chart-section + h1 + .section-header, 
-   h2.section-header:has(span[data-tooltip*="Monnit"]) {
-      display: none;
-  }
-   
-  /* Make the third master tab visible on mobile screens */
-  .mobile-givenergy-tab {
-    display: inline-flex !important;
-  }
+  .logo-bar-left {
+    gap: 10px;                
+  }
+   
+  #uos-logo-light, #uos-logo-dark { width: 85px; }  
+  #sml-logo-light, #sml-logo-dark { width: 105px; } 
+  #ehl-logo-light, #ehl-logo-dark { width: 70px; }  
+   
+   .chart-section + h1 + .section-header, 
+   h2.section-header:has(span[data-tooltip*="Monnit"]) {
+      display: none;
+  }
+   
+  /* Make the third master tab visible on mobile screens */
+  .mobile-givenergy-tab {
+    display: inline-flex !important;
+  }
 
-  /* HIDES THE ENTIRE SECONDARY CHART SECTION AT THE BOTTOM ON MOBILE */
-  .givenergy-section {
-    display: none !important;
-  }
+  /* HIDES THE ENTIRE SECONDARY CHART SECTION AT THE BOTTOM ON MOBILE */
+  .givenergy-section {
+    display: none !important;
+  }
 
-  /* Prevent chart card containers from spilling out horizontally on mobile devices */
-  .chart-container {
-    min-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box;
-    padding: 10px;
-  }
+  /* Prevent chart card containers from spilling out horizontally on mobile devices */
+  .chart-container {
+    min-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 10px;
+  }
 
-  /* Make tab rows horizontally scrollable on mobile */
-  .tab-row {
-    display: flex;                      
-    flex-wrap: nowrap !important;       /* Force tabs onto a single horizontal line */
-    overflow-x: auto !important;        /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch;  /* Smooth inertial scrolling on iOS devices */
-    padding-bottom: 10px;               /* Slightly increased to give scrollbar breathing room */
-    gap: 8px;                           
-    
-    /* For Firefox: Enable a clean, thin scrollbar */
-    scrollbar-width: thin;          
-    scrollbar-color: #bbb rgba(0, 0, 0, 0.05); 
-  }
+  /* Make tab rows horizontally scrollable on mobile */
+  .tab-row {
+    display: flex;                      
+    flex-wrap: nowrap !important;       /* Force tabs onto a single horizontal line */
+    overflow-x: auto !important;        /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch;  /* Smooth inertial scrolling on iOS devices */
+    padding-bottom: 10px;               /* Slightly increased to give scrollbar breathing room */
+    gap: 8px;                           
+    
+    /* For Firefox: Force a standard visible scrollbar */
+    scrollbar-width: auto;          
+  }
 
-  /* Custom visible styling for WebKit scrollbars (Safari, Chrome, iOS/Android browsers) */
-  .tab-row::-webkit-scrollbar {
-    height: 5px;                        /* Sleek, thin horizontal scrollbar height */
-    display: block;                     
-  }
+  /* ===== MODIFIED SECTION: PERSISTENT SCROLLBARS WITH ARROWS ===== */
+  
+  /* Force WebKit scrollbars (Safari, Chrome, Mobile environments) to stay rendered */
+  .tab-row::-webkit-scrollbar {
+    height: 12px;                       /* Thick enough to neatly contain the navigation buttons */
+    display: block !important;          /* Hard stop to prevent auto-hiding policies */
+  }
 
-  .tab-row::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);   /* Translucent track background */
-    border-radius: 10px;
-  }
+  /* Style the scrollbar track background layout */
+  .tab-row::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);   
+    border-radius: 6px;
+  }
 
-  .tab-row::-webkit-scrollbar-thumb {
-    background: #bbb;                   /* Distinct thumb color so it's obviously scrollable */
-    border-radius: 10px;
-  }
+  /* Style the moving bar/thumb indicator */
+  .tab-row::-webkit-scrollbar-thumb {
+    background: #bbb;                   
+    border-radius: 6px;
+  }
 
-  /* Compact tabs to make presentation cleaner and prevent shrinking inside the scroll view */
-  .tab {
-    font-size: 14px !important;
-    padding: 8px 10px !important; 
-    flex-shrink: 0 !important;    /* Prevents tabs from squishing or crushing together */
-  }
+  .tab-row::-webkit-scrollbar-thumb:hover {
+    background: #999;
+  }
 
-  .master-tab {
-    font-size: 16px !important;
-    padding: 10px 12px !important;
-    flex-shrink: 0 !important;    
-  }
-   
-   .legend-controls {
-      justify-content: stretch;
-   }
-   
-   .legend-controls button {
-      flex: 1;
-   }
-   
-  /* Hide hover tooltips on mobile to prevent clipping bugs inside scroll views */
-  .tab::after, .header-tooltip::after {
-    display: none !important;
-  }
+  /* Inject navigation action arrow buttons at both extreme ends of the track */
+  .tab-row::-webkit-scrollbar-button:single-button {
+    display: block !important;          /* Hard overwrite to force rendering on mobile screens */
+    background-size: 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 16px;                        
+    height: 12px;
+    background-color: #ddd;             /* Shaded background color box behind arrows */
+  }
+
+  /* Draw vector left arrow geometry inside the left decrement button */
+  .tab-row::-webkit-scrollbar-button:single-button:decrement {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23333333'><polygon points='70,20 20,50 70,80'/></svg>");
+  }
+
+  /* Draw vector right arrow geometry inside the right increment button */
+  .tab-row::-webkit-scrollbar-button:single-button:increment {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23333333'><polygon points='30,20 80,50 30,80'/></svg>");
+  }
+
+  /* Hover background adjustments for clicking either arrow button */
+  .tab-row::-webkit-scrollbar-button:single-button:hover {
+    background-color: #bbb;
+  }
+
+  /* =============================================================== */
+
+  /* Compact tabs to make presentation cleaner and prevent shrinking inside the scroll view */
+  .tab {
+    font-size: 14px !important;
+    padding: 8px 10px !important; 
+    flex-shrink: 0 !important;    /* Prevents tabs from squishing or crushing together */
+  }
+
+  .master-tab {
+    font-size: 16px !important;
+    padding: 10px 12px !important;
+    flex-shrink: 0 !important;    
+  }
+   
+  .legend-controls {
+     justify-content: stretch;
+  }
+   
+  .legend-controls button {
+     flex: 1;
+  }
+   
+  /* Hide hover tooltips on mobile to prevent clipping bugs inside scroll views */
+  .tab::after, .header-tooltip::after {
+    display: none !important;
+  }
 }
