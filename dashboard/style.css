@@ -539,53 +539,6 @@ canvas.loading {
     background: #bbb;                   /* Distinct thumb color so it's obviously scrollable */
     border-radius: 10px;
   }
-
-   /* ===== ADDED SUB-TAB SPECIFIC ENGINE (PERSISTENT + ARROWS) ===== */
-  /* Override Firefox scrollbar fallback styling strictly for sub-tabs */
-  .sub-tab-row {
-    scrollbar-width: auto !important;
-  }
-
-  /* Force the sub-tab scrollbar container track to stay visible and have appropriate arrow height */
-  .sub-tab-row::-webkit-scrollbar {
-    height: 12px !important;            
-    display: block !important;          
-  }
-
-  .sub-tab-row::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05) !important;
-    border-radius: 6px !important;
-  }
-
-  .sub-tab-row::-webkit-scrollbar-thumb {
-    background: #bbb !important;
-    border-radius: 6px !important;
-  }
-
-  /* Force WebKit arrow scrollbar buttons to show up at both extreme ends of the track */
-  .sub-tab-row::-webkit-scrollbar-button:single-button {
-    display: block !important;          
-    background-size: 8px;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 16px;                        
-    height: 12px;
-    background-color: #ddd;             
-  }
-
-  /* Left Arrow Icon */
-  .sub-tab-row::-webkit-scrollbar-button:single-button:decrement {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23333333'><polygon points='70,20 20,50 70,80'/></svg>");
-  }
-
-  /* Right Arrow Icon */
-  .sub-tab-row::-webkit-scrollbar-button:single-button:increment {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='%23333333'><polygon points='30,20 80,50 30,80'/></svg>");
-  }
-
-  .sub-tab-row::-webkit-scrollbar-button:single-button:hover {
-    background-color: #bbb;
-  }
    
   /* Compact tabs to make presentation cleaner and prevent shrinking inside the scroll view */
   .tab {
