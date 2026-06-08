@@ -491,10 +491,16 @@ function restoreGivEnergyToSection() {
     }
 
     // Set initial layout visibility states on mobile screens
+    // ===== FIX: Set initial layout visibility states explicitly for both mobile and desktop =====
     if (window.innerWidth <= 768) {
       document.getElementById("givenergyTabs").style.display = "none";
       const givWrapper = document.getElementById("givenergy-chart-wrapper");
       if (givWrapper) givWrapper.style.display = "none";
+    } else {
+      // On desktop load, ensure the GivEnergy sub-tabs are displayed seamlessly
+      document.getElementById("givenergyTabs").style.display = "flex";
+      const givWrapper = document.getElementById("givenergy-chart-wrapper");
+      if (givWrapper) givWrapper.style.display = "block";
     }
     
     const lastMonnit = allData[allData.length - 1].MessageDate;
