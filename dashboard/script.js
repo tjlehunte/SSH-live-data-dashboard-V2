@@ -264,7 +264,7 @@ function restoreGivEnergyToSection() {
           }
           
           if (document.querySelector(".legend-controls")) {
-            document.querySelector(".legend-controls").style.display = "block";
+            document.querySelector(".legend-controls").style.display = "";
           }
           
           // Re-evaluate GivEnergy structural element states based on layout context
@@ -291,7 +291,7 @@ function restoreGivEnergyToSection() {
           }
           
           if (document.querySelector(".legend-controls")) {
-            document.querySelector(".legend-controls").style.display = "block";
+            document.querySelector(".legend-controls").style.display = "";
           }
           
           // Re-evaluate GivEnergy structural element states based on layout context
