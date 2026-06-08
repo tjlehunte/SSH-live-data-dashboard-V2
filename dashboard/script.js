@@ -256,7 +256,6 @@ function restoreGivEnergyToSection() {
           document.getElementById("envTabs").style.display = "flex";
           document.getElementById("currentTabs").style.display = "none";
           document.getElementById("givenergyTabs").style.display = "none";
-          document.querySelector(".chart-section .chart-container").style.display = "block";
 
           // RESTORE BUTTONS: Show the legend control strip for Monnit datasets
           // Ensure main chart legend turns back on when returning to Monnit data
@@ -285,7 +284,6 @@ function restoreGivEnergyToSection() {
           document.getElementById("envTabs").style.display = "none";
           document.getElementById("currentTabs").style.display = "flex";
           document.getElementById("givenergyTabs").style.display = "none";
-          document.querySelector(".chart-section .chart-container").style.display = "block";
 
           // RESTORE BUTTONS: Show the legend control strip for Monnit datasets
           if (mainChart) {
@@ -316,9 +314,7 @@ function restoreGivEnergyToSection() {
           if (document.querySelector(".legend-controls")) {
             document.querySelector(".legend-controls").style.display = "none";
           }
-        
-          document.querySelector(".chart-section .chart-container").style.display = "block";
-          
+                  
           const givTabs = document.getElementById("givenergyTabs");
           const chartSection = document.querySelector(".chart-section");
           givTabs.style.display = "flex";
@@ -668,11 +664,11 @@ function restoreGivEnergyToSection() {
         document.getElementById("envTabs").style.display = "none";
         document.getElementById("currentTabs").style.display = "none";
         document.getElementById("givenergyTabs").style.display = "flex";
-        document.querySelector(".chart-section .chart-container").style.display = "block";
+        
       } else {
         document.getElementById("givenergyTabs").style.display = "none";
         restoreGivEnergyToSection();
-        document.querySelector(".chart-section .chart-container").style.display = "block";
+        
         if (activeMaster === "environment") {
           document.getElementById("envTabs").style.display = "flex";
           document.getElementById("currentTabs").style.display = "none";
@@ -685,7 +681,6 @@ function restoreGivEnergyToSection() {
       // Revert cleanly to original desktop layout constraints if window is widened
       restoreGivEnergyToSection();
       document.getElementById("givenergyTabs").style.display = "flex";
-      document.querySelector(".chart-section .chart-container").style.display = "block";
       
       if (activeMaster === "givenergy") {
         // Desktop doesn't use GivEnergy in the master block, default back to environment view
