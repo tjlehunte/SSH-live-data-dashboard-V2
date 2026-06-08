@@ -441,7 +441,7 @@ canvas.loading {
      text-align: center;   
      font-size: 30px;      
      margin-top: 0;        
-     padding-top: 15px;    
+     padding-top: 10px;    
      border-top: 3px solid #ccc;  
      margin-bottom: 0px;   
   }
@@ -482,7 +482,7 @@ canvas.loading {
     min-width: 100% !important;
     width: 100% !important;
     box-sizing: border-box;
-    padding: 12px;
+    padding: 10px;
   }
 
   /* Make tab rows horizontally scrollable on mobile */
@@ -491,7 +491,7 @@ canvas.loading {
     flex-wrap: nowrap !important;       /* Force tabs onto a single horizontal line */
     overflow-x: auto !important;        /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch;  /* Smooth inertial scrolling on iOS devices */
-    padding-bottom: 12px;               /* Slightly increased to give scrollbar breathing room */
+    padding-bottom: 10px;               /* Slightly increased to give scrollbar breathing room */
     gap: 8px;                           
     
     /* For Firefox: Enable a clean, thin scrollbar */
