@@ -379,12 +379,27 @@ function restoreGivEnergyToSection() {
               labels: { font: { size: 15 }, color: textColor, usePointStyle: true, pointStyle: "rect", pointStyleWidth: 16 }
             },
             tooltip: { enabled: true },
-            title: { display: true, text: "", color: textColor, font: { size: 20 }, padding: { bottom: 30 } }
+            title: { 
+              display: true, 
+              text: "", 
+              color: textColor, 
+              // REDUCE TITLE SIZE ON MOBILE
+              font: { size: window.innerWidth <= 768 ? 14 : 20 }, 
+              // REDUCE SPACE BETWEEN GRAPH AND TITLE ON MOBILE
+              padding: { bottom: window.innerWidth <= 768 ? 10 : 30 }
+            }
           },
           layout: { padding: { bottom: 20 } },
           scales: {
             x: {
-              title: { display: true, text: "Time", align: "center", color: textColor, font: { size: 20 } },
+              title: { 
+                display: true, 
+                text: "Time", // (or "" for Y axis)
+                align: "center", 
+                color: textColor, 
+                // REDUCE AXIS TITLE SIZES ON MOBILE
+                font: { size: window.innerWidth <= 768 ? 12 : 20 }  
+              },
               ticks: {
                 color: textColor,
                   maxRotation: window.innerWidth <= 768 ? 0 : 50,
@@ -401,7 +416,23 @@ function restoreGivEnergyToSection() {
               },
               grid: {}
             },
-            y: { min: 0, max: 1, ticks: { color: textColor }, grid: { color: gridColor }, title: { display: true, text: "", align: "center", color: textColor, font: { size: 20 } } }
+            y: { min: 0, 
+                max: 1, 
+                ticks: { 
+                  color: textColor 
+                }, 
+                grid: { 
+                  color: gridColor 
+                }, 
+                title: { 
+                  display: true, 
+                  text: "", 
+                  align: 
+                    "center", 
+                  color: textColor, 
+                  font: { size: 20 } 
+                } 
+               }
           }
         }
       });
@@ -426,13 +457,27 @@ function restoreGivEnergyToSection() {
               labels: { font: { size: 15 }, color: textColor, usePointStyle: true, pointStyle: "rect", pointStyleWidth: 16 }
             },
             tooltip: { enabled: true },
-            title: { display: true, text: "", color: textColor, font: { size: 20 }, padding: { bottom: 30 } }
+            title: { 
+              display: true, 
+              text: "", 
+              color: textColor, 
+              // REDUCE TITLE SIZE ON MOBILE
+              font: { size: window.innerWidth <= 768 ? 14 : 20 }, 
+              // REDUCE SPACE BETWEEN GRAPH AND TITLE ON MOBILE
+              padding: { bottom: window.innerWidth <= 768 ? 10 : 30 } 
+            }
           },
           layout: { padding: { bottom: 20 } },
           scales: {
             x: {
-              title: { display: true, text: "Time", align: "center", color: textColor, font: { size: 20 } },
-              ticks: {
+              title: { 
+                display: true, 
+                text: "Time", // (or "" for Y axis)
+                align: "center", 
+                color: textColor, 
+                // REDUCE AXIS TITLE SIZES ON MOBILE
+                font: { size: window.innerWidth <= 768 ? 12 : 20 } },
+                ticks: {
                 color: textColor,
                 maxRotation: window.innerWidth <= 768 ? 0 : 50,
                 minRotation: 0,
