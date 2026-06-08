@@ -36,6 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("givenergySpinner").style.display = "none";
   }
 
+  function formatMobileTick(rawLabel) {
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const date = new Date(rawLabel.replace(" ", "T"));
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = months[date.getMonth()];
+  const hours = String(date.getHours()).padStart(2, "0");
+  const mins = String(date.getMinutes()).padStart(2, "0");
+  return [`${day} ${month}`, `${hours}:${mins}`];
+}
+  
   // ==================== COLOR CONFIGURATION ====================
   const ROOM_COLORS = [
     "#800000", "#9A6324", "#469990", "#000075", "#000000",
@@ -374,7 +384,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 color: textColor,
                 autoSkip: false,
                 callback: function(value, index) {
-                  if (index % 12 === 0) return this.getLabelForValue(value);
+                  if (index % 12 === 0) {
+                    const raw = this.getLabelForValue(value);
+                    return window.innerWidth <= 768 ? formatMobileTick(raw) : raw;
+                  }
                   return "";
                 }
               },
@@ -414,7 +427,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 color: textColor,
                 autoSkip: false,
                 callback: function(value, index) {
-                  if (index % 4 === 0) return this.getLabelForValue(value);
+                  if (index % 4 === 0) {
+                    const raw = this.getLabelForValue(value);
+                    return window.innerWidth <= 768 ? formatMobileTick(raw) : raw;
+                  }
                   return "";
                 }
               },
