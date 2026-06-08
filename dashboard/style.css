@@ -390,8 +390,9 @@ canvas.loading {
   }
 
   .legend-controls button {
-    background: #222;  /* Dark background */
+    background: #444;  /* Dark background */
     color: #ddd;  /* Light gray text */
+    border: 1px solid #555;
   }
   
   .givenergy-section {
