@@ -51,7 +51,7 @@ body {
 /* Main page heading/title */
 h1 {
   text-align: center;  /* Center the heading text */
-  margin-bottom: 50px;  /* Add 50px space below heading */
+  margin-bottom: 25px;  /* Add 50px space below heading */
   margin-top: 0;  /* Remove default top margin */
   font-size: 40px;  /* Large heading size */
 }
@@ -60,7 +60,7 @@ h1 {
 .section-header {
   text-align: center;  /* Center the section header text */
   font-size: 30px;  /* Large font size for sections */
-  padding-top: 40px;  /* Add space above the header */
+  padding-top: 25px;  /* Add space above the header */
   border-top: 3px solid #ccc;  /* Add a gray line above section */
   margin-bottom: 0px;  /* No space below header */
 }
