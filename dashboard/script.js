@@ -439,7 +439,7 @@ function restoreGivEnergyToSection() {
               padding: { bottom: window.innerWidth <= 768 ? 10 : 30 }
             }
           },
-          layout: { padding: { bottom: 20 } },
+          layout: { padding: { bottom: window.innerWidth <= 768 ? 5 : 20 } },
           scales: {
             x: {
               title: { 
