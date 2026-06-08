@@ -191,14 +191,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==================== HELPER FUNCTION TO RESTORE GIVENERGY TO ORIGINAL SECTION ====================
-  function restoreGivEnergyToSection() {
-    const givWrapper = document.getElementById("givenergy-chart-wrapper");
-    const givSection = document.querySelector(".givenergy-section");
-    if (givWrapper && givWrapper.parentElement !== givSection) {
-      givSection.appendChild(givWrapper);
-      givWrapper.style.display = window.innerWidth <= 768 ? "none" : "block";
-    }
+function restoreGivEnergyToSection() {
+  const givWrapper = document.getElementById("givenergy-chart-wrapper");
+  const givTabs = document.getElementById("givenergyTabs");
+  const givSection = document.querySelector(".givenergy-section");
+
+  if (givWrapper && givWrapper.parentElement !== givSection) {
+    givSection.appendChild(givTabs);
+    givSection.appendChild(givWrapper);
+    givWrapper.style.display = window.innerWidth <= 768 ? "none" : "block";
+    givTabs.style.display = window.innerWidth <= 768 ? "none" : "flex";
   }
+}
 
   // ==================== TAB INITIALIZATION FUNCTION ====================
   function initTabs() {
@@ -253,20 +257,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (master === "givenergy") {
           document.getElementById("envTabs").style.display = "none";
           document.getElementById("currentTabs").style.display = "none";
-          document.querySelector(".chart-section .chart-container").style.display = "none"; // Hide Monnit chart card
-          
-          document.getElementById("givenergyTabs").style.display = "flex";
-          
-          // Move givenergy chart container up into the chart section dynamically
+          document.querySelector(".chart-section .chart-container").style.display = "none";
+
+          const givTabs = document.getElementById("givenergyTabs");
           const givWrapper = document.getElementById("givenergy-chart-wrapper");
           const chartSection = document.querySelector(".chart-section");
+
+          givTabs.style.display = "flex";
+          chartSection.appendChild(givTabs);   // move tabs up too
+
           if (givWrapper) {
             givWrapper.style.display = "block";
             chartSection.appendChild(givWrapper);
-            if (givenergyChart) givenergyChart.resize(); // force redraw in new layout position
+            if (givenergyChart) givenergyChart.resize();
           }
 
-          // Automatically trigger click on the first energy sub-tab flow: PV to Home
           const firstGeTab = document.querySelector("#givenergyTabs .tab:first-child");
           if (firstGeTab) firstGeTab.click();
         }
