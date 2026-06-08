@@ -492,10 +492,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (givWrapper) givWrapper.style.display = "none";
     }
     
-    const now = new Date();
-    const pad = n => String(n).padStart(2, "0");
-    const timeStr = `${now.getUTCFullYear()}-${pad(now.getUTCMonth()+1)}-${pad(now.getUTCDate())} ${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}`;
-    document.getElementById("lastUpdated").textContent = `Last updated: ${timeStr}`;
+    const lastMonnit = allData[allData.length - 1].MessageDate;
+    const lastGivenergy = givenergyData[givenergyData.length - 1].start;
+    
+    // Take whichever is more recent
+    const lastTimestamp = lastMonnit > lastGivenergy ? lastMonnit : lastGivenergy;
+    document.getElementById("lastUpdated").textContent = `Last updated: ${lastTimestamp}`;
     
     hideSpinner();
     hideGivenergySpinner();
