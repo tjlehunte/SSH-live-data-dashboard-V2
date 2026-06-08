@@ -517,13 +517,13 @@ canvas.loading {
 
   /* Compact tabs to make presentation cleaner and prevent shrinking inside the scroll view */
   .tab {
-    font-size: 14px !important;
+    font-size: 15px !important;
     padding: 8px 10px !important; 
     flex-shrink: 0 !important;    /* Prevents tabs from squishing or crushing together */
   }
 
   .master-tab {
-    font-size: 18px !important;
+    font-size: 17px !important;
     padding: 10px 12px !important;
     flex-shrink: 0 !important;    
   }
