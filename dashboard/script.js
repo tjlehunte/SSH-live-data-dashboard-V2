@@ -179,6 +179,11 @@ document.addEventListener("DOMContentLoaded", () => {
     givenergyChart.options.scales.y.min = yMin;
     givenergyChart.options.scales.y.max = yMax;
 
+    // --- FIX: ENFORCE LEGEND HIDING ---
+    // We explicitly configure the display boolean directly to the active configuration reference
+    if (!givenergyChart.options.plugins.legend) {
+      givenergyChart.options.plugins.legend = {};
+    }
     // Hide the line item legends on mobile since the large header title already states the metrics
     givenergyChart.options.plugins.legend.display = !isMobile;
     givenergyChart.options.plugins.legend.position = isMobile ? "bottom" : "right";
