@@ -426,12 +426,12 @@ function restoreGivEnergyToSection() {
                 }, 
                 title: { 
                   display: true, 
-                  text: "", 
-                  align: 
-                    "center", 
+                  text: "", // (or "" for Y axis)
+                  align: "center", 
                   color: textColor, 
-                  font: { size: 20 } 
-                } 
+                  // REDUCE AXIS TITLE SIZES ON MOBILE
+                  font: { size: window.innerWidth <= 768 ? 12 : 20 } 
+                }
                }
           }
         }
@@ -493,7 +493,24 @@ function restoreGivEnergyToSection() {
               },
               grid: { color: isDark ? "#444" : "#ccc" }
             },
-            y: { min: 0, max: 1, ticks: { color: textColor }, grid: { color: gridColor }, title: { display: true, text: "Energy (kW)", align: "center", color: textColor, font: { size: 20 } } }
+            y: { 
+              min: 0, 
+              max: 1, 
+              ticks: { 
+                color: textColor 
+              }, 
+              grid: { 
+                color: gridColor 
+              }, 
+              title: { 
+                display: true, 
+                text: "Energy (kWh)", // (or "" for Y axis)
+                align: "center", 
+                color: textColor, 
+                // REDUCE AXIS TITLE SIZES ON MOBILE
+                font: { size: window.innerWidth <= 768 ? 12 : 20 } 
+              } 
+            }
           }
         }
       });
