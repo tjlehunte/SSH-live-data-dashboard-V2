@@ -71,6 +71,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ==================== MAIN CHART DRAWING FUNCTION ====================
   function drawChart(data, cols, title, unit, isCurrentChart = false) {
+    
+    mainChart.options.plugins.legend.display = true;
+    
+    // Always re-assert the correct Monnit tick callback (GivEnergy interval is different)
+    mainChart.options.scales.x.ticks.callback = function(value, index) {
+      const interval = window.innerWidth <= 768 ? 36 : 12;
+      if (index % interval === 0) {
+        const raw = this.getLabelForValue(value);
+        return window.innerWidth <= 768 ? formatMobileTick(raw) : raw;
+      }
+      return "";
+    };
+      
     const labels = data.map(d => d.MessageDate || d.start);
     const gridColors = labels.map((_, i) => {
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
