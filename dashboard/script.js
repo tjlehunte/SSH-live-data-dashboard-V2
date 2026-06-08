@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Arrays to store column names for different sensor types
   let tempCols = [];              // Temperature sensor columns
-  let humCols = [];              // Humidity sensor columns
+  let humCols = [];               // Humidity sensor columns
   let dewCols = [];               // Dew point sensor columns
   let gpkgCols = [];              // Grams per kilogram sensor columns
   let heatindexCols = [];         // Heat index sensor columns
@@ -382,6 +382,8 @@ document.addEventListener("DOMContentLoaded", () => {
               title: { display: true, text: "Time", align: "center", color: textColor, font: { size: 20 } },
               ticks: {
                 color: textColor,
+                  maxRotation: window.innerWidth <= 768 ? 0 : 50,
+                  minRotation: 0,
                 autoSkip: false,
                 callback: function(value, index) {
                   if (index % 12 === 0) {
@@ -425,6 +427,8 @@ document.addEventListener("DOMContentLoaded", () => {
               title: { display: true, text: "Time", align: "center", color: textColor, font: { size: 20 } },
               ticks: {
                 color: textColor,
+                maxRotation: window.innerWidth <= 768 ? 0 : 50,
+                minRotation: 0,
                 autoSkip: false,
                 callback: function(value, index) {
                   if (index % 4 === 0) {
