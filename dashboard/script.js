@@ -421,6 +421,7 @@ function restoreGivEnergyToSection() {
           elements: { point: { pointStyle: "rect", hoverRadius: 8 } },
           plugins: {
             legend: {
+              display: false,
               position: (window.innerWidth <= 768) ? "bottom" : "right",
               labels: { font: { size: 15 }, color: textColor, usePointStyle: true, pointStyle: "rect", pointStyleWidth: 16 }
             },
