@@ -330,6 +330,17 @@ canvas.loading {
   0% { transform: rotate(0deg); }  /* Start rotation at 0 degrees */
   100% { transform: rotate(360deg); }  /* Complete full rotation */
 }
+ /* Footer style */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 3px solid #ccc;
+  font-size: 14px;
+  color: #888;
+}
 
 /* =============================================================================
    DARK MODE STYLES
@@ -398,7 +409,11 @@ canvas.loading {
 
 /* Hide mobile-specific master tab on desktop layout */
 .mobile-givenergy-tab {
-  display: none !important;
+   display: none !important;
+}
+
+.footer {
+   border-top-color: #444;
 }
 
 /* =============================================================================
