@@ -351,8 +351,8 @@ document.addEventListener("DOMContentLoaded", () => {
     humCols = columns.filter(c => c.toLowerCase().includes("humid"));
     dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
     gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
-    heatindexCols = columns.filter(c => c.toLowerCase().includes("heatindex"));
-    wetbulbCols = columns.filter(c => c.toLowerCase().includes("wetbulb"));
+    heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
+    wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
     current3Cols = columns.filter(c => c.toLowerCase().includes("current") && !c.toLowerCase().includes("cum"));
     currentcumCols = columns.filter(c => c.toLowerCase().includes("current") && c.toLowerCase().includes("cum"));
 
