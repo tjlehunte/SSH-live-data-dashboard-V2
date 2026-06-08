@@ -244,7 +244,7 @@ canvas.loading {
   font-weight: bold;  /* Bold text */
   cursor: pointer;  /* Show clickable */
   transition: 0.2s;  /* Smooth state transition */
-  font-size: 15px;  /* Button text size */
+  font-size: 14px;  /* Button text size */
 }
 
 /* Legend button hover effect */
@@ -541,13 +541,13 @@ canvas.loading {
 
   /* Compact tabs to make presentation cleaner and prevent shrinking inside the scroll view */
   .tab {
-    font-size: 15px !important;
+    font-size: 14px !important;
     padding: 8px 10px !important; 
     flex-shrink: 0 !important;    /* Prevents tabs from squishing or crushing together */
   }
 
   .master-tab {
-    font-size: 17px !important;
+    font-size: 16px !important;
     padding: 10px 12px !important;
     flex-shrink: 0 !important;    
   }
