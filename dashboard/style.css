@@ -445,7 +445,7 @@ canvas.loading {
   /* Force the legend control buttons to move to the bottom */
   .chart-section .legend-controls {
     order: 2;
-    margin-top: 15px; /* Adds a clean gap below the chart legend */
+    margin-top: 5px; /* Adds a clean gap below the chart legend */
     margin-bottom: 5px;
     justify-content: center; /* Centers the buttons on mobile screens */
   }
