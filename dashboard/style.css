@@ -15,7 +15,7 @@ body {
   display: flex;  /* Use flexbox for horizontal layout */
   justify-content: space-between;  /* Distribute content with space between left and right sides */
   align-items: center;  /* Vertically center all items */
-  margin-bottom: 20px;  /* Add space below the logo bar */
+  margin-bottom: 10px;  /* Add space below the logo bar */
 }
 
 /* Left side of logo bar containing multiple logos */
@@ -51,7 +51,7 @@ body {
 /* Main page heading/title */
 h1 {
   text-align: center;  /* Center the heading text */
-  margin-bottom: 25px;  /* Add 50px space below heading */
+  margin-bottom: 20px;  /* Add space below heading */
   margin-top: 0;  /* Remove default top margin */
   font-size: 40px;  /* Large heading size */
 }
