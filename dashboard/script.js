@@ -253,23 +253,23 @@ function restoreGivEnergyToSection() {
           if (activeCurrent) activeCurrent.click();
         }
 
-        // --- GivEnergy Selection (Mobile Context Only) ---
+// --- GivEnergy Selection (Mobile Context Only) ---
         if (master === "givenergy") {
           document.getElementById("envTabs").style.display = "none";
           document.getElementById("currentTabs").style.display = "none";
           
-          // Ensure the main chart area stays visible on mobile
+          // FIX: Keep the main chart area visible so GivEnergy can draw inside it
           document.querySelector(".chart-section .chart-container").style.display = "block";
-        
-          // Display and place the GivEnergy sub-tabs right below the master tabs
+
           const givTabs = document.getElementById("givenergyTabs");
           const chartSection = document.querySelector(".chart-section");
           givTabs.style.display = "flex";
+          
+          // Move sub-tabs right above the main chart container
           chartSection.insertBefore(givTabs, document.querySelector(".chart-section .chart-container"));
-        
-          // Programmatically click the first active GivEnergy flow sub-tab
-          const activeGe = document.querySelector("#givenergyTabs .tab.active") || document.querySelector("#givenergyTabs .tab:first-child");
-          if (activeGe) activeGe.click();
+
+          const firstGeTab = document.querySelector("#givenergyTabs .tab:first-child");
+          if (firstGeTab) firstGeTab.click();
         }
       });
     });
@@ -510,8 +510,7 @@ function restoreGivEnergyToSection() {
           }
         }
       });
-    }
-    if (!window.givenergyTabsInitialised) {
+    }if (!window.givenergyTabsInitialised) {
       window.givenergyTabsInitialised = true;
       document.querySelectorAll("#givenergyTabs .tab").forEach(tab => {
         tab.addEventListener("click", () => {
@@ -519,21 +518,25 @@ function restoreGivEnergyToSection() {
           tab.classList.add("active");
           
           const flow = tab.dataset.flow;
-          const isMobile = window.innerWidth <= 768;
-    
-          if (isMobile) {
-            // Redirect data pipeline straight into the main chart container on mobile devices
-            drawChart(givenergyData, [flow], flow, "Energy (kW)", false);
-          } else {
-            // Standard standalone layout configuration for desktop viewports
-            if (flow === "pv-home")       drawGivenergyChart(givenergyData, "PV to Home",      "PV to Home");
-            if (flow === "pv-battery")    drawGivenergyChart(givenergyData, "PV to Battery",   "PV to Battery");
-            if (flow === "pv-grid")       drawGivenergyChart(givenergyData, "PV to Grid",      "PV to Grid");
-            if (flow === "grid-home")     drawGivenergyChart(givenergyData, "Grid to Home",    "Grid to Home");
-            if (flow === "grid-battery")  drawGivenergyChart(givenergyData, "Grid to Battery", "Grid to Battery");
-            if (flow === "battery-home")  drawGivenergyChart(givenergyData, "Battery to Home", "Battery to Home");
-            if (flow === "battery-grid")  drawGivenergyChart(givenergyData, "Battery to Grid", "Battery to Grid");
+
+          // Swap the underlying chart instance target based on screen size
+          // If mobile, temporarily point the drawing engine to mainChart!
+          const originalGivChart = givenergyChart;
+          if (window.innerWidth <= 768) {
+            givenergyChart = mainChart; 
           }
+
+          // Run your original, perfectly working drawing functions
+          if (flow === "pv-home")       drawGivenergyChart(givenergyData, "PV to Home",      "PV to Home");
+          if (flow === "pv-battery")    drawGivenergyChart(givenergyData, "PV to Battery",   "PV to Battery");
+          if (flow === "pv-grid")       drawGivenergyChart(givenergyData, "PV to Grid",      "PV to Grid");
+          if (flow === "grid-home")     drawGivenergyChart(givenergyData, "Grid to Home",    "Grid to Home");
+          if (flow === "grid-battery")  drawGivenergyChart(givenergyData, "Grid to Battery", "Grid to Battery");
+          if (flow === "battery-home")  drawGivenergyChart(givenergyData, "Battery to Home", "Battery to Home");
+          if (flow === "battery-grid")  drawGivenergyChart(givenergyData, "Battery to Grid", "Battery to Grid");
+
+          // Restore the desktop target reference immediately afterward
+          givenergyChart = originalGivChart;
         });
       });
     }
