@@ -384,7 +384,7 @@ function restoreGivEnergyToSection() {
               text: "", 
               color: textColor, 
               // REDUCE TITLE SIZE ON MOBILE
-              font: { size: window.innerWidth <= 768 ? 14 : 20 }, 
+              font: { size: window.innerWidth <= 768 ? 16 : 20 }, 
               // REDUCE SPACE BETWEEN GRAPH AND TITLE ON MOBILE
               padding: { bottom: window.innerWidth <= 768 ? 10 : 30 }
             }
@@ -398,7 +398,7 @@ function restoreGivEnergyToSection() {
                 align: "center", 
                 color: textColor, 
                 // REDUCE AXIS TITLE SIZES ON MOBILE
-                font: { size: window.innerWidth <= 768 ? 12 : 20 }  
+                font: { size: window.innerWidth <= 768 ? 14 : 20 }  
               },
               ticks: {
                 color: textColor,
@@ -430,7 +430,7 @@ function restoreGivEnergyToSection() {
                   align: "center", 
                   color: textColor, 
                   // REDUCE AXIS TITLE SIZES ON MOBILE
-                  font: { size: window.innerWidth <= 768 ? 12 : 20 } 
+                  font: { size: window.innerWidth <= 768 ? 14 : 20 } 
                 }
                }
           }
@@ -462,7 +462,7 @@ function restoreGivEnergyToSection() {
               text: "", 
               color: textColor, 
               // REDUCE TITLE SIZE ON MOBILE
-              font: { size: window.innerWidth <= 768 ? 14 : 20 }, 
+              font: { size: window.innerWidth <= 768 ? 16 : 20 }, 
               // REDUCE SPACE BETWEEN GRAPH AND TITLE ON MOBILE
               padding: { bottom: window.innerWidth <= 768 ? 10 : 30 } 
             }
@@ -476,7 +476,7 @@ function restoreGivEnergyToSection() {
                 align: "center", 
                 color: textColor, 
                 // REDUCE AXIS TITLE SIZES ON MOBILE
-                font: { size: window.innerWidth <= 768 ? 12 : 20 } },
+                font: { size: window.innerWidth <= 768 ? 14 : 20 } },
                 ticks: {
                 color: textColor,
                 maxRotation: window.innerWidth <= 768 ? 0 : 50,
@@ -508,7 +508,7 @@ function restoreGivEnergyToSection() {
                 align: "center", 
                 color: textColor, 
                 // REDUCE AXIS TITLE SIZES ON MOBILE
-                font: { size: window.innerWidth <= 768 ? 12 : 20 } 
+                font: { size: window.innerWidth <= 768 ? 14 : 20 } 
               } 
             }
           }
