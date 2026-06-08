@@ -103,12 +103,20 @@ for (sensor in SensorID) {
     df <- data.frame(parsed$Result)
     
     #get messagedate to readable format
-    df <- df %>% mutate(MessageDate = as.POSIXct(
-      
-      #turn it into a posix timestamp, divide by 1000 so its not in milliseconds - would give a year of like 20000
-      as.numeric(str_match(MessageDate, "\\d+")) / 1000, 
-      origin = "1970-01-01")) %>% 
-      mutate(MessageDate = floor_date(MessageDate, unit = "10 minute"))
+    df <- df %>% mutate(
+      MessageDate = format(
+        floor_date(
+          as.POSIXct(
+            as.numeric(str_match(MessageDate, "\\d+")) / 1000,
+            origin = "1970-01-01",
+            tz = "UTC"
+          ),
+          unit = "10 minute"
+        ),
+        tz = "Europe/London",
+        format = "%Y-%m-%d %H:%M:%S"
+      )
+    )
     
     #order the data from start to end, by default monnit goes most recent to oldest
     df <- df %>% arrange(MessageDate) %>% select(c(3,8,16))
