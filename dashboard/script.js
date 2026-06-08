@@ -386,7 +386,8 @@ document.addEventListener("DOMContentLoaded", () => {
                   minRotation: 0,
                 autoSkip: false,
                 callback: function(value, index) {
-                  if (index % 12 === 0) {
+                  const interval = window.innerWidth <= 768 ? 36 : 12;
+                  if (index % interval === 0) {
                     const raw = this.getLabelForValue(value);
                     return window.innerWidth <= 768 ? formatMobileTick(raw) : raw;
                   }
@@ -431,7 +432,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 minRotation: 0,
                 autoSkip: false,
                 callback: function(value, index) {
-                  if (index % 4 === 0) {
+                  const interval = window.innerWidth <= 768 ? 12 : 4;
+                  if (index % interval === 0) {
                     const raw = this.getLabelForValue(value);
                     return window.innerWidth <= 768 ? formatMobileTick(raw) : raw;
                   }
