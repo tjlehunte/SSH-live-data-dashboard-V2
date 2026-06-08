@@ -431,6 +431,25 @@ canvas.loading {
     margin: 15px; 
   }
 
+   /* Turn the chart container into a column flexbox on mobile */
+  .chart-section .chart-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Force the canvas wrapper to stay at the top */
+  .chart-section .canvas-wrapper {
+    order: 1;
+  }
+
+  /* Force the legend control buttons to move to the bottom */
+  .chart-section .legend-controls {
+    order: 2;
+    margin-top: 15px; /* Adds a clean gap below the chart legend */
+    margin-bottom: 5px;
+    justify-content: center; /* Centers the buttons on mobile screens */
+  }
+   
   h1 {
      font-size: 24px !important;
      margin-bottom: 10px;
