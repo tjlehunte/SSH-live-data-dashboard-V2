@@ -581,5 +581,54 @@ function restoreGivEnergyToSection() {
     }
   });
 
+  // ==================== LIVE THEME SWITCH LISTENER ====================
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    const isDark = e.matches;
+    const textColor = isDark ? "#ddd" : "#000";
+    const gridColor = isDark ? "#444" : "#ccc";
+
+    // 1. Update Main Chart Core Theme Styling
+    if (mainChart) {
+      mainChart.options.plugins.title.color = textColor;
+      mainChart.options.plugins.legend.labels.color = textColor;
+      mainChart.options.scales.x.ticks.color = textColor;
+      mainChart.options.scales.y.ticks.color = textColor;
+      mainChart.options.scales.x.title.color = textColor;
+      mainChart.options.scales.y.title.color = textColor;
+      mainChart.options.scales.y.grid.color = gridColor;
+      
+      // Recalculate alternating grid colors for X axis if data exists
+      if (mainChart.data.labels.length > 0) {
+        mainChart.options.scales.x.grid.color = mainChart.data.labels.map((_, i) => {
+          if (i % 12 === 0) return isDark ? "#444" : "#ccc";
+          return isDark ? "#2a2a2a" : "#ebebeb";
+        });
+      }
+      
+      mainChart.update();
+    }
+
+    // 2. Update GivEnergy Chart Core Theme Styling
+    if (givenergyChart) {
+      givenergyChart.options.plugins.title.color = textColor;
+      givenergyChart.options.plugins.legend.labels.color = textColor;
+      givenergyChart.options.scales.x.ticks.color = textColor;
+      givenergyChart.options.scales.y.ticks.color = textColor;
+      givenergyChart.options.scales.x.title.color = textColor;
+      givenergyChart.options.scales.y.title.color = textColor;
+      givenergyChart.options.scales.y.grid.color = gridColor;
+      
+      // Recalculate alternating grid colors for GivEnergy X axis
+      if (givenergyChart.data.labels.length > 0) {
+        givenergyChart.options.scales.x.grid.color = givenergyChart.data.labels.map((_, i) => {
+          if (i % 4 === 0) return isDark ? "#444" : "#ccc";
+          return isDark ? "#2a2a2a" : "#ebebeb";
+        });
+      }
+      
+      givenergyChart.update();
+    }
+  });
+  
   loadData();
 });
