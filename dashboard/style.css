@@ -521,7 +521,7 @@ canvas.loading {
   }
    
    .sub-tab-row {
-      margin-bottom: 0px !important;     /* Removes the bottom margin spacing entirely */
+      margin-bottom: 5px !important;     /* Removes the bottom margin spacing entirely */
    }
      
     /* For Firefox: Enable a clean, thin scrollbar */
