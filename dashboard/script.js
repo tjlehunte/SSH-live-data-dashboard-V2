@@ -573,10 +573,24 @@ function restoreGivEnergyToSection() {
     // Redraw and shift legend positions actively during desktop/mobile resizing
     if (mainChart) {
       mainChart.options.plugins.legend.position = isMobile ? "bottom" : "right";
+      
+      // DYNAMIC MOBILE TEXT ADJUSTMENTS FOR MAIN CHART
+      mainChart.options.plugins.title.font.size = isMobile ? 14 : 20;
+      mainChart.options.plugins.title.padding.bottom = isMobile ? 10 : 30;
+      mainChart.options.scales.x.title.font.size = isMobile ? 12 : 20;
+      mainChart.options.scales.y.title.font.size = isMobile ? 12 : 20;
+      
       mainChart.update();
     }
     if (givenergyChart) {
       givenergyChart.options.plugins.legend.position = isMobile ? "bottom" : "right";
+
+      // DYNAMIC MOBILE TEXT ADJUSTMENTS FOR GIVENERGY CHART
+      givenergyChart.options.plugins.title.font.size = isMobile ? 14 : 20;
+      givenergyChart.options.plugins.title.padding.bottom = isMobile ? 10 : 30;
+      givenergyChart.options.scales.x.title.font.size = isMobile ? 12 : 20;
+      givenergyChart.options.scales.y.title.font.size = isMobile ? 12 : 20;
+      
       givenergyChart.update();
     }
 
