@@ -517,8 +517,13 @@ canvas.loading {
     overflow-x: auto !important;        /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch;  /* Smooth inertial scrolling on iOS devices */
     padding-bottom: 10px;               /* Slightly increased to give scrollbar breathing room */
-    gap: 8px;                           
-
+    gap: 8px;
+  }
+   
+   .sub-tab-row {
+      margin-bottom: 0px !important;     /* Removes the bottom margin spacing entirely */
+   }
+     
     /* For Firefox: Enable a clean, thin scrollbar */
     scrollbar-width: thin;          
     scrollbar-color: #bbb rgba(0, 0, 0, 0.05); 
