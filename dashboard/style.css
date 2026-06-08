@@ -431,26 +431,36 @@ canvas.loading {
     margin: 15px; 
   }
 
-  /* Turn the chart containers into a column flexbox on mobile (Targets both main and merged GivEnergy containers) */
-  .chart-section .chart-container,
-  #givenergy-chart-wrapper {
+  /* Target only the specific main chart section's layout flow on mobile */
+  .chart-section > .chart-container {
     display: flex !important;
     flex-direction: column !important;
   }
 
-  /* Force the canvas wrapper to stay at the top */
-  .chart-section .canvas-wrapper,
-  #givenergy-chart-wrapper .canvas-wrapper {
-    order: 1;
+  /* When GivEnergy wrapper is appended inside the main chart section on mobile, style its flow */
+  .chart-section #givenergy-chart-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 10px;
   }
 
-  /* Force the legend control buttons to move to the bottom */
+  /* Force canvas wrappers to stay at the top inside their respective containers */
+  .chart-section .canvas-wrapper,
+  #givenergy-chart-wrapper .canvas-wrapper {
+    order: 1 !important;
+  }
+
+  /* Force the legend control buttons to move directly underneath the canvas */
   .chart-section .legend-controls,
   #givenergy-chart-wrapper .legend-controls {
-    order: 2;
-    margin-top: 5px; /* Adds a clean gap below the chart legend */
+    order: 2 !important;
+    margin-top: 5px; 
     margin-bottom: 5px;
-    justify-content: center; /* Centers the buttons on mobile screens */
+    justify-content: center; 
+    display: flex !important;
   }
    
   h1 {
@@ -504,8 +514,8 @@ canvas.loading {
     display: none !important;
   }
 
-  /* Prevent chart card containers from spilling out horizontally on mobile devices */
-  .chart-container {
+  /* Standard presentation styling for the main chart card container on mobile devices */
+  .chart-section .chart-container {
     min-width: 100% !important;
     width: 100% !important;
     box-sizing: border-box;
