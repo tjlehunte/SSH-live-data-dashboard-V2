@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
       givenergyChart.options.plugins.legend = {};
     }
     // Hide the line item legends on mobile since the large header title already states the metrics
-    givenergyChart.options.plugins.legend.display = !isMobile;
+    givenergyChart.options.plugins.legend.display = false;
     givenergyChart.options.plugins.legend.position = isMobile ? "bottom" : "right";
     givenergyChart.options.plugins.legend.labels.color = textColor;
 
