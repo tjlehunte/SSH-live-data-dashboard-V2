@@ -441,9 +441,11 @@ canvas.loading {
   }
 
   #masterTabs .master-tab {
-   flex: 1 1 0 !important;                   /* Each tab takes equal share of width */
-   text-align: center;        /* Keep text centred within each tab */
-   overflow: hidden;          /* Prevent text spilling if labels are long */
+   flex: 1 1 0 !important;
+   display: flex !important;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
   }
    
    /* Turn the chart container into a column flexbox on mobile */
