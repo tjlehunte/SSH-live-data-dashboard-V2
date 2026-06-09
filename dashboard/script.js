@@ -605,6 +605,26 @@ function restoreGivEnergyToSection() {
       initTabs();
     }
 
+    if (!window.touchDismissInitialised) {
+      window.touchDismissInitialised = true;
+  
+      document.addEventListener("touchstart", (e) => {
+      const mainCanvas = document.getElementById("mainChart");
+      const givCanvas = document.getElementById("givenergyChart");
+    
+      if (e.target !== mainCanvas && e.target !== givCanvas) {
+        if (mainChart) {
+          mainChart.tooltip.setActiveElements([], { x: 0, y: 0 });
+          mainChart.update();
+        }
+        if (givenergyChart) {
+          givenergyChart.tooltip.setActiveElements([], { x: 0, y: 0 });
+          givenergyChart.update();
+        }
+      }
+      });
+    }
+    
     const activeMaster = document.querySelector("#masterTabs .tab.active");
     if (activeMaster && activeMaster.dataset.master === "current") {
       const activeSub = document.querySelector("#currentTabs .tab.active");
