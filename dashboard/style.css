@@ -264,7 +264,7 @@ canvas.loading {
 /* Heading within givenergy section */
 .givenergy-section h2 {
   text-align: center;  /* Center the heading */
-  margin-bottom: 40px;  /* Large space below heading */
+  margin-bottom: 20px;  /* Large space below heading */
   font-size: 30px;  /* Large heading size */
   margin-top: 20px;  /* Space above heading */
 }
