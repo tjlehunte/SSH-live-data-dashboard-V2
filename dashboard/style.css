@@ -547,7 +547,6 @@ canvas.loading {
     /* For Firefox: Enable a clean, thin scrollbar */
     scrollbar-width: thin;          
     scrollbar-color: #bbb rgba(0, 0, 0, 0.05); 
-  }
 
   /* Custom visible styling for WebKit scrollbars (Safari, Chrome, iOS/Android browsers) */
   .tab-row::-webkit-scrollbar {
