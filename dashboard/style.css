@@ -137,6 +137,10 @@ canvas.loading {
   display: inline-flex;  /* Horizontal layout for tabs */
 }
 
+#givenergyTabs {
+  flex-wrap: wrap;
+}
+
 /* Separator line between chart sections */
 #chart-seperator {
   border-bottom: 3px solid #ccc;  /* Gray line separator */
