@@ -437,11 +437,11 @@ canvas.loading {
    display: flex !important;  /* Override inline-flex from desktop */
    width: 100%;               /* Fill full screen width */
    box-sizing: border-box;
-   overflow-x: visible !important;  /* Override the tab-row scroll rule */
+   overflow-x: hidden !important;  /* Override the tab-row scroll rule */
   }
 
   #masterTabs .master-tab {
-   flex: 1;                   /* Each tab takes equal share of width */
+   flex: 1 1 0 !important;                   /* Each tab takes equal share of width */
    text-align: center;        /* Keep text centred within each tab */
    overflow: hidden;          /* Prevent text spilling if labels are long */
   }
