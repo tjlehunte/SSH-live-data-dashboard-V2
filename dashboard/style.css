@@ -410,15 +410,14 @@ canvas.loading {
   .legend-controls button:hover {
     background: #333;  /* Slightly lighter on hover */
   }
+  .footer {
+    border-top-color: #444;
+  }
 }
 
 /* Hide mobile-specific master tab on desktop layout */
 .mobile-givenergy-tab {
    display: none !important;
-}
-
-.footer {
-   border-top-color: #444;
 }
 
 /* =============================================================================
@@ -545,8 +544,10 @@ canvas.loading {
    }
      
     /* For Firefox: Enable a clean, thin scrollbar */
-    scrollbar-width: thin;          
-    scrollbar-color: #bbb rgba(0, 0, 0, 0.05); 
+   .tab-row {
+     scrollbar-width: thin;
+     scrollbar-color: #bbb rgba(0, 0, 0, 0.05);
+   }
 
   /* Custom visible styling for WebKit scrollbars (Safari, Chrome, iOS/Android browsers) */
   .tab-row::-webkit-scrollbar {
@@ -574,12 +575,7 @@ canvas.loading {
   .master-tab {
     font-size: 16px !important;
     padding: 10px 12px !important;
-    flex-shrink: 0 !important;    
   }
-
-   .legend-controls {
-      justify-content: stretch;
-   }
    
    .legend-controls button {
       flex: 1;
