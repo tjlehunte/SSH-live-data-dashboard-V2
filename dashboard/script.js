@@ -395,8 +395,8 @@ function restoreGivEnergyToSection() {
     showSpinner();
     showGivenergySpinner();
 
-    allData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/data");
-    givenergyData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/givenergy");
+    allData = await fetchWithRetry("https://dashboard-proxy-jiof.onrender.com/data");
+    givenergyData = await fetchWithRetry("https://dashboard-proxy-jiof.onrender.com/givenergy");
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const gridColor = isDark ? "#444" : "#ccc";
     const textColor = isDark ? "#ddd" : "#000";
