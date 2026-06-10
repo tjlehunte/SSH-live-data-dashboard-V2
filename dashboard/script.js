@@ -629,6 +629,9 @@ function restoreGivEnergyToSection() {
     if (activeMaster && activeMaster.dataset.master === "current") {
       const activeSub = document.querySelector("#currentTabs .tab.active");
       if (activeSub) activeSub.click();
+    } else if (activeMaster && activeMaster.dataset.master === "givenergy") {
+      const activeSub = document.querySelector("#givenergyTabs .tab.active");
+      if (activeSub) activeSub.click();
     } else {
       const activeSub = document.querySelector("#envTabs .tab.active");
       if (activeSub) activeSub.click();
@@ -765,4 +768,5 @@ function restoreGivEnergyToSection() {
   });
   
   loadData();
+  setInterval(loadData, 10 * 60 * 1000); // re-fetch every 10 minutes
 });
