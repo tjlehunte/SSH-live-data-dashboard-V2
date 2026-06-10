@@ -640,9 +640,12 @@ function restoreGivEnergyToSection() {
     // Set initial layout visibility states on mobile screens
     // ===== FIX: Set initial layout visibility states explicitly for both mobile and desktop =====
     if (window.innerWidth <= 768) {
-      document.getElementById("givenergyTabs").style.display = "none";
-      const givWrapper = document.getElementById("givenergy-chart-wrapper");
-      if (givWrapper) givWrapper.style.display = "none";
+      const activeMasterOnLoad = document.querySelector("#masterTabs .tab.active");
+      if (!activeMasterOnLoad || activeMasterOnLoad.dataset.master !== "givenergy") {
+        document.getElementById("givenergyTabs").style.display = "none";
+        const givWrapper = document.getElementById("givenergy-chart-wrapper");
+        if (givWrapper) givWrapper.style.display = "none";
+      }
     } else {
       // On desktop load, ensure the GivEnergy sub-tabs are displayed seamlessly
       document.getElementById("givenergyTabs").style.display = "flex";
