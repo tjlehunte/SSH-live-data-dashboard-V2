@@ -33,26 +33,6 @@ schedule_refresh <- function() {
 # Warm cache on startup, then refresh every 10 mins
 schedule_refresh()
 
-#* @filter check-ip
-function(req, res) {
-  allowed_subnets <- c("74.220.49.", "74.220.57.")
-  
-  ip <- req$HTTP_X_FORWARDED_FOR
-  if (is.null(ip)) ip <- req$REMOTE_ADDR
-  
-  # X-Forwarded-For can be comma-separated, take first
-  ip <- trimws(strsplit(ip, ",")[[1]][1])
-  
-  allowed <- any(sapply(allowed_subnets, function(subnet) startsWith(ip, subnet)))
-  
-  if (!allowed) {
-    res$status <- 403
-    return(list(error = "Forbidden"))
-  }
-  
-  plumber::forward()
-}
-
 #* @filter cors
 function(req, res) {
   res$setHeader("Access-Control-Allow-Origin", "*")
