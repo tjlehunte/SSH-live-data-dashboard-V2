@@ -27,7 +27,7 @@ refresh_givenergy <- function() {
 schedule_refresh <- function() {
   refresh_monnit()
   refresh_givenergy()
-  later(schedule_refresh, delay = 600)
+  later(schedule_refresh, delay = 540)
 }
 
 # Warm cache on startup, then refresh every 10 mins
