@@ -771,5 +771,5 @@ function restoreGivEnergyToSection() {
   });
   
   loadData();
-  setInterval(loadData, 9 * 60 * 1000); // re-fetch every 10 minutes
+  setInterval(loadData, 9 * 60 * 1000); // re-fetch every 9 minutes
 });
