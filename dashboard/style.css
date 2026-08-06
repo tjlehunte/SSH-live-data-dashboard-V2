@@ -245,7 +245,7 @@ canvas.loading {
   padding: 6px 8px;          /* keep existing spacing */
   border: 1px solid #7f7f7f; /* match the tab outline/border */
   border-radius: 6px;        /* keep rounded corners */
-  background: #eee;          /* stronger contrast against chart container (same as .tab) */
+  background: #e0e0e0;       /* slightly darker than .tab in light mode for stronger contrast */
   color: #333;               /* same text color as .tab */
   font-weight: bold;         /* keep bold text */
   cursor: pointer;           /* clickable */
@@ -255,7 +255,7 @@ canvas.loading {
 
 /* Legend button hover effect (keeps behavior consistent with tabs) */
 .legend-controls button:hover {
-  background: #ddd;  /* Slightly darker on hover */
+  background: #d6d6d6;  /* Slightly darker on hover */
 }
 
 /* =============================================================================
@@ -379,6 +379,7 @@ canvas.loading {
   .tab {
     background: #222 !important;  /* Dark background */
     color: #ddd !important;  /* Light gray text */
+    border: 1px solid #555 !important; /* match legend button border in dark mode */
   }
 
   .tab:hover {
@@ -396,7 +397,7 @@ canvas.loading {
   }
 
   .legend-controls button {
-    background: #222 !important;
+    background: #2b2b2b !important; /* slightly lighter than .tab in dark mode */
     color: #ddd !important;
     border: 1px solid #555;
   }
