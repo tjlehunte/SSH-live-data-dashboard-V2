@@ -223,7 +223,7 @@ canvas.loading {
 
 /* Active/selected tab styling */
 .tab.active {
-  background: #3498db;  /* Blue background for active state */
+  background: #1f6fad;  /* Darker blue background for active state */
   color: white;  /* White text for contrast */
 }
 
