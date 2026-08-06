@@ -240,20 +240,20 @@ canvas.loading {
   justify-content: flex-end;  /* Align buttons to the right */
 }
 
-/* Legend control buttons */
+/* Legend control buttons: stronger contrast and same outline as tabs */
 .legend-controls button {
-  padding: 6px 8px;  /* Internal spacing */
-  border: none;  /* No border */
-  border-radius: 6px;  /* Rounded corners */
-  background: #eee;  /* Light gray background */
-  color: #333;  /* Dark text */
-  font-weight: bold;  /* Bold text */
-  cursor: pointer;  /* Show clickable */
-  transition: 0.2s;  /* Smooth state transition */
-  font-size: 14px;  /* Button text size */
+  padding: 6px 8px;          /* keep existing spacing */
+  border: 1px solid #7f7f7f; /* match the tab outline/border */
+  border-radius: 6px;        /* keep rounded corners */
+  background: #eee;          /* stronger contrast against chart container (same as .tab) */
+  color: #333;               /* same text color as .tab */
+  font-weight: bold;         /* keep bold text */
+  cursor: pointer;           /* clickable */
+  transition: 0.2s;          /* smooth state transition */
+  font-size: 14px;          /* keep size */
 }
 
-/* Legend button hover effect */
+/* Legend button hover effect (keeps behavior consistent with tabs) */
 .legend-controls button:hover {
   background: #ddd;  /* Slightly darker on hover */
 }
@@ -396,8 +396,8 @@ canvas.loading {
   }
 
   .legend-controls button {
-    background: #444;  /* Dark background */
-    color: #ddd;  /* Light gray text */
+    background: #222 !important;
+    color: #ddd !important;
     border: 1px solid #555;
   }
   
@@ -410,7 +410,7 @@ canvas.loading {
   }
   
   .legend-controls button:hover {
-    background: #333;  /* Slightly lighter on hover */
+    background: #333 !important;  /* Slightly lighter on hover */
   }
   .footer {
     border-top-color: #444;
