@@ -377,13 +377,13 @@ canvas.loading {
   }
   
   .tab {
-    background: #222 !important;  /* Dark background */
-    color: #ddd !important;  /* Light gray text */
+    background: #5F5F5F !important;  /* adjusted for text contrast */
+    color: #fff !important;  /* changed to pure white */
     border: 1px solid #555 !important; /* match legend button border in dark mode */
   }
 
   .tab:hover {
-    background: #333 !important;  /* Slightly lighter on hover */
+    background: #545454 !important;  /* Slightly darker on hover to preserve contrast */
   }
 
   .tab.active {
@@ -397,8 +397,8 @@ canvas.loading {
   }
 
   .legend-controls button {
-    background: #2b2b2b !important; /* slightly lighter than .tab in dark mode */
-    color: #ddd !important;
+    background: #5F5F5F !important; /* match .tab background */
+    color: #fff !important; /* changed to pure white */
     border: 1px solid #555;
   }
   
@@ -411,7 +411,7 @@ canvas.loading {
   }
   
   .legend-controls button:hover {
-    background: #333 !important;  /* Slightly lighter on hover */
+    background: #545454 !important;  /* Slightly darker on hover */
   }
   .footer {
     border-top-color: #444;
