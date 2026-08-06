@@ -377,8 +377,8 @@ canvas.loading {
   }
   
   .tab {
-    background: #5F5F5F !important;  /* adjusted for text contrast */
-    color: #fff !important;  /* changed to pure white */
+    background: #616161 !important;  /* adjusted to meet tab->page 3:1 and text contrast */
+    color: #fff !important;  /* keep white text */
     border: 1px solid #555 !important; /* match legend button border in dark mode */
   }
 
@@ -387,7 +387,7 @@ canvas.loading {
   }
 
   .tab.active {
-    background: #444 !important;  /* Medium dark gray background */
+    background: #1f6fad !important;  /* keep accent for active */
     color: #fff !important;  /* White text */
   }
 
@@ -397,8 +397,8 @@ canvas.loading {
   }
 
   .legend-controls button {
-    background: #5F5F5F !important; /* match .tab background */
-    color: #fff !important; /* changed to pure white */
+    background: #616161 !important; /* match .tab background */
+    color: #fff !important; /* keep white */
     border: 1px solid #555;
   }
   
