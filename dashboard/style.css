@@ -225,8 +225,10 @@ canvas.loading {
 
 /* Active/selected tab styling */
 .tab.active {
-  background: #1f6fad;  /* Darker blue background for active state */
-  color: white;  /* White text for contrast */
+  background: #1f6fad !important;  /* keep accent for active state */
+  color: #fff !important;  /* White text */
+  border: 1px solid #154f78 !important; /* slightly darker border to emphasise active state */
+  box-shadow: 0 1px 0 rgba(0,0,0,0.08) !important; /* subtle elevation */
 }
 
 /* =============================================================================
@@ -387,9 +389,11 @@ canvas.loading {
   }
 
   .tab.active {
-    background: #1f6fad !important;  /* keep accent for active */
-    color: #fff !important;  /* White text */
-  }
+  background: #1f6fad !important;  /* keep accent for active state */
+  color: #fff !important;  /* White text */
+  border: 1px solid #154f78 !important; /* slightly darker border to emphasise active state */
+  box-shadow: 0 1px 0 rgba(0,0,0,0.08) !important; /* subtle elevation */
+}
 
   .chart-spinner {
     border-color: #444;  /* Dark border */
