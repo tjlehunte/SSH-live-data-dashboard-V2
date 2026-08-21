@@ -56,8 +56,8 @@ get_monnit_time <- function(local_time_str, tzone = "Europe/London") {
 fromDate <- get_monnit_time(as.character(Sys.Date() -1))
 
 #for live data we want data up to right now
-toDate <- as.POSIXct(Sys.Date())
-
+toDate <- as.POSIXct(Sys.time(), tz = "Europe/London")
+  
 #list of all the sensors - to be iterated over
 SensorID <- monnit_result$SensorID
 
