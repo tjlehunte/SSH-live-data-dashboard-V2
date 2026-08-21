@@ -107,7 +107,7 @@ for (sensor in SensorID) {
       
       #turn it into a posix timestamp, divide by 1000 so its not in milliseconds - would give a year of like 20000
       as.numeric(str_match(MessageDate, "\\d+")) / 1000, 
-      origin = "1970-01-01")) %>% 
+      origin = "1970-01-01", tz = "Europe/London")) %>% 
       mutate(MessageDate = floor_date(MessageDate, unit = "10 minute"))
     
     #order the data from start to end, by default monnit goes most recent to oldest
