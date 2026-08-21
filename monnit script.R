@@ -227,6 +227,13 @@ monnit_current_df <- monnit_current_df[,-6]
 #remove the . too
 names(monnit_current_df) <- sub("\\.", " ", names(monnit_current_df))
 
+# Mark amp-hours column as cumulative so the JS can detect it
+ah_idx <- grepl("amp\\s*-?\\s*hours|\\bah\\b", names(monnit_current_df), ignore.case = TRUE)
+if (any(ah_idx)) {
+  names(monnit_current_df)[ah_idx] <- sub("(?i)amp\\s*-?\\s*hours", "Cumulative current (Ah)", names(monnit_current_df)[ah_idx], perl = TRUE)
+  names(monnit_current_df)[ah_idx] <- sub("(?i)\\bah\\b", "Cumulative current (Ah)", names(monnit_current_df)[ah_idx], perl = TRUE)
+}
+  
 #one df
 df_list <- list(monnit_current_df, monnit_dewpoint_df, monnit_gpkg_df, monnit_heatindex_df, monnit_humidity_df, monnit_temperature_df, monnit_wetbulb_df)
 
