@@ -103,20 +103,12 @@ for (sensor in SensorID) {
     df <- data.frame(parsed$Result)
     
     #get messagedate to readable format
-    df <- df %>% mutate(
-      MessageDate = format(
-        floor_date(
-          as.POSIXct(
-            as.numeric(str_match(MessageDate, "\\d+")) / 1000,
-            origin = "1970-01-01",
-            tz = "UTC"
-          ),
-          unit = "10 minute"
-        ),
-        tz = "Europe/London",
-        format = "%Y-%m-%d %H:%M:%S"
-      )
-    )
+    df <- df %>% mutate(MessageDate = as.POSIXct(
+      
+      #turn it into a posix timestamp, divide by 1000 so its not in milliseconds - would give a year of like 20000
+      as.numeric(str_match(MessageDate, "\\d+")) / 1000, 
+      origin = "1970-01-01")) %>% 
+      mutate(MessageDate = floor_date(MessageDate, unit = "10 minute"))
     
     #order the data from start to end, by default monnit goes most recent to oldest
     df <- df %>% arrange(MessageDate) %>% select(c(3,8,16))
@@ -146,7 +138,13 @@ monnit_temps <- monnit_results %>% keep(str_detect(names(monnit_results), regex(
 monnit_temps <- lapply(monnit_temps, function(df){
   df %>% separate(Data, into = c("Humidity", "Temperature", "DewPoint", "GramsPerKilogram", "HeatIndex_Celsius", "WetBulb_Celsius"), 
                   sep = ",",
-                  convert = TRUE)
+                  convert = TRUE) %>%
+    #average any readings that share the same floored 10-minute MessageDate
+    #(handles sensors reporting more often than every 10 minutes, e.g. minutely)
+    group_by(MessageDate) %>%
+    summarise(across(where(is.numeric), mean, na.rm = TRUE),
+              PlotLabels = first(PlotLabels),
+              .groups = "drop")
 })
 
 #Put all temperatures into one df, same for humidity, etc
@@ -207,9 +205,14 @@ monnit_current <- monnit_results %>% keep(str_detect(names(monnit_results), rege
 #split the data from "42.53,22.45,9.1,51.1,21.9,14.7" into seperate columns
 #lapply (list apply) separate function on every element
 monnit_current <- lapply(monnit_current, function(df){
-  df %>% separate(Data, into = c("Cumulative Amp hours","Average current","Maximum current","Minimum current"), 
+  df %>% separate(Data, into = c("Amp hours","Average current","Maximum current","Minimum current"), 
                   sep = ",",
-                  convert = TRUE)
+                  convert = TRUE) %>%
+    #average any readings that share the same floored 10-minute MessageDate
+    group_by(MessageDate) %>%
+    summarise(across(where(is.numeric), mean, na.rm = TRUE),
+              PlotLabels = first(PlotLabels),
+              .groups = "drop")
 })
 
 monnit_current_df <- data.frame(monnit_current)
@@ -227,7 +230,7 @@ names(monnit_current_df) <- sub("\\.", " ", names(monnit_current_df))
 #one df
 df_list <- list(monnit_current_df, monnit_dewpoint_df, monnit_gpkg_df, monnit_heatindex_df, monnit_humidity_df, monnit_temperature_df, monnit_wetbulb_df)
 
-joined_monnit_df <- df_list %>% reduce(full_join) %>% arrange(MessageDate)
+joined_monnit_df <- df_list %>% reduce(full_join)
 
 joined_monnit_df
 }
