@@ -72,7 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==================== MAIN CHART DRAWING FUNCTION ====================
   function drawChart(data, cols, title, unit, isCurrentChart = false) {
     
-    mainChart.options.plugins.legend.display = true;
+    // Show legend for multi-series charts, but hide it for a single cumulative-current series. 
+    // Keep the legend control buttons visible elsewhere. 
+    
+    if (isCurrentChart && cols.length <= 1) { 
+      mainChart.options.plugins.legend.display = false; } else { 
+      mainChart.options.plugins.legend.display = true; }
     
     // Always re-assert the correct Monnit tick callback (GivEnergy interval is different)
     mainChart.options.scales.x.ticks.callback = function(value, index) {
