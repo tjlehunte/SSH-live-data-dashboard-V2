@@ -36,6 +36,32 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("givenergySpinner").style.display = "none";
   }
 
+  // ==================== UNAVAILABLE DATA PLACEHOLDER FUNCTIONS ====================
+  function showDataUnavailable(chartElement, spinnerElement, title = "Live data is currently unavailable") {
+    spinnerElement.style.display = "none";
+    const wrapper = chartElement.parentElement;
+    
+    if (!wrapper.querySelector(".data-unavailable-placeholder")) {
+      const placeholder = document.createElement("div");
+      placeholder.className = "data-unavailable-placeholder";
+      placeholder.textContent = title;
+      wrapper.appendChild(placeholder);
+    }
+    
+    chartElement.style.display = "none";
+  }
+  
+  function hideDataUnavailable(chartElement, spinnerElement) {
+    const wrapper = chartElement.parentElement;
+    const placeholder = wrapper.querySelector(".data-unavailable-placeholder");
+    
+    if (placeholder) {
+      placeholder.remove();
+    }
+    
+    chartElement.style.display = "block";
+  }
+
   function formatMobileTick(rawLabel) {
   const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const date = new Date(rawLabel.replace(" ", "T"));
@@ -400,8 +426,38 @@ function restoreGivEnergyToSection() {
     showSpinner();
     showGivenergySpinner();
 
-    allData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/data");
-    givenergyData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/givenergy");
+    try {
+      allData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/data");
+      givenergyData = await fetchWithRetry("https://monnit-plumber-api.onrender.com/givenergy");
+    } catch (e) {
+      console.error("Failed to fetch data:", e);
+      hideSpinner();
+      hideGivenergySpinner();
+      showDataUnavailable(canvas, document.getElementById("spinner"), "Failed to load sensor data. Please try again later.");
+      document.getElementById("lastUpdated").textContent = `Last updated: Error`;
+      return;
+    }
+
+    // ==================== CHECK IF MONNIT DATA IS EMPTY ====================
+    if (!allData || allData.length === 0) {
+      hideSpinner();
+      showDataUnavailable(canvas, document.getElementById("spinner"), "Live data is currently unavailable - Monnit sensors offline");
+      canvas.classList.remove("loading");
+      document.getElementById("lastUpdated").textContent = `Last updated: No data`;
+      return;
+    } else {
+      hideDataUnavailable(canvas, document.getElementById("spinner"));
+    }
+
+    // ==================== CHECK IF GIVENERGY DATA IS EMPTY ====================
+    if (!givenergyData || givenergyData.length === 0) {
+      hideGivenergySpinner();
+      showDataUnavailable(givenergyCanvas, document.getElementById("givenergySpinner"), "Live data is currently unavailable - GivEnergy offline");
+      givenergyCanvas.classList.remove("loading");
+    } else {
+      hideDataUnavailable(givenergyCanvas, document.getElementById("givenergySpinner"));
+    }
+
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const gridColor = isDark ? "#444" : "#ccc";
     const textColor = isDark ? "#ddd" : "#000";
@@ -658,11 +714,13 @@ function restoreGivEnergyToSection() {
       if (givWrapper) givWrapper.style.display = "block";
     }
     
-    const lastMonnit = allData[allData.length - 1].MessageDate;
-    const lastGivenergy = givenergyData[givenergyData.length - 1].start;
+    const lastMonnit = allData.length > 0 ? allData[allData.length - 1].MessageDate : "N/A";
+    const lastGivenergy = givenergyData.length > 0 ? givenergyData[givenergyData.length - 1].start : "N/A";
     
     // Take whichever is more recent
-    const lastTimestamp = lastMonnit > lastGivenergy ? lastMonnit : lastGivenergy;
+    const lastTimestamp = (lastMonnit !== "N/A" && lastGivenergy !== "N/A") 
+      ? (lastMonnit > lastGivenergy ? lastMonnit : lastGivenergy)
+      : (lastMonnit !== "N/A" ? lastMonnit : lastGivenergy);
     document.getElementById("lastUpdated").textContent = `Last updated: ${lastTimestamp}`;
     
     hideSpinner();
