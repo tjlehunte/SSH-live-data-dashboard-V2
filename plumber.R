@@ -48,7 +48,12 @@ refresh_givenergy <- function() {
 }
 
 schedule_refresh <- function() {
-  refresh_monnit()
+  # Monnit pull switched off (Oct 2026): the Monnit server moved to a VPN-only address, so
+  # Render can no longer reach 146.87.171.55 ("Couldn't connect to server" in the Render log).
+  # A failing attempt can also tie up this single R process, blocking the webhook endpoint.
+  # Monnit data is to arrive via /monnit-webhook instead; refresh_monnit() is kept, unused,
+  # until the webhook parsing replaces it.
+  # refresh_monnit()
   refresh_givenergy()
   later(schedule_refresh, delay = 540)
 }
