@@ -789,5 +789,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   loadData();
-  setInterval(loadData, 9 * 60 * 1000);
+  //load every 5 mins
+  setInterval(loadData, 5 * 60 * 1000);
 });
