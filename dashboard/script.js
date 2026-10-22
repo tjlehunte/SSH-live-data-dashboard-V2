@@ -136,7 +136,10 @@ document.addEventListener("DOMContentLoaded", () => {
         fill: false
       };
     });
-    const allValues = datasets.flatMap(ds => ds.data).map(v => Number(v)).filter(v => Number.isFinite(v));
+    // Missing readings arrive from /data as null (so every column is in every row). Skip them here:
+    // Number(null) is 0, which would otherwise pull the y-axis down to zero. Chart.js already draws
+    // null as a gap in the line, not a dip.
+    const allValues = datasets.flatMap(ds => ds.data).filter(v => v !== null && v !== undefined).map(v => Number(v)).filter(v => Number.isFinite(v));
     const roundedMax = Math.ceil(Math.max(...allValues) / 5) * 5;
     const roundedMin = Math.floor(Math.min(...allValues) / 5) * 5;
 
