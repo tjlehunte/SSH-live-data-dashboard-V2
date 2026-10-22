@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==================== CHART VARIABLES ====================
   let mainChart = null;           // Main chart for displaying sensor data
   let givenergyChart = null;      // Chart for displaying GiveEnergy data
-  
+
   // Arrays to store column names for different sensor types
   let tempCols = [];              // Temperature sensor columns
   let humCols = [];               // Humidity sensor columns
@@ -14,16 +14,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let wetbulbCols = [];           // Wet bulb temperature sensor columns
   let current3Cols = [];          // Current (min/max/avg) sensor columns
   let currentcumCols = [];        // Cumulative current (amp-hours) columns
-  
+
   // Data storage arrays
   let allData = []; // All fetched Monnit sensor data
   let givenergyData = []; // All fetched GiveEnergy data
-  
+
   // ==================== SPINNER DISPLAY FUNCTIONS ====================
   function showSpinner() {
     document.getElementById("spinner").style.display = "block";
   }
-  
+
   function hideSpinner() {
     document.getElementById("spinner").style.display = "none";
   }
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showGivenergySpinner() {
     document.getElementById("givenergySpinner").style.display = "block";
   }
-  
+
   function hideGivenergySpinner() {
     document.getElementById("givenergySpinner").style.display = "none";
   }
@@ -40,25 +40,25 @@ document.addEventListener("DOMContentLoaded", () => {
   function showDataUnavailable(chartElement, spinnerElement, title = "Live data is currently unavailable") {
     spinnerElement.style.display = "none";
     const wrapper = chartElement.parentElement;
-    
+
     if (!wrapper.querySelector(".data-unavailable-placeholder")) {
       const placeholder = document.createElement("div");
       placeholder.className = "data-unavailable-placeholder";
       placeholder.textContent = title;
       wrapper.appendChild(placeholder);
     }
-    
+
     chartElement.style.display = "none";
   }
-  
+
   function hideDataUnavailable(chartElement, spinnerElement) {
     const wrapper = chartElement.parentElement;
     const placeholder = wrapper.querySelector(".data-unavailable-placeholder");
-    
+
     if (placeholder) {
       placeholder.remove();
     }
-    
+
     chartElement.style.display = "block";
   }
 
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mins = String(date.getMinutes()).padStart(2, "0");
     return [`${day} ${month}`, `${hours}:${mins}`];
   }
-  
+
   // ==================== COLOR CONFIGURATION ====================
   const ROOM_COLORS = [
     "#800000", "#9A6324", "#469990", "#000075", "#000000",
@@ -415,12 +415,11 @@ document.addEventListener("DOMContentLoaded", () => {
     allData = Array.isArray(allData) ? allData : [];
     givenergyData = Array.isArray(givenergyData) ? givenergyData : [];
 
+    // Monnit and GivEnergy are independent. Do not return early here or the GivEnergy spinner gets stuck.
     if (allData.length === 0) {
       hideSpinner();
       showDataUnavailable(canvas, document.getElementById("spinner"), "Live data is currently unavailable - Monnit sensors offline");
       canvas.classList.remove("loading");
-      document.getElementById("lastUpdated").textContent = `Last updated: No data`;
-      return;
     } else {
       hideDataUnavailable(canvas, document.getElementById("spinner"));
     }
@@ -433,22 +432,33 @@ document.addEventListener("DOMContentLoaded", () => {
       hideDataUnavailable(givenergyCanvas, document.getElementById("givenergySpinner"));
     }
 
+    if (allData.length === 0 && givenergyData.length === 0) {
+      document.getElementById("lastUpdated").textContent = `Last updated: No data`;
+      hideSpinner();
+      hideGivenergySpinner();
+      canvas.classList.remove("loading");
+      givenergyCanvas.classList.remove("loading");
+      return;
+    }
+
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const gridColor = isDark ? "#444" : "#ccc";
     const textColor = isDark ? "#ddd" : "#000";
 
-    const columns = Object.keys(allData[0]);
-    tempCols = columns.filter(c => c.toLowerCase().includes("temp"));
-    humCols = columns.filter(c => c.toLowerCase().includes("humid"));
-    dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
-    gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
-    heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
-    wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
-    current3Cols = columns.filter(c => c.toLowerCase().includes("current") && !c.toLowerCase().includes("cum"));
-    currentcumCols = columns.filter(c => c.toLowerCase().includes("current") && c.toLowerCase().includes("cum"));
+    if (allData.length > 0) {
+      const columns = Object.keys(allData[0]);
+      tempCols = columns.filter(c => c.toLowerCase().includes("temp"));
+      humCols = columns.filter(c => c.toLowerCase().includes("humid"));
+      dewCols = columns.filter(c => c.toLowerCase().includes("dewpoint"));
+      gpkgCols = columns.filter(c => c.toLowerCase().includes("gpkg"));
+      heatindexCols = columns.filter(c => c.toLowerCase().includes("heat index"));
+      wetbulbCols = columns.filter(c => c.toLowerCase().includes("wet bulb"));
+      current3Cols = columns.filter(c => c.toLowerCase().includes("current") && !c.toLowerCase().includes("cum"));
+      currentcumCols = columns.filter(c => c.toLowerCase().includes("current") && c.toLowerCase().includes("cum"));
+    }
 
     // ===== INITIALIZE MAIN CHART =====
-    if (!mainChart) {
+    if (!mainChart && allData.length > 0) {
       const ctx = canvas.getContext("2d");
       mainChart = new Chart(ctx, {
         type: "line",
@@ -518,7 +528,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ===== INITIALIZE GIVENERGY CHART =====
-    if (!givenergyChart) {
+    if (!givenergyChart && givenergyData.length > 0) {
       const ctx3 = givenergyCanvas.getContext("2d");
       givenergyChart = new Chart(ctx3, {
         type: "line",
@@ -588,7 +598,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    if (!window.givenergyTabsInitialised) {
+    if (!window.givenergyTabsInitialised && givenergyData.length > 0) {
       window.givenergyTabsInitialised = true;
       document.querySelectorAll("#givenergyTabs .tab").forEach(tab => {
         tab.addEventListener("click", () => {
@@ -615,7 +625,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const activeGe = document.querySelector("#givenergyTabs .tab.active");
-    if (activeGe) activeGe.click();
+    if (activeGe && givenergyData.length > 0) activeGe.click();
 
     if (!window.tabsInitialised) {
       window.tabsInitialised = true;
